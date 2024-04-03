@@ -33,7 +33,28 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    
+    const type = req.query.type;
+    switch(type) {
+        case 'user':
+            console.log('User login')
+            break;
+        case 'restaurant':
+            console.log('Restaurant login')
+            break;
+        case 'delivery':
+            console.log('Delivery login')
+            break;
+        case 'intern':
+            console.log('Intern login')
+            break;
+        case 'tiers':
+            console.log('Tiers login')
+            break;
+        default:
+            res.status(404).send("Type login");
+            return;
+    }
+    res.status(200).send("Login successful");
 });
 
 router.get('/authenticate', (req, res) => {
