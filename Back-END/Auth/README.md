@@ -92,3 +92,6 @@ Il est nécessaire sur chacune des routes ou il est annoté **'?type='** de spé
 | Livreur | delivery |
 | Commercial, Technique | intern |
 | Développeur tiers | tiers |
+
+
+Last update : 03/04/2024 by MaximeCESI
