@@ -30,3 +30,5 @@ I
 src/components/NextBtn.js,2\8\282a3c469e6e4eb1813be0e2e066fd1a085ed566
 I
 src/components/CartBtn.js,2\0\200f7ab69a4bb6c4a827067f5782c308c199e6ae
+K
+src/components/SignInBtn.js,c\3\c33eb611190ee3a51075d0a388ce3bf42567d7b3
