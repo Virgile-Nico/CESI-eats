@@ -15,6 +15,7 @@ export default function App() {
             <div className="flex flex-row space-x-4">
                 <BackBtn />
                 <BackBtn text={"Retour"} />
+                <NextBtn onClick={test} text={"Suivant"} />
                 <NextBtn onClick={test} />
                 <CartBtn articlesCount={"0"} onClick={test} />
                 <CartBtn articlesCount={"5"} onClick={test} />
