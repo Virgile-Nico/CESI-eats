@@ -32,3 +32,5 @@ I
 src/components/CartBtn.js,2\0\200f7ab69a4bb6c4a827067f5782c308c199e6ae
 K
 src/components/SignInBtn.js,c\3\c33eb611190ee3a51075d0a388ce3bf42567d7b3
+K
+src/components/SignUpBtn.js,d\4\d43a495363019b7c8ca22cfa1e88841737e8915b

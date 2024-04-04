@@ -3,6 +3,7 @@ import BackBtn from "./components/BackBtn";
 import NextBtn from "./components/NextBtn";
 import CartBtn from "./components/CartBtn";
 import SignInBtn from "./components/SignInBtn";
+import SignUpBtn from "./components/SignUpBtn";
 
 function test() {
     console.log("Button clicked")
@@ -18,6 +19,7 @@ export default function App() {
                 <CartBtn articlesCount={"0"} onClick={test} />
                 <CartBtn articlesCount={"5"} onClick={test} />
                 <SignInBtn onClick={test} />
+                <SignUpBtn onClick={test} />
             </div>
         </div>
     )
