@@ -26,3 +26,7 @@ D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
 A
 public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9
+I
+src/components/NextBtn.js,2\8\282a3c469e6e4eb1813be0e2e066fd1a085ed566
+I
+src/components/CartBtn.js,2\0\200f7ab69a4bb6c4a827067f5782c308c199e6ae
