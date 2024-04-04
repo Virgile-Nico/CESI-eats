@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const pool = require('../controllers/dbMaria')
 
 const timeLog = (req, res, next) => {
     console.log('Time: ', Date.now())
@@ -7,10 +8,11 @@ const timeLog = (req, res, next) => {
 }
 router.use(timeLog)
 
-router.post('/update', (req, res) => {
-    const type = req.query.type;
-
-    res.status(200).send("[Restaurant-sevice] Account updated successfully");
+router.get('/update', async (req, res) => {
+    let promise = await pool.getConnection()
+    res.status(200)
+    .send(JSON.stringify(promise))
+    console.log("[Restaurant-sevice] Account updated successfully")
 });
 
 module.exports = router;
