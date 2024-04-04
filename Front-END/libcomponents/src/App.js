@@ -1,13 +1,11 @@
-import './App.css';
+import React from "react";
+import BackBtn from "./components/BackBtn";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <div className="flex m-4">
+            <BackBtn />
+        </div>
+    )
 }
 
-export default App;
