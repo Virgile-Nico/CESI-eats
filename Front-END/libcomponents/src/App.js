@@ -4,6 +4,7 @@ import NextBtn from "./components/NextBtn";
 import CartBtn from "./components/CartBtn";
 import SignInBtn from "./components/SignInBtn";
 import SignUpBtn from "./components/SignUpBtn";
+import Avatar from "./components/Avatar";
 
 function test() {
     console.log("Button clicked")
@@ -11,7 +12,7 @@ function test() {
 
 export default function App() {
     return (
-        <div className="flex m-4">
+        <div className="flex flex-col place-items-center place-content-center">
             <div className="flex flex-row space-x-4">
                 <BackBtn />
                 <BackBtn text={"Retour"} />
@@ -22,6 +23,7 @@ export default function App() {
                 <SignInBtn onClick={test} />
                 <SignUpBtn onClick={test} />
             </div>
+            <Avatar firstname={"Nathalie"} lastname={"parisse"} />
         </div>
     )
 }
