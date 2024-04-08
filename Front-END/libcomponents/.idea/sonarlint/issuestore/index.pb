@@ -34,3 +34,5 @@ K
 src/components/SignUpBtn.js,d\4\d43a495363019b7c8ca22cfa1e88841737e8915b
 H
 src/components/Avatar.js,5\6\56e1055f2418b236ac284798df739f5169d74056
+Q
+!src/components/MobileConnexion.js,7\5\753dff0618698eeeda87274f9223f0f7588991b3

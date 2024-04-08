@@ -36,3 +36,7 @@ E
 src/pages/NotFound.js,c\b\cbf3fb6afd32a8cabd112d46a8045c5176b7879c
 F
 src/pages/loginMail.js,b\e\be18825be170a8c9ffe4ad518575acf4ea906a0e
+G
+src/assets/svg/food.svg,a\6\a63981277934618e9fbfea92551af3ce340b6cf6
+L
+src/assets/svg/food_logo.svg,1\2\12609e29f40c448b126afaeef4f86ea4f29d3887
