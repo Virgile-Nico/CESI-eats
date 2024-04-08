@@ -34,3 +34,5 @@ C
 src/NotFound.js,9\f\9fc4230cf6dc1f47a31bf5445872419660a90891
 E
 src/pages/NotFound.js,c\b\cbf3fb6afd32a8cabd112d46a8045c5176b7879c
+F
+src/pages/loginMail.js,b\e\be18825be170a8c9ffe4ad518575acf4ea906a0e

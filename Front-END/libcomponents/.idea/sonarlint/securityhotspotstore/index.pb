@@ -32,3 +32,5 @@ K
 src/components/SignInBtn.js,c\3\c33eb611190ee3a51075d0a388ce3bf42567d7b3
 K
 src/components/SignUpBtn.js,d\4\d43a495363019b7c8ca22cfa1e88841737e8915b
+H
+src/components/Avatar.js,5\6\56e1055f2418b236ac284798df739f5169d74056
