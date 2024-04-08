@@ -8,17 +8,15 @@ import Avatar from "./components/Avatar";
 import MobileConnexion from "./components/MobileConnexion";
 import { BrowserRouter as Router } from 'react-router-dom';
 
-function test() {
-    console.log("Button clicked");
-}
-
 export default function App() {
-    const [accessToken, setAccessToken] = useState(null);
-    const [refreshToken, setRefreshToken] = useState(null);
+    const [showNotif, setShowNotif] = useState(false);
 
-    const handleTokensReceived = ({ accessToken, refreshToken }) => {
-        setAccessToken(accessToken);
-        setRefreshToken(refreshToken);
+    function test() {
+        console.log("Button clicked");
+    }
+
+    const toggleNotification = () => {
+        setShowNotif(!showNotif);
     };
 
     return (
@@ -35,7 +33,7 @@ export default function App() {
                     <SignUpBtn onClick={test} />
                 </div>
                 <Avatar firstname={"Nathalie"} lastname={"parisse"} />
-                <MobileConnexion firstname={"Nathalie"} forgetPassword={test} onSignIn={test} onTokensReceived={handleTokensReceived} />
+                <MobileConnexion firstname={"Nathalie"} forgetPassword={test} onSignIn={toggleNotification} showNotif={showNotif} />
             </div>
         </Router>
     );

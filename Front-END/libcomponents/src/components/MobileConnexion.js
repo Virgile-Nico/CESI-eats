@@ -1,31 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {mdiAlert, mdiEye, mdiEyeOff} from '@mdi/js';
 import Icon from '@mdi/react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-export default function MobileConnexion({ firstname, forgetPassword, APIpath, homePage, onTokensReceived }) {
+export default function MobileConnexion({ firstname, forgetPassword, onSignIn, showNotif }) {
     const [show, setShow] = useState(false);
-    const [showNotif, setShowNotif] = useState(false);
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
-    //const history = useHistory(); // Initialize useHistory
+    const [notifVisible, setNotifVisible] = useState(showNotif);
+    console.log(showNotif, notifVisible);
 
-    function onSignIn() {
-        // Perform a POST request to the API with the password value
-        axios.post(APIpath, { password })
-            .then(response => {
-                // Handle the API response if necessary
-                const { accessToken, refreshToken } = response.data;
-                onTokensReceived({ accessToken, refreshToken }); // Pass tokens to the callback function
-                navigate(homePage); // Navigate to homePage
-                //history.push(homePage); // Navigate to homePage
-            })
-            .catch(error => {
-                // Handle request errors
-                setShowNotif(true)
-            });
-    }
+    useEffect(() => {
+        setNotifVisible(showNotif);
+    }, [showNotif]);
+
+    const closeNotification = () => {
+        setNotifVisible(false);
+    };
 
     return (
         <div className="flex flex-col place-items-start space-y-8">
@@ -53,10 +42,10 @@ export default function MobileConnexion({ firstname, forgetPassword, APIpath, ho
                 <p className="m-auto inset-0 text-md font-semibold text-center text-gray-800">Mot de passe oublié ?</p>
             </button>
             <button onClick={onSignIn}
-                    className="flex flex-row space-x-2 h-12 bg-primary-500 shadow rounded-3xl py-2 px-8 hover:bg-gray-300">
+                    className="flex flex-row space-x-2 h-12 bg-primary-500 shadow rounded-3xl py-2 px-8 hover:bg-primary-300">
                 <p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
             </button>
-            {showNotif && (
+            {notifVisible && (
                 <div
                     className="flex flex-col space-y-4 min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-transparent">
                     <div className="flex flex-col p-8 bg-gray-100 border-2 border-gray-200 shadow-2xl hover:shadow-lg rounded-2xl">
@@ -71,7 +60,7 @@ export default function MobileConnexion({ firstname, forgetPassword, APIpath, ho
                                 </div>
                             </div>
                             <button
-                                onClick={() => setShowNotif(false)}
+                                onClick={closeNotification}
                                 className="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full"
                             >
                                 Fermer
