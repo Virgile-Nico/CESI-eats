@@ -1,8 +1,9 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://213.32.6.121:27017";
+var mongoose = require('mongoose')
+var url = "mongodb://root:CESI-eats@213.32.6.121:27017/CESI_eats?authSource=admin";
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database connected !");
-  db.close();
-});
+module.exports = {
+  connect: async function (){
+    await mongoose.connect(url).then(console.log(`[MongoDB] MongoDB connected`))
+  }
+}
+

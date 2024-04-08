@@ -4,7 +4,7 @@ const pool = mariadb.createPool({
     host:'213.32.6.121',
     user:'root',
     password:'CESI-eats',
-    database:'Restaurants',
+    database:'CESI_eats',
     connectionLimit: 100
 })
 
