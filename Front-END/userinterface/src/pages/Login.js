@@ -7,9 +7,21 @@ import {useState} from "react";
 export default function Login() {
 	// Check if the screen width is less than or equal to 600 pixels
 	const isMobile = window.innerWidth <= 600;
-	const [show, setShow] = useState(false);
-	const [password, setPassword] = useState('');
-	const [notifVisible, setNotifVisible] = useState(false);
+	const [show, setShow] = useState(false); // State to store the visibility of the password
+	const [password, setPassword] = useState(''); //State to store the email value
+	const [notifVisible, setNotifVisible] = useState(false); // State to store the visibility of the notification
+	const [email, setEmail] = useState(''); // State to store the email value
+	const [isValid, setIsValid] = useState(true); // State to store the validity of the email
+
+	// Function to handle changes in the input value
+	const handleChange = (event) => {
+		const { value } = event.target;
+		setEmail(value);
+
+		// Regular expression to validate the email
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		setIsValid(emailRegex.test(value));
+	};
 
 	return (
 		<main className="h-screen w-full flex flex-col items-center">
@@ -28,9 +40,12 @@ export default function Login() {
 							<input
 								type="email"
 								id="UserEmail"
+								value={email}
+								onChange={handleChange}
 								placeholder="Entrer votre adresse email"
 								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm"
 							/>
+							{!isValid && <p style={{ color: 'red' }}>Veuillez entrer une adresse email valide.</p>}
 						</div>
 						<div className="flex flex-row h-10 mx-4 rounded-md bg-gray-300 p-2">
 							<input
@@ -65,25 +80,29 @@ export default function Login() {
 			)}
 			{!isMobile && (
 				<div className="flex flex-col w-full space-y-10 py-4 place-items-center my-auto">
-					<img alt="bowl"
+					<img alt="logo"
 						 src={Logo}
 						 className="h-9/12 w-1/4"/>
 					<div className="flex flex-row h-12 w-1/4 rounded-md bg-gray-300 p-2">
 						<input
-							type={show ? 'text' : 'password'}
-							placeholder="Entrer votre email"
-							className="border-none bg-transparent w-full text-lg text-gray-900 focus:outline-none"
+							type="email"
+							id="UserEmail"
+							value={email}
+							onChange={handleChange}
+							placeholder="Entrer votre adresse email"
+							className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-2 text-lg shadow-md focus:outline-none"
 						/>
+						{!isValid && <p style={{color: 'red'}}>Veuillez entrer une adresse email valide.</p>}
 					</div>
-					<div className="flex flex-row h-12 w-1/4 rounded-md bg-gray-300 p-2">
+					<div className="flex flex-row h-12 w-1/4 rounded-md bg-gray-300 p-2 shadow-md">
 						<input
 							type={show ? 'text' : 'password'}
 							placeholder="Entrer votre mot de passe"
-							className="border-none bg-transparent w-full text-lg text-gray-900 focus:outline-none"
+							className="border-none bg-transparent w-full px-2 text-lg text-gray-900 focus:outline-none"
 							value={password}
 							onChange={e => setPassword(e.target.value)}
 						/>
-						<button className="bg-transparent"
+						<button className="bg-transparent hover:text-gray-800"
 								onClick={() => setShow(!show)}>
 							{show ? (
 								<Icon path={mdiEye}
