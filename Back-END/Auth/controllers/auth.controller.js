@@ -17,48 +17,13 @@ module.exports = {
                 return res.status(400).json({ "error": "email already exists." });
             }
             const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
-            const newUser = new User({
-                MAIL: body.MAIL,
-                PASSWORD: hashedPassword,
-                NOM: body.NOM,
-                PRENOM: body.PRENOM,
-                TEL: body.TEL,
-                CODE_PARRAIN: body.CODE_PARRAIN,
-                CODE_PARAINAGE: body.CODE_PARAINAGE
-            });
-            await pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [body.MAIL, body.PASSWORD, body.NOM, body.PRENOM, body.TEL, body.CODE_PARRAIN, body.CODE_PARAINAGE]);
+            await pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TEL, body.CODE_PARRAIN, body.CODE_PARAINAGE]);
         } catch (error) {
             console.error("register error: ", error);
         }
     
     }
 }
-/*exports.registerUser = async (req, res) => {
-    try {
-        //verify if the user already exists
-        const queryResult = await pool.query(`SELECT * FROM CLIENTS WHERE MAIL = ${req.body.MAIL}`);
-        console.log("test");
-        const userExists = queryResult.length > 0;
-
-        if (userExists) {
-            return res.status(400).json({ "error": "email already exists." });
-        }
-        //hash password
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        //create new user
-        const newUser = new User({
-            MAIL: req.body.MAIL,
-            password: hashedPassword
-        });
-        //save new user
-        await newUser.save();
-        //return success message
-        return res.status(201).json({ "msg": "New user created !" });
-    } catch (error) {
-        console.error("register error: ", error);
-        return res.status(500).json({ "error": "internal server error" });
-    }
-};*/
 
 exports.loginUser = async (req, res) => {
   try {
@@ -110,26 +75,26 @@ exports.authenticateUser = (req, res) => {
   //the only difference is the model used
   //and the fields used in the model
   
-  exports.registerDelivery = async (req, res) => {
-    try {
-      const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [req.body.MAIL]);
-      const DeliveryExists = queryResult.length > 0;
 
-      if (DeliveryExists) {
-          return res.status(400).json({ "error": "email already exists." });
-      }
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        const newDelivery = new Delivery({
-            ...req.body,
-            password: hashedPassword
-        });
-        await newDelivery.save();
-        return res.status(201).json({ "msg": "New delivery person created!" });
+
+module.exports = {
+registerDelivery: async (body) => {
+    try {
+        const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [body.MAIL]);
+        const DeliveryExists = queryResult.length > 0;
+
+        if (DeliveryExists) {
+            return res.status(400).json({ "error": "email already exists." });
+        }
+        const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
+        const hashedRIB = bcrypt.hashSync(body.RIB, 10);
+        await pool.query('INSERT INTO LIVREURS (MAIL, PASSWORD, NOM, PRENOM, RIB, VEHICULE_TYPE) VALUES (?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TEL, hashedRIB, body.VEHICULE_TYPE]);
     } catch (error) {
         console.error("register error: ", error);
-        return res.status(500).json({ "error": "internal server error" });
     }
-};
+
+}
+}
 
 exports.loginDelivery = async (req, res) => {
   try {
@@ -169,27 +134,23 @@ exports.authenticateDelivery = (req, res) => {
     });
 };
 
-exports.registerIntern = async (req, res) => {
-  try {
-    const queryResult = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [req.body.MAIL]);
-    const InternExists = queryResult.length > 0;
+module.exports = {
+registerIntern : async (body) => {
+    try {
+        const queryResult = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [body.MAIL]);
+        const InternExists = queryResult.length > 0;
 
-    if (InternExists) {
-        return res.status(400).json({ "error": "email already exists." });
+        if (InternExists) {
+            return res.status(400).json({ "error": "email already exists." });
+        }
+        const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
+        await pool.query('INSERT INTO INTERN (MAIL, PASSWORD, NOM, PRENOM, TYPE) VALUES (?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TYPE]);
+    } catch (error) {
+        console.error("register error: ", error);
     }
-      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-      const newIntern = new Intern({
-          ...req.body,
-          password: hashedPassword
-      });
-      await newIntern.save();
-      return res.status(201).json({ "msg": "New Intern account created!" });
-  } catch (error) {
-      console.error("register error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-};
 
+}
+}
 
 exports.loginIntern = async (req, res) => {
   try {
@@ -229,26 +190,25 @@ exports.authenticateIntern = (req, res) => {
   });
 };
 
-exports.registerRestaurant = async (req, res) => {
-  try {
-    const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [req.body.MAIL]);
-    const RestaurantExists = queryResult.length > 0;
 
-    if (RestaurantExists) {
-        return res.status(400).json({ "error": "email already exists." });
+module.exports = {
+registerRestaurant: async (body) => {
+    try {
+        const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [body.MAIL]);
+        const RestaurantExists = queryResult.length > 0;
+
+        if (RestaurantExists) {
+            return res.status(400).json({ "error": "email already exists." });
+        }
+        const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
+        const hashedRIB = bcrypt.hashSync(body.RIB, 10);
+        await pool.query('INSERT INTO RESTAURANT (MAIL, PASSWORD, NOM, TEL, CP, VILLE, ADRESSE, SIRET, RIB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.TEL, body.CP, body.VILLE, body.ADRESSE, body.SIRET, hashedRIB]);
+    } catch (error) {
+        console.error("register error: ", error);
     }
-      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-      const newRestaurant = new Restaurant({
-          ...req.body,
-          password: hashedPassword
-      });
-      await newRestaurant.save();
-      return res.status(201).json({ "msg": "New Restaurant created!" });
-  } catch (error) {
-      console.error("register error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-};
+
+}
+}
 
 exports.loginRestaurant = async (req, res) => {
   try {
@@ -289,26 +249,24 @@ exports.authenticateRestaurant = (req, res) => {
   });
 };
 
-exports.registerTiers = async (req, res) => {
-  try {
-    const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [req.body.MAIL]);
-    const TiersExists = queryResult.length > 0;
 
-    if (TiersExists) {
-        return res.status(400).json({ "error": "email already exists." });
+module.exports = {
+registerTiers: async (body) => {
+    try {
+        const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [body.MAIL]);
+        const TiersExists = queryResult.length > 0;
+
+        if (TiersExists) {
+            return res.status(400).json({ "error": "email already exists." });
+        }
+        const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
+        await pool.query('INSERT INTO DEV_TIERS (MAIL, PASSWORD, NOM, PRENOM, ENTREPRISE) VALUES (?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.ENTREPRISE]);
+    } catch (error) {
+        console.error("register error: ", error);
     }
-      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-      const newTiers = new Tiers({
-          ...req.body,
-          password: hashedPassword
-      });
-      await newTiers.save();
-      return res.status(201).json({ "msg": "New third party developer account created!" });
-  } catch (error) {
-      console.error("register error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-};
+
+}
+}
 
 exports.loginTiers = async (req, res) => {
   try {

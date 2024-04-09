@@ -12,10 +12,6 @@ class Tiers {
     }
 
 
-    // save new third-party developer
-    save() {
-        return pool.query('INSERT INTO dev_tiers (MAIL, PASSWORD, NOM, PRENOM, ENTREPRISE) VALUES (?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.PRENOM, this.ENTREPRISE]);
-    }
 
     // get third-party developer by ID
     static findByID(ID) {

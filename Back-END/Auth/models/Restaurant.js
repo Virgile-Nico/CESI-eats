@@ -15,10 +15,6 @@ class Restaurant {
         this.RIB = RIB;
     }
 
-    //save new restaurant
-    save() {
-        return pool.query('INSERT INTO restaurant (MAIL, PASSWORD, NOM, TEL, PC, VILLE, ADRESSE, SIRET, RIB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.TEL, this.PC, this.VILLE, this.ADRESSE, this.SIRET, this.RIB]);
-    }
 
     //find restaurant by ID
     static findByID(ID) {

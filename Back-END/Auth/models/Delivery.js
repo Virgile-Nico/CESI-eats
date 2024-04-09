@@ -2,7 +2,7 @@ const pool = require('../controllers/dbMaria');
 
 // class Delivery
 class Delivery {
-    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, tel, RIB, VEHICULE_TYPE) {
+    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, RIB, VEHICULE_TYPE) {
         this.ID = ID;
         this.MAIL = MAIL;
         this.PASSWORD = PASSWORD;

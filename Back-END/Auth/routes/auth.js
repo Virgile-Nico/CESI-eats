@@ -18,19 +18,19 @@ router.post('/register', (req, res) => {
             break
         case 'restaurant':
             console.log('Restaurant register')
-            authController.registerRestaurant(req, res);
+            authController.registerRestaurant(req.body);
             break;
         case 'delivery':
             console.log('Delivery register')
-            authController.registerDelivery(req, res);
+            authController.registerDelivery(req.body);
             break;
         case 'intern':
             console.log('Intern register')
-            authController.registerIntern(req, res);
+            authController.registerIntern(req.body);
             break;
         case 'tiers':
             console.log('Tiers register')
-            authController.registerTiers(req, res);
+            authController.registerTiers(req.body);
             break;
         default:
             res.status(404).send("Type unknown");
