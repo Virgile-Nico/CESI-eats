@@ -2,7 +2,7 @@ const express = require('express')
 const router = require('./routes/delivery')
 const Logger = require('./middlewares/logger')
 const app = express()
-const port = 3010
+const port = 3021
 
 app.use(express.json())
 
