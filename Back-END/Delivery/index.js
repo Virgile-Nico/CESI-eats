@@ -1,6 +1,6 @@
 const express = require('express')
 const router = require('./routes/delivery')
-const Logger = require('./middlewares/logger')
+const Logger = require('./controllers/logger')
 const app = express()
 const port = 3021
 
