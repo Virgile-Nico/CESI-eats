@@ -1,6 +1,6 @@
 import NotFound from "./pages/NotFound";
 import Splash from "./pages/Splash";
-import LoginMail from "./pages/loginMail";
+import Login from "./pages/Login";
 
 
 export const routes = [
@@ -10,9 +10,9 @@ export const routes = [
 		element: <Splash />,
 	},
 	{
-		name: "LoginMail",
+		name: "Login",
 		path: "/login",
-		element: <LoginMail />,
+		element: <Login />,
 	},
 	{
 		name: "NotFound",
