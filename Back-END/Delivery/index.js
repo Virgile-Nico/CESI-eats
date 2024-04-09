@@ -14,11 +14,13 @@ app.use((req, res, next) => {
 app.use(router)
 
 app.use((req, res) => {
-  Logger.logaction(req.method, req.url, true, "Response send");
+  const success = false;
+  if(res.status == 200) success = true;
+  Logger.logaction(req.method, req.url, success, "Response send");
   res.send();
 })
 
-const { connectToMongoDB } = require('./controllers/  dbMongo');
+const { connectToMongoDB } = require('./controllers/dbMongo');
 
 connectToMongoDB()
   .then(() => {
