@@ -26,6 +26,10 @@ third-party : 3024
 user : 3025  
 notification : 3026  
 
+### Bases de données
+mariadb : 3306  
+mongodb : 27017  
+
 # Normes d'écritures :
 ## Logs
 
