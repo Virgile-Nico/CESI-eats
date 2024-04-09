@@ -28,7 +28,22 @@ notification : 3026
 
 # Normes d'écritures :
 ## Logs
-Dans le cas ou noussuivons l'avancée de tous les logs en même temps, il faut que l'on soit capable de savoir quel service à log quelle ligne. C'est pourquoi nous allons définir une norme d'écriture des logs.  
+
+Dans le cas ou nous suivons l'avancée de tous les logs en même temps, il faut que l'on soit capable de savoir quel service à log quelle ligne. C'est pourquoi nous allons définir une norme d'écriture des logs.  
+
 Chaque log dans les console doit s'écrire comme suit : '[nom du service] log '
 
-Last modification : Virgile NICOLAS 08/04/2024
+Pour les logs d'actions, ils seront stockés en BDD NoSQL sous le format suivant :
+
+```json
+{
+  "timestamp": "date courante sous format 'dd:MM:YYYY hh:mm:ss'"
+  "service": "nomination du service rattaché à l'action loggée"
+  "action_type": "type de l'action"
+  "route": "route appelée"
+  "success": "état de la requète"
+  "message": "message complémentaire"
+}
+```
+
+Last modification : Maxime MONZA 09/04/2024
