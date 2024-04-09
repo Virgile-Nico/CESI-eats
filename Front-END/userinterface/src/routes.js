@@ -3,6 +3,7 @@ import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import SuccessConnexion from "./pages/SuccessConnexion";
 import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
 
 
 export const routes = [
@@ -25,6 +26,11 @@ export const routes = [
 		name: "SignUp",
 		path: "/sign-up",
 		element: <SignUp />,
+	},
+	{
+		name: "Home",
+		path: "/home",
+		element: <Home />,
 	},
 	{
 		name: "NotFound",
