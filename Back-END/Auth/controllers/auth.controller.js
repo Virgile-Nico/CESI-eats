@@ -61,39 +61,34 @@ module.exports = {
     },
 
     authenticateUser : async (body) => {
-        const token = body;
+        let token = body;
         console.log(token)
         try {
             console.log("Token: ", token);
-            // Vérifie la validité du token JWT
+            //verify the token
             const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
-            
-            // Ici, on suppose que le payload du token contient l'email de l'utilisateur (MAIL)
+            //get the user from the database
             const query = 'SELECT * FROM CLIENTS WHERE MAIL = ?';
             const users = await pool.query(query, [decoded.MAIL]);
-    
-            // Vérifie si au moins un utilisateur correspondant a été trouvé
-            if (users.length === 0) {
+                if (users.length === 0) {
                 console.log("User not found.");
                 return { status: 404, message: "User not found." };
             }
-    
-            const user = users[0]; // Prend le premier utilisateur trouvé
+            //get the user
+            const user = users[0]; 
     
             console.log("User: ", user);
-            // Utilisateur authentifié avec succès
+            //return the user
             return {
                 status: 200,
                 message: "User authenticated successfully.",
                 user: {
                     ID: user.ID,
                     MAIL: user.MAIL,
-                    // Incluez d'autres champs au besoin, mais excluez les informations sensibles
                 }
             };
         } catch (error) {
             console.error("Authentication error: ", error);
-            // Le token n'est pas valide ou a expiré
             return { status: 401, message: "Authentication failed." };
         }
     },
@@ -155,24 +150,34 @@ module.exports = {
     }
     },
 
-    authenticateDelivery : (req, res) => {
-    let token = req.headers["authorization"];
-    if (!token) {
-        return res.status(403).send({ message: "No token given." });
-    }
-    if (token.startsWith('Bearer ')) {
-        token = token.slice(7, token.length);
-    }
-    jwt.verify(token, process.env.ACCESS_JWT_KEY, async (err, decoded) => {
-        if (err) {
-            return res.status(401).send({ message: "Not authorised." });
+    authenticateDelivery : async (body) => {
+        let token = body;
+        console.log(token)
+        try {
+            console.log("Token: ", token);
+            const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
+            const query = 'SELECT * FROM LIVREURS WHERE MAIL = ?';
+            const users = await pool.query(query, [decoded.MAIL]);
+                if (users.length === 0) {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+    
+            const user = users[0]; 
+    
+            console.log("User: ", user);
+            return {
+                status: 200,
+                message: "User authenticated successfully.",
+                user: {
+                    ID: user.ID,
+                    MAIL: user.MAIL,
+                }
+            };
+        } catch (error) {
+            console.error("Authentication error: ", error);
+            return { status: 401, message: "Authentication failed." };
         }
-        const delivery = await Delivery.findOne({ MAIL: decoded.MAIL });
-        if (!delivery) {
-            return res.status(404).send({ message: "Delivery person not found." });
-        }
-        return res.status(200).send({ message: "Access granted." });
-    });
     },
 
     registerIntern : async (body) => {
@@ -226,24 +231,34 @@ module.exports = {
     }
     },
 
-    authenticateIntern : (req, res) => {
-  let token = req.headers["authorization"];
-  if (!token) {
-      return res.status(403).send({ message: "No token given." });
-  }
-  if (token.startsWith('Bearer ')) {
-      token = token.slice(7, token.length);
-  }
-  jwt.verify(token, process.env.ACCESS_JWT_KEY, async (err, decoded) => {
-      if (err) {
-          return res.status(401).send({ message: "Not authorised." });
-      }
-      const Intern = await Intern.findOne({ MAIL: decoded.MAIL });
-      if (!Intern) {
-          return res.status(404).send({ message: "User not found." });
-      }
-      return res.status(200).send({ message: "Access granted." });
-  });
+    authenticateIntern : async (body) => {
+        let token = body;
+        console.log(token)
+        try {
+            console.log("Token: ", token);
+            const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
+            const query = 'SELECT * FROM INTERN WHERE MAIL = ?';
+            const users = await pool.query(query, [decoded.MAIL]);
+                if (users.length === 0) {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+    
+            const user = users[0]; 
+    
+            console.log("User: ", user);
+            return {
+                status: 200,
+                message: "User authenticated successfully.",
+                user: {
+                    ID: user.ID,
+                    MAIL: user.MAIL,
+                }
+            };
+        } catch (error) {
+            console.error("Authentication error: ", error);
+            return { status: 401, message: "Authentication failed." };
+        }
     },
 
     registerRestaurant: async (body) => {
@@ -298,24 +313,34 @@ module.exports = {
     }
     },
 
-    authenticateRestaurant : (req, res) => {
-  let token = req.headers["authorization"];
-  if (!token) {
-      return res.status(403).send({ message: "No token given." });
-  }
-  if (token.startsWith('Bearer ')) {
-      token = token.slice(7, token.length);
-  }
-  jwt.verify(token, process.env.ACCESS_JWT_KEY, async (err, decoded) => {
-      if (err) {
-          return res.status(401).send({ message: "Not authorised." });
-      }
-      const Restaurant = await Restaurant.findOne({ MAIL: decoded.MAIL });
-      if (!Restaurant) {
-          return res.status(404).send({ message: "Restaurant account not found." });
-      }
-      return res.status(200).send({ message: "Access granted." });
-  });
+    authenticateRestaurant : async (body) => {
+        let token = body;
+        console.log(token)
+        try {
+            console.log("Token: ", token);
+            const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
+            const query = 'SELECT * FROM RESTAURANT WHERE MAIL = ?';
+            const users = await pool.query(query, [decoded.MAIL]);
+                if (users.length === 0) {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+    
+            const user = users[0]; 
+    
+            console.log("User: ", user);
+            return {
+                status: 200,
+                message: "User authenticated successfully.",
+                user: {
+                    ID: user.ID,
+                    MAIL: user.MAIL,
+                }
+            };
+        } catch (error) {
+            console.error("Authentication error: ", error);
+            return { status: 401, message: "Authentication failed." };
+        }
     },
 
     registerTiers: async (body) => {
@@ -369,24 +394,34 @@ module.exports = {
     }
     },
 
-    authenticateTiers : (req, res) => {
-  let token = req.headers["authorization"];
-  if (!token) {
-      return res.status(403).send({ message: "No token given." });
-  }
-  if (token.startsWith('Bearer ')) {
-      token = token.slice(7, token.length);
-  }
-  jwt.verify(token, process.env.ACCESS_JWT_KEY, async (err, decoded) => {
-      if (err) {
-          return res.status(401).send({ message: "Not authorised." });
-      }
-      const Tiers = await Tiers.findOne({ MAIL: decoded.MAIL });
-      if (!Tiers) {
-          return res.status(404).send({ message: "User not found." });
-      }
-      return res.status(200).send({ message: "Access granted." });
-  });
-    }
+    authenticateTiers : async (body) => {
+        let token = body;
+        console.log(token)
+        try {
+            console.log("Token: ", token);
+            const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
+            const query = 'SELECT * FROM DEV_TIERS WHERE MAIL = ?';
+            const users = await pool.query(query, [decoded.MAIL]);
+                if (users.length === 0) {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+    
+            const user = users[0]; 
+    
+            console.log("User: ", user);
+            return {
+                status: 200,
+                message: "User authenticated successfully.",
+                user: {
+                    ID: user.ID,
+                    MAIL: user.MAIL,
+                }
+            };
+        } catch (error) {
+            console.error("Authentication error: ", error);
+            return { status: 401, message: "Authentication failed." };
+        }
+    },
 }
 

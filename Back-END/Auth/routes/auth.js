@@ -77,11 +77,9 @@ router.get('/authenticate', (req, res) => {
             console.log("Token is required.");
             return { status: 403, message: "Token is required." };
         }
-    
-        // Extrait le token JWT du préfixe "Bearer"
         if (token.startsWith('Bearer ')) {
             token = token.slice(7, token.length);
-          }
+        }
     switch(type) {
         case 'user':
             console.log('User authenticate')
