@@ -1,7 +1,8 @@
 const express = require('express')
-const Logger = require('./middlewares/logger')
+const Logger = require('./controllers/logger')
 const app = express()
 const port = 3025
+const router = require('./routes/client')
 
 app.use(express.json())
 
@@ -11,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 // Ajout du ou des router personnalisé
-// app.use(router)
+app.use(router)
 
 app.use((req, res) => {
   const success = false;
