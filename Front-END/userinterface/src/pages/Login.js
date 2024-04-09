@@ -45,7 +45,7 @@ export default function Login() {
 								placeholder="Entrer votre adresse email"
 								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm"
 							/>
-							{!isValid && <p style={{ color: 'red' }}>Veuillez entrer une adresse email valide.</p>}
+							{!isValid && <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
 						</div>
 						<div className="flex flex-row h-10 mx-4 rounded-md bg-gray-300 p-2">
 							<input
@@ -83,16 +83,16 @@ export default function Login() {
 					<img alt="logo"
 						 src={Logo}
 						 className="h-9/12 w-1/4"/>
-					<div className="flex flex-row h-12 w-1/4 rounded-md bg-gray-300 p-2">
+					<div className="flex flex-col w-1/4 rounded-md">
 						<input
 							type="email"
 							id="UserEmail"
 							value={email}
 							onChange={handleChange}
 							placeholder="Entrer votre adresse email"
-							className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-2 text-lg shadow-md focus:outline-none"
+							className="w-full h-12 rounded-md border-gray-300 bg-gray-300 px-2 text-lg shadow-md focus:outline-none"
 						/>
-						{!isValid && <p style={{color: 'red'}}>Veuillez entrer une adresse email valide.</p>}
+						{!isValid && <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
 					</div>
 					<div className="flex flex-row h-12 w-1/4 rounded-md bg-gray-300 p-2 shadow-md">
 						<input
