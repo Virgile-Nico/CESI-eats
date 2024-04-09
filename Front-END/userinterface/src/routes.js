@@ -1,6 +1,7 @@
 import NotFound from "./pages/NotFound";
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
+import SuccessConnexion from "./pages/SuccessConnexion";
 
 
 export const routes = [
@@ -13,6 +14,11 @@ export const routes = [
 		name: "Login",
 		path: "/login",
 		element: <Login />,
+	},
+	{
+		name: "SuccessConnexion",
+		path: "/success-connexion",
+		element: <SuccessConnexion />,
 	},
 	{
 		name: "NotFound",
