@@ -30,6 +30,10 @@ notification : 3026
 mariadb : 3306  
 mongodb : 27017  
 
+### Event Bus
+kafka : 9092  
+
+
 # Normes d'écritures :
 ## Logs
 
