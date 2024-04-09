@@ -10,7 +10,7 @@ const pool = require('../controllers/dbMaria');
 exports.registerUser = async (req, res) => {
     try {
         //verify if the user already exists
-        const queryResult = await pool.query('SELECT * FROM users WHERE email = ?', [req.body.email]);
+        const queryResult = await pool.query('SELECT * FROM CLIENTS WHERE email = ?', [req.body.email]);
         const userExists = queryResult.length > 0;
 
         if (userExists) {
@@ -37,7 +37,7 @@ exports.loginUser = async (req, res) => {
   try {
       const { email, password } = req.body;
       //execute a query to find the user by email
-      const result = await pool.query('SELECT * FROM user WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM CLIENTS WHERE email = ?', [email]);
       //assuming the query returns an array of results, check if we got any result
       const user = result[0]; 
 
@@ -85,7 +85,7 @@ exports.authenticateUser = (req, res) => {
   
   exports.registerDelivery = async (req, res) => {
     try {
-      const queryResult = await pool.query('SELECT * FROM delivery WHERE email = ?', [req.body.email]);
+      const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE email = ?', [req.body.email]);
       const DeliveryExists = queryResult.length > 0;
 
       if (DeliveryExists) {
@@ -108,7 +108,7 @@ exports.loginDelivery = async (req, res) => {
   try {
       const { email, password } = req.body;
       //execute a query to find the Delivery by email
-      const result = await pool.query('SELECT * FROM delivery WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM LIVREURS WHERE email = ?', [email]);
       //assuming the query returns an array of results, check if we got any result
       const delivery = result[0]; 
 
@@ -146,7 +146,7 @@ exports.authenticateDelivery = (req, res) => {
 
 exports.registerIntern = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM intern WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM INTERN WHERE email = ?', [req.body.email]);
     const InternExists = queryResult.length > 0;
 
     if (InternExists) {
@@ -169,7 +169,7 @@ exports.registerIntern = async (req, res) => {
 exports.loginIntern = async (req, res) => {
   try {
       const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM intern WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM INTERN WHERE email = ?', [email]);
       const intern = result[0];
 
       if (intern && bcrypt.compareSync(password, intern.password)) {
@@ -206,7 +206,7 @@ exports.authenticateIntern = (req, res) => {
 
 exports.registerRestaurant = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM restaurant WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE email = ?', [req.body.email]);
     const RestaurantExists = queryResult.length > 0;
 
     if (RestaurantExists) {
@@ -228,7 +228,7 @@ exports.registerRestaurant = async (req, res) => {
 exports.loginRestaurant = async (req, res) => {
   try {
       const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM restaurant WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM RESTAURANT WHERE email = ?', [email]);
       const restaurant = result[0]; 
 
       if (restaurant && bcrypt.compareSync(password, restaurant.password)) {
@@ -266,7 +266,7 @@ exports.authenticateRestaurant = (req, res) => {
 
 exports.registerTiers = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM tiers WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE email = ?', [req.body.email]);
     const TiersExists = queryResult.length > 0;
 
     if (TiersExists) {
@@ -288,7 +288,7 @@ exports.registerTiers = async (req, res) => {
 exports.loginTiers = async (req, res) => {
   try {
       const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM tiers WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM DEV_TIERS WHERE email = ?', [email]);
       const tiers = result[0]; 
 
       if (tiers && bcrypt.compareSync(password, tiers.password)) {

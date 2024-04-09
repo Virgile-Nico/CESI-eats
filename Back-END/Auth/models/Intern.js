@@ -14,7 +14,7 @@ class Intern {
 
     // save new person in the internal service
     save() {
-        return pool.query('INSERT INTO intern (email, password, name, first_name, tel, rib, vehicle_type) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.tel, this.rib, this.vehicleType]);
+        return pool.query('INSERT INTO intern (email, password, name, first_name, type) VALUES (?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.type]);
     }
 
     // get person in the internal service by id

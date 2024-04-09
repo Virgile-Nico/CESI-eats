@@ -17,12 +17,12 @@ class Restaurant {
 
     //save new restaurant
     save() {
-        return pool.query('INSERT INTO restaurants (email, password, name, tel, postal_code, city, address, siren, rib) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.tel, this.postalCode, this.city, this.address, this.siren, this.rib]);
+        return pool.query('INSERT INTO restaurant (email, password, name, tel, postal_code, city, address, siren, rib) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.tel, this.postalCode, this.city, this.address, this.siren, this.rib]);
     }
 
     //find restaurant by id
     static findById(id) {
-        return pool.query('SELECT * FROM restaurants WHERE id = ?', [id]);
+        return pool.query('SELECT * FROM restaurant WHERE id = ?', [id]);
     }
 }
 

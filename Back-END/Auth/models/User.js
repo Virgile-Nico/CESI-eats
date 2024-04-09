@@ -1,7 +1,7 @@
 const pool = require('../controllers/dbMaria'); 
 
-// class User
-class User {
+// class user
+class user {
     constructor(id, email, password, name, firstName, telephone, codeParrain, codeParrainage) {
         this.id = id;
         this.email = email;
@@ -17,12 +17,12 @@ class User {
 
     // save new user
     save() {
-        return pool.query('INSERT INTO tiers (email, password, name, first_name, tel, rib, vehicle_type) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.tel, this.rib, this.vehicleType]);
+        return pool.query('INSERT INTO clients (email, password, name, first_name, telephone, codeParrain, vehicle_type) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.tel, this.rib, this.vehicleType]);
     }
 
     // get user by id
     static findById(id) {
-        return pool.query('SELECT * FROM tiers WHERE id = ?', [id]);
+        return pool.query('SELECT * FROM clients WHERE id = ?', [id]);
     }
 }
-module.exports = User;
+module.exports = user;
