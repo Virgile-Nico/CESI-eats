@@ -1,7 +1,7 @@
 import Bowl from '../assets/img/bowl_logo.png';
 import Logo from '../assets/logo/logo_slogan.png';
 import Icon from '@mdi/react';
-import {mdiEye, mdiEyeOff} from "@mdi/js";
+import {mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
 import {useState} from "react";
 
 export default function Login() {
@@ -9,6 +9,7 @@ export default function Login() {
 	const isMobile = window.innerWidth <= 600;
 	const [show, setShow] = useState(false);
 	const [password, setPassword] = useState('');
+	const [notifVisible, setNotifVisible] = useState(false);
 
 	return (
 		<main className="h-screen w-full flex flex-col items-center">
@@ -56,6 +57,7 @@ export default function Login() {
 						</button>
 					</div>
 					<button
+						onClick={() => setNotifVisible(true)}
 						className="flex flex-row w-1/2 self-center h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
 						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>
@@ -97,9 +99,33 @@ export default function Login() {
 					<button className="text-sm text-end mx-4 underline active:no-underline">Je n'ai pas de compte
 					</button>
 					<button
+						onClick={() => setNotifVisible(true)}
 						className="flex flex-row w-1/6 h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
 						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>
+				</div>
+			)}
+			{notifVisible && (
+				<div
+					className="flex flex-col space-y-4 mx-2 min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-transparent">
+					<div className="flex flex-col p-8 bg-gray-100 border-2 border-gray-200 shadow-2xl rounded-2xl">
+						<div className="flex items-center justify-between">
+							<div className="flex items-center">
+								<div className="flex flex-col ml-3">
+									<div className="font-bold text-lg md:text-lg">Connexion impossible</div>
+									<p className="text-sm md:text-md text-gray-700 leading-none mt-1">
+										Email ou mot de passe incorrect
+									</p>
+								</div>
+							</div>
+							<button
+								onClick={() => setNotifVisible(false)}
+								className="flex-no-shrink bg-transparent px-5 ml-4 py-2 text-sm text-red-700 hover:text-red-400 font-medium tracking-wider rounded-full"
+							>
+								<Icon path={mdiCloseBox} size={2} />
+							</button>
+						</div>
+					</div>
 				</div>
 			)}
 		</main>
