@@ -72,26 +72,36 @@ router.post('/login', (req, res) => {
 
 router.get('/authenticate', (req, res) => {
     const type = req.query.type;
+    let token = req.headers["authorization"];
+        if (!token) {
+            console.log("Token is required.");
+            return { status: 403, message: "Token is required." };
+        }
+    
+        // Extrait le token JWT du préfixe "Bearer"
+        if (token.startsWith('Bearer ')) {
+            token = token.slice(7, token.length);
+          }
     switch(type) {
         case 'user':
             console.log('User authenticate')
-            authController.authenticateUser(req, res);
+            authController.authenticateUser(token);
             break;
         case 'restaurant':
             console.log('Restaurant authenticate')
-            authController.authenticateRestaurant(req, res);
+            authController.authenticateRestaurant(token);
             break;
         case 'delivery':
             console.log('Delivery authenticate')
-            authController.authenticateDelivery(req, res);
+            authController.authenticateDelivery(token);
             break;
         case 'intern':
             console.log('Intern authenticate')
-            authController.authenticateIntern(req, res);
+            authController.authenticateIntern(token);
             break;
         case 'tiers':
             console.log('Tiers authenticate')
-            authController.authenticateTiers(req, res);
+            authController.authenticateTiers(token);
             break;
         default:
             res.status(404).send("Type authenticate unknown");

@@ -30,7 +30,7 @@ module.exports = {
             if (!body.MAIL || !body.PASSWORD) {
                 return { status: 400, message: "Email and password are required." };
             }
-            console.log(body.MAIL)
+            
             const [user] = await pool.query('SELECT * FROM CLIENTS WHERE MAIL = ?', [body.MAIL]);
             
             if (user) {
@@ -60,29 +60,42 @@ module.exports = {
         }
     },
 
-    authenticateUser : (req, res) => {
-    let token = req.headers["authorization"];
-    //if token exists
-    if (!token) {
-      return res.status(403).send({ message: "no token given." });
-    }
-    if (token.startsWith('Bearer ')) {
-        token = token.slice(7, token.length);
-      }
-    //verify token
-    jwt.verify(token, process.env.ACCESS_JWT_KEY, async (err, decoded) => {
-      if (err) {
-        return res.status(401).send({ message: "Not autorised." });
-      }
-      //check if user exists
-      const user = await User.findOne({ MAIL: decoded.MAIL }); 
-  
-      if (!user) {
-        return res.status(404).send({ message: "User not found." });
-      }
-      // res.locals.user = user; //store user in res.locals
-      return res.status(200).send({ message: "Access granted." });
-    });
+    authenticateUser : async (body) => {
+        const token = body;
+        console.log(token)
+        try {
+            console.log("Token: ", token);
+            // Vérifie la validité du token JWT
+            const decoded = jwt.verify(token, process.env.ACCESS_JWT_KEY);
+            
+            // Ici, on suppose que le payload du token contient l'email de l'utilisateur (MAIL)
+            const query = 'SELECT * FROM CLIENTS WHERE MAIL = ?';
+            const users = await pool.query(query, [decoded.MAIL]);
+    
+            // Vérifie si au moins un utilisateur correspondant a été trouvé
+            if (users.length === 0) {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+    
+            const user = users[0]; // Prend le premier utilisateur trouvé
+    
+            console.log("User: ", user);
+            // Utilisateur authentifié avec succès
+            return {
+                status: 200,
+                message: "User authenticated successfully.",
+                user: {
+                    ID: user.ID,
+                    MAIL: user.MAIL,
+                    // Incluez d'autres champs au besoin, mais excluez les informations sensibles
+                }
+            };
+        } catch (error) {
+            console.error("Authentication error: ", error);
+            // Le token n'est pas valide ou a expiré
+            return { status: 401, message: "Authentication failed." };
+        }
     },
 
     //below are the functions for the other types of models
