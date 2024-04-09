@@ -2,7 +2,7 @@ const pool = require('../controllers/dbMaria');
 
 // class Tiers
 class Tiers {
-    constructor(id, email, password, name, firstName, tel, rib, vehicleType) {
+    constructor(id, email, password, name, firstName, entreprise) {
         this.id = id;
         this.email = email;
         this.password = password;
