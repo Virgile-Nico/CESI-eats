@@ -7,10 +7,37 @@ const Restaurant = require('../models/Restaurant');
 const Tiers = require('../models/Tiers');
 const pool = require('../controllers/dbMaria');
 
-exports.registerUser = async (req, res) => {
+module.exports = {
+    registerUser: async (body) => {
+        try {
+            const queryResult = await pool.query('SELECT * FROM CLIENTS WHERE MAIL = ?', [body.MAIL]);
+            const userExists = queryResult.length > 0;
+    
+            if (userExists) {
+                return res.status(400).json({ "error": "email already exists." });
+            }
+            const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
+            const newUser = new User({
+                MAIL: body.MAIL,
+                PASSWORD: hashedPassword,
+                NOM: body.NOM,
+                PRENOM: body.PRENOM,
+                TEL: body.TEL,
+                CODE_PARRAIN: body.CODE_PARRAIN,
+                CODE_PARAINAGE: body.CODE_PARAINAGE
+            });
+            await pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [body.MAIL, body.PASSWORD, body.NOM, body.PRENOM, body.TEL, body.CODE_PARRAIN, body.CODE_PARAINAGE]);
+        } catch (error) {
+            console.error("register error: ", error);
+        }
+    
+    }
+}
+/*exports.registerUser = async (req, res) => {
     try {
         //verify if the user already exists
-        const queryResult = await pool.query('SELECT * FROM CLIENTS WHERE email = ?', [req.body.email]);
+        const queryResult = await pool.query(`SELECT * FROM CLIENTS WHERE MAIL = ${req.body.MAIL}`);
+        console.log("test");
         const userExists = queryResult.length > 0;
 
         if (userExists) {
@@ -20,7 +47,7 @@ exports.registerUser = async (req, res) => {
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         //create new user
         const newUser = new User({
-            email: req.body.email,
+            MAIL: req.body.MAIL,
             password: hashedPassword
         });
         //save new user
@@ -31,18 +58,18 @@ exports.registerUser = async (req, res) => {
         console.error("register error: ", error);
         return res.status(500).json({ "error": "internal server error" });
     }
-};
+};*/
 
 exports.loginUser = async (req, res) => {
   try {
-      const { email, password } = req.body;
+      const { MAIL, password } = req.body;
       //execute a query to find the user by email
-      const result = await pool.query('SELECT * FROM CLIENTS WHERE email = ?', [email]);
+      const result = await pool.query('SELECT * FROM CLIENTS WHERE MAIL = ?', [MAIL]);
       //assuming the query returns an array of results, check if we got any result
       const user = result[0]; 
 
       if (user && bcrypt.compareSync(password, user.password)) {
-          const accessToken = jwt.sign({ email: user.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
+          const accessToken = jwt.sign({ MAIL: user.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
           res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -68,7 +95,7 @@ exports.authenticateUser = (req, res) => {
         return res.status(401).send({ message: "Not autorised." });
       }
       //check if user exists
-      const user = await User.findOne({ email: decoded.email }); 
+      const user = await User.findOne({ MAIL: decoded.MAIL }); 
   
       if (!user) {
         return res.status(404).send({ message: "User not found." });
@@ -85,7 +112,7 @@ exports.authenticateUser = (req, res) => {
   
   exports.registerDelivery = async (req, res) => {
     try {
-      const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE email = ?', [req.body.email]);
+      const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [req.body.MAIL]);
       const DeliveryExists = queryResult.length > 0;
 
       if (DeliveryExists) {
@@ -106,12 +133,12 @@ exports.authenticateUser = (req, res) => {
 
 exports.loginDelivery = async (req, res) => {
   try {
-      const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM LIVREURS WHERE email = ?', [email]);
+      const { MAIL, password } = req.body;
+      const result = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [MAIL]);
       const delivery = result[0]; 
 
       if (delivery && bcrypt.compareSync(password, delivery.password)) {
-          const accessToken = jwt.sign({ email: delivery.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
+          const accessToken = jwt.sign({ MAIL: delivery.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
           res.status(200).json({ message: "Delivery person is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -134,7 +161,7 @@ exports.authenticateDelivery = (req, res) => {
         if (err) {
             return res.status(401).send({ message: "Not authorised." });
         }
-        const delivery = await Delivery.findOne({ email: decoded.email });
+        const delivery = await Delivery.findOne({ MAIL: decoded.MAIL });
         if (!delivery) {
             return res.status(404).send({ message: "Delivery person not found." });
         }
@@ -144,7 +171,7 @@ exports.authenticateDelivery = (req, res) => {
 
 exports.registerIntern = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM INTERN WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [req.body.MAIL]);
     const InternExists = queryResult.length > 0;
 
     if (InternExists) {
@@ -166,12 +193,12 @@ exports.registerIntern = async (req, res) => {
 
 exports.loginIntern = async (req, res) => {
   try {
-      const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM INTERN WHERE email = ?', [email]);
+      const { MAIL, password } = req.body;
+      const result = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [MAIL]);
       const intern = result[0];
 
       if (intern && bcrypt.compareSync(password, intern.password)) {
-          const accessToken = jwt.sign({ email: intern.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
+          const accessToken = jwt.sign({ MAIL: intern.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
           res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -194,7 +221,7 @@ exports.authenticateIntern = (req, res) => {
       if (err) {
           return res.status(401).send({ message: "Not authorised." });
       }
-      const Intern = await Intern.findOne({ email: decoded.email });
+      const Intern = await Intern.findOne({ MAIL: decoded.MAIL });
       if (!Intern) {
           return res.status(404).send({ message: "User not found." });
       }
@@ -204,7 +231,7 @@ exports.authenticateIntern = (req, res) => {
 
 exports.registerRestaurant = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [req.body.MAIL]);
     const RestaurantExists = queryResult.length > 0;
 
     if (RestaurantExists) {
@@ -225,12 +252,12 @@ exports.registerRestaurant = async (req, res) => {
 
 exports.loginRestaurant = async (req, res) => {
   try {
-      const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM RESTAURANT WHERE email = ?', [email]);
+      const { MAIL, password } = req.body;
+      const result = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [MAIL]);
       const restaurant = result[0]; 
 
       if (restaurant && bcrypt.compareSync(password, restaurant.password)) {
-          const accessToken = jwt.sign({ email: restaurant.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
+          const accessToken = jwt.sign({ MAIL: restaurant.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
           res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -254,7 +281,7 @@ exports.authenticateRestaurant = (req, res) => {
       if (err) {
           return res.status(401).send({ message: "Not authorised." });
       }
-      const Restaurant = await Restaurant.findOne({ email: decoded.email });
+      const Restaurant = await Restaurant.findOne({ MAIL: decoded.MAIL });
       if (!Restaurant) {
           return res.status(404).send({ message: "Restaurant account not found." });
       }
@@ -264,7 +291,7 @@ exports.authenticateRestaurant = (req, res) => {
 
 exports.registerTiers = async (req, res) => {
   try {
-    const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE email = ?', [req.body.email]);
+    const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [req.body.MAIL]);
     const TiersExists = queryResult.length > 0;
 
     if (TiersExists) {
@@ -285,12 +312,12 @@ exports.registerTiers = async (req, res) => {
 
 exports.loginTiers = async (req, res) => {
   try {
-      const { email, password } = req.body;
-      const result = await pool.query('SELECT * FROM DEV_TIERS WHERE email = ?', [email]);
+      const { MAIL, password } = req.body;
+      const result = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [MAIL]);
       const tiers = result[0]; 
 
       if (tiers && bcrypt.compareSync(password, tiers.password)) {
-          const accessToken = jwt.sign({ email: tiers.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
+          const accessToken = jwt.sign({ MAIL: tiers.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
           res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -313,7 +340,7 @@ exports.authenticateTiers = (req, res) => {
       if (err) {
           return res.status(401).send({ message: "Not authorised." });
       }
-      const Tiers = await Tiers.findOne({ email: decoded.email });
+      const Tiers = await Tiers.findOne({ MAIL: decoded.MAIL });
       if (!Tiers) {
           return res.status(404).send({ message: "User not found." });
       }

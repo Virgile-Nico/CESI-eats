@@ -2,7 +2,7 @@ const pool = require('../controllers/dbMaria');
 
 // class user
 class user {
-    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARRAINAGE) {
+    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) {
         this.ID = ID;
         this.MAIL = MAIL;
         this.PASSWORD = PASSWORD;
@@ -10,14 +10,8 @@ class user {
         this.PRENOM = PRENOM;
         this.TEL = TEL;
         this.CODE_PARRAIN = CODE_PARRAIN;
-        this.CODE_PARRAINAGE = CODE_PARRAINAGE;
+        this.CODE_PARAINAGE = CODE_PARAINAGE;
 
-    }
-
-
-    // save new user
-    save() {
-        return pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARRAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.PRENOM, this.TEL, this.CODE_PARRAIN, this.CODE_PARRAINAGE]);
     }
 
     // get user by ID

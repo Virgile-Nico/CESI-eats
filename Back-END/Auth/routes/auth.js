@@ -12,9 +12,10 @@ router.post('/register', (req, res) => {
     const type = req.query.type;
     switch(type) {
         case 'user':
-            authController.registerUser(req, res);
+            authController.registerUser(req.body);
             console.log('User register')
-            break;
+            return res.status(201).json({ "msg": "New user created!" });
+            break
         case 'restaurant':
             console.log('Restaurant register')
             authController.registerRestaurant(req, res);
