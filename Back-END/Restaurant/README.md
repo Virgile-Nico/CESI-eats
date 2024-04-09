@@ -4,7 +4,7 @@ Ce micro service est responsable de toutes les actions utilisateurs de l'applica
 Il gère les mécanisme de gestion de compte, d'articles, de menus, de commandes
 
 ## Routes
- - ### [ POST ] '/create?type=' :
+ - ### [ POST ] '/create' :
         Cette route permet à l'application fronted des restauraturs d'émètre une demande de création d'horaires d'ouverture de restaurnt, de création d'article ou de menu.
 
         Données à mettre en header de la requete :
@@ -42,7 +42,7 @@ Il gère les mécanisme de gestion de compte, d'articles, de menus, de commandes
             }
             ```
 
- - ### [ GET ] '/read?type=' :  
+ - ### [ GET ] '/read' :  
         Cette route permet à l'applicaiton frontend des restaurateurs de récupérer les informations du restaurant, de ses horaires, de ses articles ou encore de ses menus.
 
         Données à mettre en header de la requete :
@@ -54,7 +54,7 @@ Il gère les mécanisme de gestion de compte, d'articles, de menus, de commandes
           ID :
             Identifiant du restaurant, de l'article ou du menu
 
- - ### [ POST ] '/update?type=' :
+ - ### [ POST ] '/update' :
         Cette route permet à l'appliction frontend des restaurateurs d'émettre une demande de mise à jour d'informations du compte du restaurant, d'un article, d'un horaire ou d'un menu
 
         Données à mettre en header de la requete :
@@ -108,7 +108,7 @@ Il gère les mécanisme de gestion de compte, d'articles, de menus, de commandes
             }
             ```
 
- - ### [ POST ] '/delete?type=' :
+ - ### [ POST ] '/delete' :
         Cette route permet à l'application frontend des restaurateurs d'émettre une demande de supression de compte du resturant
 
         Données à mettre en header de la requete :
