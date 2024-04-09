@@ -2,6 +2,7 @@ import NotFound from "./pages/NotFound";
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import SuccessConnexion from "./pages/SuccessConnexion";
+import SignUp from "./pages/SignUp";
 
 
 export const routes = [
@@ -19,6 +20,11 @@ export const routes = [
 		name: "SuccessConnexion",
 		path: "/success-connexion",
 		element: <SuccessConnexion />,
+	},
+	{
+		name: "SignUp",
+		path: "/sign-up",
+		element: <SignUp />,
 	},
 	{
 		name: "NotFound",

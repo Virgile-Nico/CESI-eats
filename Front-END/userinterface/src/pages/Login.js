@@ -3,6 +3,7 @@ import Logo from '../assets/logo/logo_slogan.png';
 import Icon from '@mdi/react';
 import {mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
 	// Check if the screen width is less than or equal to 600 pixels
@@ -12,6 +13,8 @@ export default function Login() {
 	const [notifVisible, setNotifVisible] = useState(false); // State to store the visibility of the notification
 	const [email, setEmail] = useState(''); // State to store the email value
 	const [isValid, setIsValid] = useState(true); // State to store the validity of the email
+
+	const navigate = useNavigate();
 
 	// Function to handle changes in the input value
 	const handleChange = (event) => {
@@ -43,7 +46,7 @@ export default function Login() {
 								value={email}
 								onChange={handleChange}
 								placeholder="Entrer votre adresse email"
-								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm"
+								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
 							/>
 							{!isValid && <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
 						</div>
@@ -115,7 +118,7 @@ export default function Login() {
 							)}
 						</button>
 					</div>
-					<button className="text-sm text-end mx-4 underline active:no-underline">Je n'ai pas de compte
+					<button type="button" onClick={() => navigate('/sign-up')} className="text-sm text-end mx-4 underline active:no-underline">Je n'ai pas de compte
 					</button>
 					<button
 						onClick={() => setNotifVisible(true)}
