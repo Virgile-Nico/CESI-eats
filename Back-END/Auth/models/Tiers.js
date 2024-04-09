@@ -2,24 +2,24 @@ const pool = require('../controllers/dbMaria');
 
 // class Tiers
 class Tiers {
-    constructor(id, email, password, name, firstName, entreprise) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.firstName = firstName;
-        this.entreprise = entreprise;
+    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, ENTREPRISE) {
+        this.ID = ID;
+        this.MAIL = MAIL;
+        this.PASSWORD = PASSWORD;
+        this.NOM = NOM;
+        this.PRENOM = PRENOM;
+        this.ENTREPRISE = ENTREPRISE;
     }
 
 
     // save new third-party developer
     save() {
-        return pool.query('INSERT INTO dev_tiers (email, password, name, first_name, entreprise) VALUES (?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.entreprise]);
+        return pool.query('INSERT INTO dev_tiers (MAIL, PASSWORD, NOM, PRENOM, ENTREPRISE) VALUES (?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.PRENOM, this.ENTREPRISE]);
     }
 
-    // get third-party developer by id
-    static findById(id) {
-        return pool.query('SELECT * FROM dev_tiers WHERE id = ?', [id]);
+    // get third-party developer by ID
+    static findByID(ID) {
+        return pool.query('SELECT * FROM dev_tiers WHERE ID = ?', [ID]);
     }
 }
 module.exports = Tiers;

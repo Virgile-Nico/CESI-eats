@@ -1,26 +1,25 @@
 const pool = require('../controllers/dbMaria'); 
 
-// class Restaurant
+// class Delivery
 class Delivery {
-    constructor(id, email, password, name, firstName, tel, rib, vehicleType) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.firstName = firstName;
-        this.tel = tel;
-        this.rib = rib;
-        this.vehicleType = vehicleType;
+    constructor(ID, MAIL, PASSWORD, NOM, PRENOM, tel, RIB, VEHICULE_TYPE) {
+        this.ID = ID;
+        this.MAIL = MAIL;
+        this.PASSWORD = PASSWORD;
+        this.NOM = NOM;
+        this.PRENOM = PRENOM;
+        this.RIB = RIB;
+        this.VEHICULE_TYPE = VEHICULE_TYPE;
     }
 
     // save new delivery person
     save() {
-        return pool.query('INSERT INTO livreurs (email, password, name, first_name, tel, rib, vehicle_type) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.firstName, this.tel, this.rib, this.vehicleType]);
+        return pool.query('INSERT INTO livreurs (MAIL, PASSWORD, NOM, PRENOM, RIB, VEHICULE_TYPE) VALUES (?, ?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.PRENOM, this.RIB, this.VEHICULE_TYPE]);
     }
 
-    // get delivery person by id
-    static findById(id) {
-        return pool.query('SELECT * FROM livreurs WHERE id = ?', [id]);
+    // get delivery person by ID
+    static findByID(ID) {
+        return pool.query('SELECT * FROM livreurs WHERE ID = ?', [ID]);
     }
 }
 

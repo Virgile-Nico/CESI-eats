@@ -43,7 +43,7 @@ exports.loginUser = async (req, res) => {
 
       if (user && bcrypt.compareSync(password, user.password)) {
           const accessToken = jwt.sign({ email: user.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "user person is now connected!", accessToken: accessToken });
+          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -107,14 +107,12 @@ exports.authenticateUser = (req, res) => {
 exports.loginDelivery = async (req, res) => {
   try {
       const { email, password } = req.body;
-      //execute a query to find the Delivery by email
       const result = await pool.query('SELECT * FROM LIVREURS WHERE email = ?', [email]);
-      //assuming the query returns an array of results, check if we got any result
       const delivery = result[0]; 
 
       if (delivery && bcrypt.compareSync(password, delivery.password)) {
           const accessToken = jwt.sign({ email: delivery.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "delivery person is now connected!", accessToken: accessToken });
+          res.status(200).json({ message: "Delivery person is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -158,7 +156,7 @@ exports.registerIntern = async (req, res) => {
           password: hashedPassword
       });
       await newIntern.save();
-      return res.status(201).json({ "msg": "New Intern person created!" });
+      return res.status(201).json({ "msg": "New Intern account created!" });
   } catch (error) {
       console.error("register error: ", error);
       return res.status(500).json({ "error": "internal server error" });
@@ -174,7 +172,7 @@ exports.loginIntern = async (req, res) => {
 
       if (intern && bcrypt.compareSync(password, intern.password)) {
           const accessToken = jwt.sign({ email: intern.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "Intern person is now connected!", accessToken: accessToken });
+          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -198,7 +196,7 @@ exports.authenticateIntern = (req, res) => {
       }
       const Intern = await Intern.findOne({ email: decoded.email });
       if (!Intern) {
-          return res.status(404).send({ message: "Intern person not found." });
+          return res.status(404).send({ message: "User not found." });
       }
       return res.status(200).send({ message: "Access granted." });
   });
@@ -218,7 +216,7 @@ exports.registerRestaurant = async (req, res) => {
           password: hashedPassword
       });
       await newRestaurant.save();
-      return res.status(201).json({ "msg": "New Restaurant person created!" });
+      return res.status(201).json({ "msg": "New Restaurant created!" });
   } catch (error) {
       console.error("register error: ", error);
       return res.status(500).json({ "error": "internal server error" });
@@ -233,7 +231,7 @@ exports.loginRestaurant = async (req, res) => {
 
       if (restaurant && bcrypt.compareSync(password, restaurant.password)) {
           const accessToken = jwt.sign({ email: restaurant.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "restaurant person is now connected!", accessToken: accessToken });
+          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -258,7 +256,7 @@ exports.authenticateRestaurant = (req, res) => {
       }
       const Restaurant = await Restaurant.findOne({ email: decoded.email });
       if (!Restaurant) {
-          return res.status(404).send({ message: "Restaurant person not found." });
+          return res.status(404).send({ message: "Restaurant account not found." });
       }
       return res.status(200).send({ message: "Access granted." });
   });
@@ -278,7 +276,7 @@ exports.registerTiers = async (req, res) => {
           password: hashedPassword
       });
       await newTiers.save();
-      return res.status(201).json({ "msg": "New Tiers person created!" });
+      return res.status(201).json({ "msg": "New third party developer account created!" });
   } catch (error) {
       console.error("register error: ", error);
       return res.status(500).json({ "error": "internal server error" });
@@ -293,7 +291,7 @@ exports.loginTiers = async (req, res) => {
 
       if (tiers && bcrypt.compareSync(password, tiers.password)) {
           const accessToken = jwt.sign({ email: tiers.email, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "tiers person is now connected!", accessToken: accessToken });
+          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
       } else {
           return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -317,7 +315,7 @@ exports.authenticateTiers = (req, res) => {
       }
       const Tiers = await Tiers.findOne({ email: decoded.email });
       if (!Tiers) {
-          return res.status(404).send({ message: "Tiers person not found." });
+          return res.status(404).send({ message: "User not found." });
       }
       return res.status(200).send({ message: "Access granted." });
   });

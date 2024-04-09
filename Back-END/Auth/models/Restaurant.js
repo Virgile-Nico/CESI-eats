@@ -2,27 +2,27 @@ const pool = require('../controllers/dbMaria');
 
     //class Restaurant
 class Restaurant {
-    constructor(id, email, password, name, tel, postalCode, city, address, siren, rib) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.tel = tel;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.address = address;
-        this.siren = siren;
-        this.rib = rib;
+    constructor(ID, MAIL, PASSWORD, NOM, TEL, PC, VILLE, ADRESSE, SIRET, RIB) {
+        this.ID = ID;
+        this.MAIL = MAIL;
+        this.PASSWORD = PASSWORD;
+        this.NOM = NOM;
+        this.TEL = TEL;
+        this.PC = PC;
+        this.VILLE = VILLE;
+        this.ADRESSE = ADRESSE;
+        this.SIRET = SIRET;
+        this.RIB = RIB;
     }
 
     //save new restaurant
     save() {
-        return pool.query('INSERT INTO restaurant (email, password, name, tel, postal_code, city, address, siren, rib) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [this.email, this.password, this.name, this.tel, this.postalCode, this.city, this.address, this.siren, this.rib]);
+        return pool.query('INSERT INTO restaurant (MAIL, PASSWORD, NOM, TEL, PC, VILLE, ADRESSE, SIRET, RIB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [this.MAIL, this.PASSWORD, this.NOM, this.TEL, this.PC, this.VILLE, this.ADRESSE, this.SIRET, this.RIB]);
     }
 
-    //find restaurant by id
-    static findById(id) {
-        return pool.query('SELECT * FROM restaurant WHERE id = ?', [id]);
+    //find restaurant by ID
+    static findByID(ID) {
+        return pool.query('SELECT * FROM restaurant WHERE ID = ?', [ID]);
     }
 }
 
