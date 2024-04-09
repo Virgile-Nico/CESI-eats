@@ -26,11 +26,8 @@ module.exports = {
 
     loginUser : async (body) => {
         try {
-            console.log("Cest deja ca")
-            console.log("Mail", body.MAIL)
-            console.log("Password", body.PASSWORD)
+
             if (!body.MAIL || !body.PASSWORD) {
-                console.log("Email and password are required.");
                 return { status: 400, message: "Email and password are required." };
             }
             console.log(body.MAIL)
@@ -38,18 +35,16 @@ module.exports = {
             
             if (user) {
                 if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
-                    console.log("crie pas victoire trop vite");
                     const accessToken = jwt.sign(
                         { ID: user.ID, MAIL: user.MAIL },
                         process.env.ACCESS_JWT_KEY, 
                         { expiresIn: '1h' },
-                        console.log("popopop")
                     );
                     console.log(accessToken)
                     return {
                         status: 200,
                         message: "Authentication successful!",
-                        accessToken
+                        accessToken : accessToken
                     };
                 } else {
                     console.log("Invalid email or password.");
@@ -59,15 +54,13 @@ module.exports = {
                 console.log("User not found.");
                 return { status: 404, message: "User not found." };
             }
-            console.log("finito1")
         } catch (error) {
             console.error("Login error: ", error);
             return { status: 500, message: "An error occurred during the login process." };
         }
-        console.log("finito2")
     },
 
-authenticateUser : (req, res) => {
+    authenticateUser : (req, res) => {
     let token = req.headers["authorization"];
     //if token exists
     if (!token) {
@@ -90,14 +83,14 @@ authenticateUser : (req, res) => {
       // res.locals.user = user; //store user in res.locals
       return res.status(200).send({ message: "Access granted." });
     });
-  },
+    },
 
-  //below are the functions for the other types of models
+    //below are the functions for the other types of models
   //they are similar to the user functions
   //the only difference is the model used
   //and the fields used in the model
   
-registerDelivery: async (body) => {
+    registerDelivery: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [body.MAIL]);
         const DeliveryExists = queryResult.length > 0;
@@ -112,27 +105,44 @@ registerDelivery: async (body) => {
         console.error("register error: ", error);
     }
 
-},
+    },
 
-loginDelivery : async (req, res) => {
-  try {
-      const { MAIL, password } = req.body;
-      const result = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [MAIL]);
-      const delivery = result[0]; 
+    loginDelivery : async (body) => {
+    try {
+        if (!body.MAIL || !body.PASSWORD) {
+            console.log("Email and password are required.");
+            return { status: 400, message: "Email and password are required." };
+        }
+        const [user] = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [body.MAIL]);
+        
+        if (user) {
+            if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
+                const accessToken = jwt.sign(
+                    { ID: user.ID, MAIL: user.MAIL },
+                    process.env.ACCESS_JWT_KEY, 
+                    { expiresIn: '1h' },
+                );
+                console.log(accessToken)
+                return {
+                    status: 200,
+                    message: "Authentication successful!",
+                    accessToken : accessToken
+                };
+            } else {
+                console.log("Invalid email or password.");
+                return { status: 401, message: "Invalid email or password." };
+            }
+        } else {
+            console.log("User not found.");
+            return { status: 404, message: "User not found." };
+        }
+    } catch (error) {
+        console.error("Login error: ", error);
+        return { status: 500, message: "An error occurred during the login process." };
+    }
+    },
 
-      if (delivery && bcrypt.compareSync(password, delivery.password)) {
-          const accessToken = jwt.sign({ MAIL: delivery.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "Delivery person is now connected!", accessToken: accessToken });
-      } else {
-          return res.status(401).json({ message: "Invalid email or password" });
-      }
-  } catch (error) {
-      console.error("login error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-},
-
-authenticateDelivery : (req, res) => {
+    authenticateDelivery : (req, res) => {
     let token = req.headers["authorization"];
     if (!token) {
         return res.status(403).send({ message: "No token given." });
@@ -150,9 +160,9 @@ authenticateDelivery : (req, res) => {
         }
         return res.status(200).send({ message: "Access granted." });
     });
-},
+    },
 
-registerIntern : async (body) => {
+    registerIntern : async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [body.MAIL]);
         const InternExists = queryResult.length > 0;
@@ -166,27 +176,44 @@ registerIntern : async (body) => {
         console.error("register error: ", error);
     }
 
-},
+    },
 
-loginIntern : async (req, res) => {
-  try {
-      const { MAIL, password } = req.body;
-      const result = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [MAIL]);
-      const intern = result[0];
+    loginIntern : async (body) => {
+    try {
+        if (!body.MAIL || !body.PASSWORD) {
+            console.log("Email and password are required.");
+            return { status: 400, message: "Email and password are required." };
+        }
+        const [user] = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [body.MAIL]);
+        
+        if (user) {
+            if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
+                const accessToken = jwt.sign(
+                    { ID: user.ID, MAIL: user.MAIL },
+                    process.env.ACCESS_JWT_KEY, 
+                    { expiresIn: '1h' },
+                );
+                console.log(accessToken)
+                return {
+                    status: 200,
+                    message: "Authentication successful!",
+                    accessToken : accessToken
+                };
+            } else {
+                console.log("Invalid email or password.");
+                return { status: 401, message: "Invalid email or password." };
+            }
+        } else {
+            console.log("User not found.");
+            return { status: 404, message: "User not found." };
+        }
+    } catch (error) {
+        console.error("Login error: ", error);
+        return { status: 500, message: "An error occurred during the login process." };
+    }
+    },
 
-      if (intern && bcrypt.compareSync(password, intern.password)) {
-          const accessToken = jwt.sign({ MAIL: intern.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
-      } else {
-          return res.status(401).json({ message: "Invalid email or password" });
-      }
-  } catch (error) {
-      console.error("login error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-},
-
-authenticateIntern : (req, res) => {
+    authenticateIntern : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -204,9 +231,9 @@ authenticateIntern : (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-},
+    },
 
-registerRestaurant: async (body) => {
+    registerRestaurant: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [body.MAIL]);
         const RestaurantExists = queryResult.length > 0;
@@ -221,28 +248,44 @@ registerRestaurant: async (body) => {
         console.error("register error: ", error);
     }
 
-},
+    },
 
-loginRestaurant : async (req, res) => {
-  try {
-      const { MAIL, password } = req.body;
-      const result = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [MAIL]);
-      const restaurant = result[0]; 
+    loginRestaurant : async (body) => {
+    try {
+        if (!body.MAIL || !body.PASSWORD) {
+            console.log("Email and password are required.");
+            return { status: 400, message: "Email and password are required." };
+        }
+        const [user] = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [body.MAIL]);
+        
+        if (user) {
+            if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
+                const accessToken = jwt.sign(
+                    { ID: user.ID, MAIL: user.MAIL },
+                    process.env.ACCESS_JWT_KEY, 
+                    { expiresIn: '1h' },
+                );
+                console.log(accessToken)
+                return {
+                    status: 200,
+                    message: "Authentication successful!",
+                    accessToken : accessToken
+                };
+            } else {
+                console.log("Invalid email or password.");
+                return { status: 401, message: "Invalid email or password." };
+            }
+        } else {
+            console.log("User not found.");
+            return { status: 404, message: "User not found." };
+        }
+    } catch (error) {
+        console.error("Login error: ", error);
+        return { status: 500, message: "An error occurred during the login process." };
+    }
+    },
 
-      if (restaurant && bcrypt.compareSync(password, restaurant.password)) {
-          const accessToken = jwt.sign({ MAIL: restaurant.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
-      } else {
-          return res.status(401).json({ message: "Invalid email or password" });
-      }
-  } catch (error) {
-      console.error("login error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-},
-
-
-authenticateRestaurant : (req, res) => {
+    authenticateRestaurant : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -260,10 +303,9 @@ authenticateRestaurant : (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-},
+    },
 
-
-registerTiers: async (body) => {
+    registerTiers: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [body.MAIL]);
         const TiersExists = queryResult.length > 0;
@@ -277,27 +319,44 @@ registerTiers: async (body) => {
         console.error("register error: ", error);
     }
 
-},
+    },
 
-loginTiers : async (req, res) => {
-  try {
-      const { MAIL, password } = req.body;
-      const result = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [MAIL]);
-      const tiers = result[0]; 
+    loginTiers : async (body) => {
+    try {
+        if (!body.MAIL || !body.PASSWORD) {
+            console.log("Email and password are required.");
+            return { status: 400, message: "Email and password are required." };
+        }
+        const [user] = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [body.MAIL]);
+        
+        if (user) {
+            if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
+                const accessToken = jwt.sign(
+                    { ID: user.ID, MAIL: user.MAIL },
+                    process.env.ACCESS_JWT_KEY, 
+                    { expiresIn: '1h' },
+                );
+                console.log(accessToken)
+                return {
+                    status: 200,
+                    message: "Authentication successful!",
+                    accessToken : accessToken
+                };
+            } else {
+                console.log("Invalid email or password.");
+                return { status: 401, message: "Invalid email or password." };
+            }
+        } else {
+            console.log("User not found.");
+            return { status: 404, message: "User not found." };
+        }
+    } catch (error) {
+        console.error("Login error: ", error);
+        return { status: 500, message: "An error occurred during the login process." };
+    }
+    },
 
-      if (tiers && bcrypt.compareSync(password, tiers.password)) {
-          const accessToken = jwt.sign({ MAIL: tiers.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
-      } else {
-          return res.status(401).json({ message: "Invalid email or password" });
-      }
-  } catch (error) {
-      console.error("login error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-},
-
-authenticateTiers : (req, res) => {
+    authenticateTiers : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -315,6 +374,6 @@ authenticateTiers : (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-}
+    }
 }
 

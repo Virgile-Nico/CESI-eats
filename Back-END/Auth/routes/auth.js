@@ -49,19 +49,19 @@ router.post('/login', (req, res) => {
             break;
         case 'restaurant':
             console.log('Restaurant login')
-            authController.loginRestaurant(req, res);
+            authController.loginRestaurant(req.body);
             break;
         case 'delivery':
             console.log('Delivery login')
-            authController.loginDelivery(req, res);
+            authController.loginDelivery(req.body);
             break;
         case 'intern':
             console.log('Intern login')
-            authController.loginIntern(req, res);
+            authController.loginIntern(req.body);
             break;
         case 'tiers':
             console.log('Tiers login')
-            authController.loginTiers(req, res);
+            authController.loginTiers(req.body);
             break;
         default:
             res.status(404).send("Type login unknown");
