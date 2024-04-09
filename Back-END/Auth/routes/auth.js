@@ -44,7 +44,8 @@ router.post('/login', (req, res) => {
     switch(type) {
         case 'user':
             console.log('User login')
-            authController.loginUser(req, res);
+            authController.loginUser(req.body);
+            console.log('Finishing login user')
             break;
         case 'restaurant':
             console.log('Restaurant login')

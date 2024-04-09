@@ -1,6 +1,8 @@
 const express = require('express')
+const dotenv = require('dotenv').config()
 const app = express()
 const port = 3010
+
 
 const router = require('./routes/auth');
 app.use(express.json());

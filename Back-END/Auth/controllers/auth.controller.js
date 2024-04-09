@@ -22,30 +22,52 @@ module.exports = {
             console.error("register error: ", error);
         }
     
-    }
-}
+    },
 
-exports.loginUser = async (req, res) => {
-  try {
-      const { MAIL, password } = req.body;
-      //execute a query to find the user by email
-      const result = await pool.query('SELECT * FROM CLIENTS WHERE MAIL = ?', [MAIL]);
-      //assuming the query returns an array of results, check if we got any result
-      const user = result[0]; 
+    loginUser : async (body) => {
+        try {
+            console.log("Cest deja ca")
+            console.log("Mail", body.MAIL)
+            console.log("Password", body.PASSWORD)
+            if (!body.MAIL || !body.PASSWORD) {
+                console.log("Email and password are required.");
+                return { status: 400, message: "Email and password are required." };
+            }
+            console.log(body.MAIL)
+            const [user] = await pool.query('SELECT * FROM CLIENTS WHERE MAIL = ?', [body.MAIL]);
+            
+            if (user) {
+                if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
+                    console.log("crie pas victoire trop vite");
+                    const accessToken = jwt.sign(
+                        { ID: user.ID, MAIL: user.MAIL },
+                        process.env.ACCESS_JWT_KEY, 
+                        { expiresIn: '1h' },
+                        console.log("popopop")
+                    );
+                    console.log(accessToken)
+                    return {
+                        status: 200,
+                        message: "Authentication successful!",
+                        accessToken
+                    };
+                } else {
+                    console.log("Invalid email or password.");
+                    return { status: 401, message: "Invalid email or password." };
+                }
+            } else {
+                console.log("User not found.");
+                return { status: 404, message: "User not found." };
+            }
+            console.log("finito1")
+        } catch (error) {
+            console.error("Login error: ", error);
+            return { status: 500, message: "An error occurred during the login process." };
+        }
+        console.log("finito2")
+    },
 
-      if (user && bcrypt.compareSync(password, user.password)) {
-          const accessToken = jwt.sign({ MAIL: user.MAIL, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.ACCESS_JWT_KEY);
-          res.status(200).json({ message: "User is now connected!", accessToken: accessToken });
-      } else {
-          return res.status(401).json({ message: "Invalid email or password" });
-      }
-  } catch (error) {
-      console.error("login error: ", error);
-      return res.status(500).json({ "error": "internal server error" });
-  }
-};
-
-exports.authenticateUser = (req, res) => {
+authenticateUser : (req, res) => {
     let token = req.headers["authorization"];
     //if token exists
     if (!token) {
@@ -68,16 +90,13 @@ exports.authenticateUser = (req, res) => {
       // res.locals.user = user; //store user in res.locals
       return res.status(200).send({ message: "Access granted." });
     });
-  };
+  },
 
   //below are the functions for the other types of models
   //they are similar to the user functions
   //the only difference is the model used
   //and the fields used in the model
   
-
-
-module.exports = {
 registerDelivery: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [body.MAIL]);
@@ -93,10 +112,9 @@ registerDelivery: async (body) => {
         console.error("register error: ", error);
     }
 
-}
-}
+},
 
-exports.loginDelivery = async (req, res) => {
+loginDelivery : async (req, res) => {
   try {
       const { MAIL, password } = req.body;
       const result = await pool.query('SELECT * FROM LIVREURS WHERE MAIL = ?', [MAIL]);
@@ -112,9 +130,9 @@ exports.loginDelivery = async (req, res) => {
       console.error("login error: ", error);
       return res.status(500).json({ "error": "internal server error" });
   }
-};
+},
 
-exports.authenticateDelivery = (req, res) => {
+authenticateDelivery : (req, res) => {
     let token = req.headers["authorization"];
     if (!token) {
         return res.status(403).send({ message: "No token given." });
@@ -132,9 +150,8 @@ exports.authenticateDelivery = (req, res) => {
         }
         return res.status(200).send({ message: "Access granted." });
     });
-};
+},
 
-module.exports = {
 registerIntern : async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [body.MAIL]);
@@ -149,10 +166,9 @@ registerIntern : async (body) => {
         console.error("register error: ", error);
     }
 
-}
-}
+},
 
-exports.loginIntern = async (req, res) => {
+loginIntern : async (req, res) => {
   try {
       const { MAIL, password } = req.body;
       const result = await pool.query('SELECT * FROM INTERN WHERE MAIL = ?', [MAIL]);
@@ -168,9 +184,9 @@ exports.loginIntern = async (req, res) => {
       console.error("login error: ", error);
       return res.status(500).json({ "error": "internal server error" });
   }
-};
+},
 
-exports.authenticateIntern = (req, res) => {
+authenticateIntern : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -188,10 +204,8 @@ exports.authenticateIntern = (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-};
+},
 
-
-module.exports = {
 registerRestaurant: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [body.MAIL]);
@@ -207,10 +221,9 @@ registerRestaurant: async (body) => {
         console.error("register error: ", error);
     }
 
-}
-}
+},
 
-exports.loginRestaurant = async (req, res) => {
+loginRestaurant : async (req, res) => {
   try {
       const { MAIL, password } = req.body;
       const result = await pool.query('SELECT * FROM RESTAURANT WHERE MAIL = ?', [MAIL]);
@@ -226,10 +239,10 @@ exports.loginRestaurant = async (req, res) => {
       console.error("login error: ", error);
       return res.status(500).json({ "error": "internal server error" });
   }
-};
+},
 
 
-exports.authenticateRestaurant = (req, res) => {
+authenticateRestaurant : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -247,17 +260,16 @@ exports.authenticateRestaurant = (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-};
+},
 
 
-module.exports = {
 registerTiers: async (body) => {
     try {
         const queryResult = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [body.MAIL]);
         const TiersExists = queryResult.length > 0;
 
         if (TiersExists) {
-            return res.status(400).json({ "error": "email already exists." });
+            return  "error email already exists." ;
         }
         const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
         await pool.query('INSERT INTO DEV_TIERS (MAIL, PASSWORD, NOM, PRENOM, ENTREPRISE) VALUES (?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.ENTREPRISE]);
@@ -265,10 +277,9 @@ registerTiers: async (body) => {
         console.error("register error: ", error);
     }
 
-}
-}
+},
 
-exports.loginTiers = async (req, res) => {
+loginTiers : async (req, res) => {
   try {
       const { MAIL, password } = req.body;
       const result = await pool.query('SELECT * FROM DEV_TIERS WHERE MAIL = ?', [MAIL]);
@@ -284,9 +295,9 @@ exports.loginTiers = async (req, res) => {
       console.error("login error: ", error);
       return res.status(500).json({ "error": "internal server error" });
   }
-};
+},
 
-exports.authenticateTiers = (req, res) => {
+authenticateTiers : (req, res) => {
   let token = req.headers["authorization"];
   if (!token) {
       return res.status(403).send({ message: "No token given." });
@@ -304,7 +315,6 @@ exports.authenticateTiers = (req, res) => {
       }
       return res.status(200).send({ message: "Access granted." });
   });
-};
-
-
+}
+}
 
