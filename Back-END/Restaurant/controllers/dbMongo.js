@@ -1,9 +1,10 @@
-var mongoose = require('mongoose')
-var url = "mongodb://root:CESI-eats@213.32.6.121:27017/CESI_eats?authSource=admin";
+const mongoose = require('mongoose');
 
-module.exports = {
-  connect: async function (){
-    await mongoose.connect(url).then(console.log(`[MongoDB] MongoDB connected`))
-  }
-}
+const connectToMongoDB = async () => {
+  await mongoose.connect("mongodb://root:CESI-eats@213.32.6.121:27017/CESI_eats?authSource=admin")
+    .then(console.log('[MONGODB] - Connection succeed'));
+};
+
+// Exportez l'objet mongoose pour une utilisation dans d'autres fichiers
+module.exports = { mongoose, connectToMongoDB };
 

@@ -2,7 +2,13 @@ const express = require('express')
 const router = express.Router();
 const controller = require('../controllers/restaurant')
 
-router.post('/create', async (req, res) => {
+router.get('/', (req, res, next) => {
+    res.status(200)
+    .send("Welcome on restaurants API")
+    next()
+})
+
+router.post('/create', async (req, res, next) => {
     const ID = req.query.ID;
     const type = req.query.type;
     const body = req.body;
@@ -19,11 +25,11 @@ router.post('/create', async (req, res) => {
     }
     
     res.status(200)
-    .send("success")
+    next()
     
 });
 
-router.get('/read', async (req, res) => {
+router.get('/read', async (req, res, next) => {
     let response = ""
     const type = req.query.type;
     const ID = req.query.ID;
@@ -64,10 +70,11 @@ router.get('/read', async (req, res) => {
     
 
     res.status(200)
-    .send(response)
+    res.json(response)
+    next()
 })
 
-router.post('/update', async (req, res) => {
+router.post('/update', async (req, res, next) => {
     const type = req.query.type;
     const ID = req.query.ID;
     const body = req.body
@@ -91,9 +98,9 @@ router.post('/update', async (req, res) => {
             break;
     }
     res.status(200)
-    .send("success")   
+    next()   
 });
-router.post('/delete', async (req, res) => {
+router.post('/delete', async (req, res, next) => {
     const type = req.query.type;
     const ID = req.query.ID;
     switch(type) {
@@ -115,13 +122,13 @@ router.post('/delete', async (req, res) => {
             break;
     }
     res.status(200)
-    .send("success")   
+    next()   
 });
-router.post('/validate', async (req, res) => {
+router.post('/validate', async (req, res, next) => {
     const ID = req.query.ID;
     await controller.Order_update(ID)
     res.status(200)
-    .send("success")   
+    next()   
 });
 
 module.exports = router;
