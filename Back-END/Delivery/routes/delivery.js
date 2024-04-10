@@ -5,6 +5,12 @@ const logger = require('../controllers/logger');
 const deliveryBoyDB = require("../controllers/delivery-boy");
 const deliveryDB = require("../controllers/delivery");
 
+router.get('/', (req, res, next) => {
+    res.status(200)
+    .send("Welcome on restaurants API")
+    next()
+})
+
 /**
  * Retrieve data of the delivery boy
  */
