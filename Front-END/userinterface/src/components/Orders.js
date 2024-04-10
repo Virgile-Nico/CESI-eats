@@ -1,17 +1,21 @@
 function Order({ order }) {
+    // Déterminer la couleur de fond en fonction du statut de la commande
+    const bgColor = order.Status === 'done' ? 'bg-gray-300' : 'bg-yellow-200';
+    
     return (
-        <div className="flex justify-between items-center bg-yellow-200 p-4 rounded-lg mb-2 mx-4">
-            <div>
-                <p className="mb-2">Nombre de produits : {order.Number_products}</p>
-                <p>{order.ID_client} {order.ID.slice(-4)}</p>
+        <div className={`flex flex-col justify-between items-start ${bgColor} p-4 rounded-lg mb-2 mx-4 w-full`}>
+            <div className="flex justify-between w-full">
+                <p><span className="font-bold">Nombre de produits :</span> {order.Number_products}</p>
+                <p>{order.Status === 'done' ? 'Livraison effectuée' : 'En préparation'}</p>
             </div>
-            <div className="text-right">
-                <p className="mb-2">{order.Status === 'done' ? 'Livraison effectuée' : 'En préparation'}</p>
+            <div className="flex justify-between w-full mt-2">
+                <p>{order.ID.slice(0)}</p>
                 <button className="text-blue-500">Détails →</button>
             </div>
         </div>
     );
 }
+
 
 export function OrdersList({ orders, title }) {
     return (
