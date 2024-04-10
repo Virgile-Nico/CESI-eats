@@ -1,6 +1,11 @@
 import NotFound from "./pages/NotFound";
 import Splash from "./pages/Splash";
-import LoginMail from "./pages/loginMail";
+import Login from "./pages/Login";
+import SuccessConnexion from "./pages/SuccessConnexion";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Edit from "./pages/Edit";
 
 
 export const routes = [
@@ -10,9 +15,36 @@ export const routes = [
 		element: <Splash />,
 	},
 	{
-		name: "LoginMail",
+		name: "Login",
 		path: "/login",
-		element: <LoginMail />,
+		element: <Login />,
+	},
+	{
+		name: "SuccessConnexion",
+		path: "/success-connexion",
+		element: <SuccessConnexion />,
+	},
+	{
+		name: "SignUp",
+		path: "/sign-up",
+		element: <SignUp />,
+	},
+	{
+		name: "Home",
+		path: "/home",
+		element: <Home />,
+	},
+	{
+		name: "Profile",
+		path: "/profile",
+		element: <Profile />,
+		routes: [
+			{
+				name: "Edit",
+				path: "/edit",
+				element: <Edit />,
+			},
+		],
 	},
 	{
 		name: "NotFound",
