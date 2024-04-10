@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo/logo_slogan.png';
+import Logo from '../assets/logo/logo_slogan.png';import { connect } from 'react-redux';
 
-export default function Splash() {
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+});
+
+function Splash({isAuthenticated}) {
 	const navigate = useNavigate();
 	const isMobile = window.innerWidth <= 600;
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			if(isMobile)
-				navigate('/login');
+				if(isAuthenticated)
+					navigate('/home');
+				else
+					navigate('/login');
 			else
 				navigate('/home');
 		}, 1500);
@@ -23,3 +30,5 @@ export default function Splash() {
 		</main>
 	);
 }
+
+export default connect(mapStateToProps)(Splash);
