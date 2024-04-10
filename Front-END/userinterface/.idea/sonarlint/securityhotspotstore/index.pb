@@ -54,3 +54,9 @@ N
 src/components/FooterButton.js,2\8\28a924703339f6ec008f043e642673fda5d1eab9
 H
 src/components/Avatar.js,5\6\56e1055f2418b236ac284798df739f5169d74056
+H
+src/components/Adress.js,4\e\4e413e6eee320995fe2416f7ecf2652aea4c2cc3
+I
+src/components/Address.js,8\d\8d3d3517cb22af6af49e3fa8bf40dfcb8d75794c
+M
+src/components/CardPayment.js,2\b\2b8187fc27b09c1f0d588d363a28ceef4ecfa9b9

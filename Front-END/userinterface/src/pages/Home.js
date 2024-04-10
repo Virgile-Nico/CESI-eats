@@ -68,7 +68,7 @@ export default function Home() {
         setDisplayCount(7);
     };
 
-    /*const App = () => {
+    const App = () => {
         useEffect(() => {
             axios.get('api-call')
                 .then(response => {
@@ -88,24 +88,7 @@ export default function Home() {
                     console.error('There was an error!', error);
                 });
         }, []);
-    }*/
-
-    useEffect(() => {
-        setCategories([
-            {name: "Cuisine Française"},
-            {name: "Cuisine Italienne"},
-            {name: "Plats Végétariens"},
-            {name: "Cuisine Asiatique"},
-            {name: "Fruits de Mer et Poissons"},
-            {name: "Cuisine Américaine"},
-            {name: "Fast Food"},
-            {name: "Plat Végan"},
-            {name: "Spécialités Locales"},
-            {name: "Grillades et Barbecue"},
-            {name: "Cuisine Mexicaine"},
-            {name: "Pâtisseries et Desserts"},
-        ])
-    }, []);
+    }
 
     return (
         <main className="h-screen w-full flex flex-col items-center">
@@ -141,7 +124,6 @@ export default function Home() {
                             </button>
                         )}
                         {isExpanded && (
-
                             <button className="bg-transparent flex flex-col items-center        p-2"
                                     onClick={handleShowLess}>
                                 <div
