@@ -10,9 +10,31 @@ var order = new Schema(
         Total_price: Number,
         Number_products: Number,
         Status: String,
-        Articles: Array
+        Articles: Array,
+        Menus: Array
     }
 );
 const Orders = mongoose.model('Orders', order);
 
-module.exports = { Orders };
+var article = new Schema(
+    {
+        ID: Number,
+        Nom: String,
+        Description: String,
+        Prix: Number
+    }
+);
+const Article = mongoose.model('Articles', article);
+
+var menu = new Schema(
+    {
+        ID: Number,
+        Nom: String,
+        Description: String,
+        Prix: Number,
+        Articles: Array
+    }
+);
+const Menu = mongoose.model('Menus', menu);
+
+module.exports = { Orders, Article, Menu };

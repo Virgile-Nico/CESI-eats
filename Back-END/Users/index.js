@@ -16,7 +16,9 @@ app.use(router)
 
 app.use((req, res) => {
   const success = false;
-  if(res.status == 200) success = true;
+  if(res.status == 200){
+    success = true;
+  }
   Logger.logaction(req.method, req.url, success, "Response send");
   res.send();
 })
