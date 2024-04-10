@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const pool = require('./dbMaria');
 
 const Orders = require('../models/Orders')
+const Clients = require('../models/Client')
 
 function createRandomString() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -14,12 +15,12 @@ function createRandomString() {
 
 module.exports = {
     //Create
-    Order_create: async function (body) {
-        const Identifier = createRandomString()
+    Order_create: async function (body, Identifier) {
+        const Order_Identifier = createRandomString()
         const newest = new Orders.Orders(
             {
-                ID: Identifier,
-                ID_client: body.ID_client,
+                ID: Order_Identifier,
+                ID_client: Identifier,
                 ID_restaurant: body.ID_restaurant,
                 ID_delivery: body.ID_delivery,
                 Total_price: body.Total_price,
@@ -30,6 +31,14 @@ module.exports = {
             }
         )
         newest.save();
+    },
+    Address_create: async function (body, Identifier) {
+        const newest = new Clients.Adress({ID: Identifier, CP:body.CP, City: body.City, Street: body.Street})
+        newest.save()
+    },
+    Card_create: async function (body, Identifier) {
+        const newest = new Clients.Card({ID: Identifier, Card_number: body.Card_number, Owner: body.Owner, CVC: body.cvc, Expiration_date: body.Exp_date})
+        newest.save()
     },
 
     //read
@@ -126,8 +135,26 @@ module.exports = {
         }))
         return obj_to_return
     },
-    Account_read: async function () {
-
+    Address_read: async function (Identifier) {
+        let response = await Clients.Adress.findOne({ _id: Identifier })
+        return response
+    },
+    Address_client_read: async function (Identifier) {
+        let response = await Clients.Adress.find({ID: Identifier})
+        return response
+    },
+    Card_read: async function (Identifier) {
+        let response = await Clients.Card.findOne({ _id: Identifier })
+        return response
+    },
+    Card_client_read: async function (Identifier) {
+        let response = await Clients.Card.find({ID: Identifier})
+        return response
+    },
+    Account_read: async function (Identifier) {
+        let SQL_slate = `SELECT MAIL, NOM, PRENOM, TEL, CODE_PARAINAGE FROM CLIENTS WHERE ID=${Identifier}`
+        let account = await pool.query(SQL_slate)
+        return account[0]
     },
 
     //Update
@@ -141,16 +168,36 @@ module.exports = {
 
         await Orders.Orders.findByIdAndUpdate(ID, {Total_price: Total_price, Number_products: Number_products, Status: Status, Articles: Articles, Menus: Menus})
     },
-    Account_update: async function () {
-
+    Address_update: async function (body, Identifier) {
+        await Clients.Adress.findByIdAndUpdate(Identifier, {CP:body.CP, City: body.City, Street: body.Street})
+    },
+    Card_update: async function (body, Identifier) {
+        await Clients.Card.findByIdAndUpdate(Identifier, {Card_number: body.Card_number, Owner: body.Owner, CVC: body.cvc, Expiration_date: body.Exp_date})
+    },
+    Account_update: async function (body, Identifier) {
+        let SQL_slate = `UPDATE CLIENTS SET MAIL = ${body.MAIL} NOM = ${body.NOM} PRENOM = ${body.PRENOM} TEL = ${body.TEL} WHERE ID=${Identifier}`
+        await pool.query(SQL_slate)
     },
 
     //Delete
     Order_delete: async function (Identifier) {
         await Orders.Orders.deleteOne({_id: Identifier})
     },
-    Account_delete: async function () {
-
+    Address_delete: async function (Identifier) {
+        await Clients.Adress.deleteOne({_id: Identifier})
     },
+    Card_delete: async function (Identifier) {
+        await Clients.Card.deleteOne({_id: Identifier})
+    },
+    Account_delete: async function (Identifier) {
+        let orders = await Orders.Orders.find({Status: "cart", ID_client: Identifier})
+        orders.forEach(async (order) => {
+            await this.Order_delete(order._id)
+        });
+        await Clients.Card.deleteMany({ID: Identifier})
+        await Clients.Adress.deleteMany({ID: Identifier})
 
+        let SQL_slate = `DELETE FROM CLIENTS WHERE ID = ${Identifier}`
+        await pool.query(SQL_slate)
+    }
 }
