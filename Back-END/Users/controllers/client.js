@@ -14,10 +14,23 @@ function createRandomString() {
 
 module.exports = {
     //Create
-    Order_create: async function () {
+    Order_create: async function (body) {
         const Identifier = createRandomString()
         console.log(Identifier)
-        //const newest = new Orders.Orders({})
+        const newest = new Orders.Orders(
+            {
+                ID: Identifier,
+                ID_client: body.ID_client,
+                ID_restaurant: body.ID_restaurant,
+                ID_delivery: body.ID_delivery,
+                Total_price: body.Total_price,
+                Number_products: body.Number_products,
+                Status: body.Status,
+                Articles: body.Articles,
+                Menus: body.Menus
+            }
+        )
+        console.log(newest);
         //newest.save();
     },
 
