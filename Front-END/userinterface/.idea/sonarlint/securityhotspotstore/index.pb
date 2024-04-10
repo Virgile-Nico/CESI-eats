@@ -13,8 +13,6 @@ src/App.js,1\e\1e43fa63aecd2127be034b3fb9d4caa172275714
 A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 <
-src/logo.svg,6\d\6d3a8cd532ece5b4ddbd4b3b6a678ba686d300bc
-<
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 F
 src/reportWebVitals.js,1\c\1ce5e63ae1582ed0b425c46001299a07515efbf9
@@ -30,13 +28,9 @@ C
 src/pages/Splash.js,a\5\a5730aea6993f46b618a7bb1eaac27797a8e8db6
 =
 src/routes.js,e\8\e8d89f7a2814c9e07e58bcf9b360f6aa076dd83e
-?
-src/NotFound.js,9\f\9fc4230cf6dc1f47a31bf5445872419660a90891
 E
 src/pages/NotFound.js,c\b\cbf3fb6afd32a8cabd112d46a8045c5176b7879c
-F
-src/pages/loginMail.js,b\e\be18825be170a8c9ffe4ad518575acf4ea906a0e
-G
-src/assets/svg/food.svg,a\6\a63981277934618e9fbfea92551af3ce340b6cf6
-L
-src/assets/svg/food_logo.svg,1\2\12609e29f40c448b126afaeef4f86ea4f29d3887
+A
+src/pages/Home.js,f\8\f88e17193d91c101c7e0bd70b2fc4123066b1147
+J
+src/components/Category.js,4\e\4ee836e8d91e91a7e28d41c3f3a7ed2083b45056
