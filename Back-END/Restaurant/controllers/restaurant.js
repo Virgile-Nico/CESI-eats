@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 const Account = require('../models/Account');
 const Article = require('../models/Article');
 const Menu = require('../models/Menu');
@@ -96,7 +97,7 @@ module.exports = {
 
     Account_update: async function (ID, body) {
         const mail = body.MAIL;
-        const password = body.PASSWORD;
+        const password = bcrypt.hashSync(body.PASSWORD, 10);
         const name = body.NOM;
         const phone = body.TEL;
         const CP = body.CP;
@@ -150,5 +151,105 @@ module.exports = {
     },
     Menu_delete: async function (Identifier) {
         await Menu.Menu.deleteOne({ _id: Identifier })
+    },
+
+    Articles_order_read : async function (Article_obj){
+        let article = await Article.Article.findById(Article_obj.ID)
+        let obj = {
+            _id: article._id,
+            Nom: article.Nom,
+            Description: article.Description,
+            Prix: article.Prix,
+            Qte: Article_obj.Qte
+        }
+        return obj
+    },
+    Article_menu_read: async function (Identifier) {
+        let article = await Article.Article.findById(Identifier)
+        let obj = {
+            _id: article._id,
+            Nom: article.Nom,
+            Description: article.Description
+        }
+        return obj
+    },
+    Menus_order_read : async function (Menu_obj){
+        let menu = await Menu.Menu.findById(Menu_obj.ID)
+        let articles_list = []
+        await Promise.all(menu.Articles.map(async (article) => {
+            articles_list.push(await this.Article_menu_read(article))
+        }))
+        let obj = {
+            _id: menu._id,
+            Nom: menu.Nom,
+            Description: menu.Description,
+            Prix: menu.Prix,
+            Articles: articles_list,
+            Qte: Menu_obj.Qte
+        }
+        return obj
+    },
+    Order_read: async function (Identifier) {
+        let result = await Order.Orders.findById(Identifier)
+
+        const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${result.ID_client}`
+            let client_name = await pool.query(SQL_query)
+            let articles_list = []
+            let menus_list = []
+            
+            await Promise.all(await result.Articles.map(async (article) => {
+                articles_list.push(await this.Articles_order_read(article))
+            }))
+            await Promise.all(await result.Menus.map(async (menu) => {
+                menus_list.push(await this.Menus_order_read(menu))
+            }))
+
+            let obj = {
+                _id : result._id,
+                Date_Creation : result._id.getTimestamp(),
+                ID : result.ID,
+                nom_client : `${client_name[0].NOM} ${client_name[0].PRENOM}`,
+                Total_price : result.Total_price,
+                Number_products : result.Number_products,
+                Articles : articles_list,
+                Menus : menus_list
+            }
+
+        return obj
+    },
+    Order_history: async function (Identifier) {
+        let result = await Order.Orders.find( { ID_restaurant: Identifier })
+        let obj_to_return = []
+        await Promise.all(result.map( async (order) => {
+            const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${order.ID_client}`
+            let client_name = await pool.query(SQL_query)
+            let articles_list = []
+            let menus_list = []
+            
+            await Promise.all(await order.Articles.map(async (article) => {
+                articles_list.push(await this.Articles_order_read(article))
+            }))
+            await Promise.all(await order.Menus.map(async (menu) => {
+                menus_list.push(await this.Menus_order_read(menu))
+            }))
+
+            let obj = {
+                _id : order._id,
+                Date_Creation : order._id.getTimestamp(),
+                ID : order.ID,
+                nom_client : `${client_name[0].NOM} ${client_name[0].PRENOM}`,
+                Total_price : order.Total_price,
+                Number_products : order.Number_products,
+                Articles : articles_list,
+                Menus : menus_list
+            }
+            obj_to_return.push(obj)
+        }))
+        return obj_to_return
+    },
+
+    Order_update: async function (Identifier) {
+        const ID= Identifier
+        await Order.Orders.findByIdAndUpdate(ID, { Status: "En préparation"})
     },
 }

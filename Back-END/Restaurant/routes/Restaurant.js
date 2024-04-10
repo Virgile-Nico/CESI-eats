@@ -24,6 +24,7 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/read', async (req, res) => {
+    let response = ""
     const type = req.query.type;
     const ID = req.query.ID;
     switch(type) {
@@ -37,29 +38,33 @@ router.get('/read', async (req, res) => {
                 categories: categories,
                 hours: hours
             }
-            res.status(200)
-            .send(result)
+            response = result
             console.log("[Restaurant-sevice] Restaurant retrieved successfully")
             break;
         case 'Hours':
-            await controller.Hours_read(ID)
+            response = await controller.Hours_read(ID)
             console.log("[Restaurant-sevice] Restaurant hours retrieved successfully")
             break;
         case 'Article':
-            const response_Article = await controller.Article_read(ID)
-            res.status(200)
-            .send(response_Article)
+            response = await controller.Article_read(ID)
             console.log("[Restaurant-sevice] Restaurant article retrieved successfully")
             break;
         case 'Menu':
-            const response_Menu = await controller.Menu_read(ID)
-            res.status(200)
-            .send(response_Menu)
+            response = await controller.Menu_read(ID)
+
             console.log("[Restaurant-sevice] Restaurant menu retrieved successfully")
+            break;
+        case 'Order':
+            response = await controller.Order_read(ID)
+            break;
+        case 'History':
+            response = await controller.Order_history(ID)
             break;
     }
     
 
+    res.status(200)
+    .send(response)
 })
 
 router.post('/update', async (req, res) => {
@@ -109,6 +114,12 @@ router.post('/delete', async (req, res) => {
             console.log("[Restaurant-sevice] Restaurant menu deleted successfully")
             break;
     }
+    res.status(200)
+    .send("success")   
+});
+router.post('/validate', async (req, res) => {
+    const ID = req.query.ID;
+    await controller.Order_update(ID)
     res.status(200)
     .send("success")   
 });
