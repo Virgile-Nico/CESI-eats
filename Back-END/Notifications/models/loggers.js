@@ -1,4 +1,4 @@
-const { mongoose } = require('./dbMongo');
+const { mongoose } = require('../controllers/dbMongo');
 
 var sc = new mongoose.Schema({
   timestamp: String,
