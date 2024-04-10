@@ -5,6 +5,7 @@ import SuccessConnexion from "./pages/SuccessConnexion";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Edit from "./pages/Edit";
 
 
 export const routes = [
@@ -37,6 +38,13 @@ export const routes = [
 		name: "Profile",
 		path: "/profile",
 		element: <Profile />,
+		routes: [
+			{
+				name: "Edit",
+				path: "/edit",
+				element: <Edit />,
+			},
+		],
 	},
 	{
 		name: "NotFound",

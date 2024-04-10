@@ -8,9 +8,9 @@ export default function Footer() {
     const location = useLocation();
 
     return(
-        <footer className="w-full">
+        <footer className="w-full fixed bottom-0">
             {isMobile ? (
-                <nav className="flex flex-row justify-between items-center px-4 text-gray-400">
+                <nav className="flex flex-row justify-between items-center px-4 text-gray-400 bg-gray-50">
                     <FooterButton icon={mdiHome} text="Home" path="/home" currentPath={location.pathname} />
                     <FooterButton icon={mdiCart} text="Panier" path="/cart" currentPath={location.pathname} />
                     <FooterButton icon={mdiAccount} text="Mon compte" path="/profile" currentPath={location.pathname} />

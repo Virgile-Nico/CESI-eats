@@ -60,3 +60,7 @@ I
 src/components/Address.js,8\d\8d3d3517cb22af6af49e3fa8bf40dfcb8d75794c
 M
 src/components/CardPayment.js,2\b\2b8187fc27b09c1f0d588d363a28ceef4ecfa9b9
+A
+src/pages/edit.js,4\5\45ce1f221d990ad2f8e2015e18f67a947e38cc04
+A
+src/pages/Edit.js,4\e\4e7cb2a7fbde92169dc435c301f88fc889e9aa4b

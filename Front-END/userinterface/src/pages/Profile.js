@@ -76,6 +76,7 @@ export default function Profile() {
     return (
         <main className="flex flex-col items-center justify-between h-screen">
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
+            <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
             <div className="flex flex-col items-start h-full w-full space-y-2">
                 <button className="flex flex-row space-x-4 bg-transparent hover:bg-gray-200 w-60 p-4" onClick={() => navigate('/orders')}>
                     <Icon path={mdiInvoiceList} size={1}/>
