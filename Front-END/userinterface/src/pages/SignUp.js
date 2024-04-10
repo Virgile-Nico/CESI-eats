@@ -13,7 +13,7 @@ export default function SignUp() {
     const [isValid, setIsValid] = useState(true);
     const [isSame, setIsSame] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
-    const [form, setForm] = useState({firstname: '', lastname: '', email: '', password: '', phone: ''});
+    const [form, setForm] = useState({firstname: '', lastname: '', email: '', password: '', phone: '', sponsorCode: ''});
     const isMobile = window.innerWidth <= 600;
 
     const handleChange = (event) => {
@@ -165,11 +165,27 @@ export default function SignUp() {
                     {!isPhoneValid &&
                         <p className="text-red-700 bg-transparent">Veuillez entrer un numéro de téléphone valide.</p>}
                 </div>
+                <div className="m-4">
+                    <label htmlFor="UserSponsor"
+                           className="sr-only"> Code de parrainage </label>
+
+                    <input
+                        type="text"
+                        id="UserSponsor"
+                        name={"sponsorCode"}
+                        value={form.sponsorCode}
+                        placeholder="Entrer votre code de parrainage"
+                        onChange={handleChange}
+                        className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
+                    />
+                </div>
                 <div className="flex flex-row space-x-4 mx-4 my-24">
-                    <button type="button" onClick={goBack} className="w-1/2 h-10 bg-gray-300 shadow-md rounded-3xl py-2 px-8 hover:bg-gray-500">
+                    <button type="button" onClick={goBack}
+                            className="w-1/2 h-10 bg-gray-300 shadow-md rounded-3xl py-2 px-8 hover:bg-gray-500">
                         <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Annuler</p>
                     </button>
-                    <button type="submit" onClick={(e) => e.preventDefault()} className="w-1/2 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300">
+                    <button type="submit" onClick={(e) => e.preventDefault()}
+                            className="w-1/2 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300">
                         <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Confirmer</p>
                     </button>
                 </div>

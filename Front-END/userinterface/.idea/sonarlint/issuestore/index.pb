@@ -42,3 +42,5 @@ B
 src/pages/Login.js,c\8\c896236ba4a30f2d4d14daebfc43b8b237ff6821
 C
 src/pages/SignUp.js,7\5\75226b9a46b972c0be91625b8b2ea7b1292028e9
+N
+src/components/HeaderMobile.js,e\d\ed65b58d4e22bda32909972bd7974d0247e55ea4
