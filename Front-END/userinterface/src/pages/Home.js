@@ -1,5 +1,6 @@
 import HeaderDesktop from "../components/HeaderDesktop";
 import Category from "../components/Category";
+import RestoCard from "../components/RestoCard";
 import Chief from "../assets/img/categories/chef.png";
 import FastFood from "../assets/img/categories/fast-food.png";
 import Baguette from "../assets/img/categories/baguette.png";
@@ -20,7 +21,7 @@ import Asian from "../assets/img/categories/ramen.png";
 import GlutenFree from "../assets/img/categories/sans-gluten.png";
 import Taco from "../assets/img/categories/taco.png";
 import Vegan from "../assets/img/categories/vegan.png";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function Home() {
@@ -48,9 +49,10 @@ export default function Home() {
         "Gastronomie et Haute Cuisine": Chief,
     }
 
-    const App = () => {
-        const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [restos, setRestos] = useState([]);
 
+    const App = () => {
         useEffect(() => {
             axios.get('api-call')
                 .then(response => {
@@ -60,6 +62,16 @@ export default function Home() {
                     console.error('There was an error!', error);
                 });
         }, [])
+
+        useEffect(() => {
+            axios.get('api-call')
+                .then(response => {
+                    setRestos(response.data.name)
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
+        }, []);
     }
 
     return (
@@ -70,6 +82,11 @@ export default function Home() {
                     <div className="w-full flex flex-row h-1/5 space-x-4">
                         {categories.map((category, index) => (
                             <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)} />
+                        ))}
+                    </div>
+                    <div className="grid  grid-cols-5 gap-3 justify-center items-center h-4/5">
+                        {restos.map((resto, index) => (
+                            <RestoCard key={index} onClick={() => console.log(resto.name)} restoName={resto.name} restoImg={resto.img} />
                         ))}
                     </div>
                 </>
