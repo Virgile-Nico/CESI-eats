@@ -2,6 +2,7 @@ import HeaderDesktop from "../components/HeaderDesktop";
 import Category from "../components/Category";
 import RestoCard from "../components/RestoCard";
 import HeaderMobile from "../components/HeaderMobile";
+import Icon from "@mdi/react";
 import Chief from "../assets/img/categories/chef.png";
 import FastFood from "../assets/img/categories/fast-food.png";
 import Baguette from "../assets/img/categories/baguette.png";
@@ -24,6 +25,7 @@ import Taco from "../assets/img/categories/taco.png";
 import Vegan from "../assets/img/categories/vegan.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {mdiMinusBox, mdiPlusBox} from "@mdi/js";
 
 export default function Home() {
     const isMobile = window.innerWidth <= 600;
@@ -128,12 +130,25 @@ export default function Home() {
                             <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)} />
                         ))}
                         {categories.length > 7 && !isExpanded && (
-                            <button className="bg-gray-300 hover:bg-gray-200 place-content-center justify-center p-1 mr-2 rounded-xl text-xs self-center" onClick={handleShowMore}>
-                                Afficher plus
+                            <button className="bg-transparent flex flex-col items-center        p-2"
+                                    onClick={handleShowMore}>
+                                <div
+                                    className="place-content-center justify-center p-4 rounded-xl ">
+                                    <Icon path={mdiPlusBox} size={1}/>
+                                </div>
+                                <h5 className="text-center text-xs md:text-sm font-semibold">Afficher plus</h5>
                             </button>
                         )}
                         {isExpanded && (
-                            <button className="bg-gray-300 hover:bg-gray-200 place-content-center justify-center p-1 h-8 rounded-xl text-xs ml-2" onClick={handleShowLess}>Afficher moins</button>
+
+                            <button className="bg-transparent flex flex-col items-center        p-2"
+                                    onClick={handleShowLess}>
+                                <div
+                                    className="place-content-center justify-center p-4 rounded-xl ">
+                                    <Icon path={mdiMinusBox} size={1}/>
+                                </div>
+                                <h5 className="text-center text-xs md:text-sm font-semibold">Afficher moins</h5>
+                            </button>
                         )}
                     </div>
                     <div className="grid grid-cols-1 gap-3 justify-center items-center h-4/5">
