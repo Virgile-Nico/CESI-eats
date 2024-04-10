@@ -2,6 +2,7 @@ import HeaderDesktop from "../components/HeaderDesktop";
 import Category from "../components/Category";
 import RestoCard from "../components/RestoCard";
 import HeaderMobile from "../components/HeaderMobile";
+import Footer from "../components/Footer";
 import Icon from "@mdi/react";
 import Chief from "../assets/img/categories/chef.png";
 import FastFood from "../assets/img/categories/fast-food.png";
@@ -158,6 +159,7 @@ export default function Home() {
                     </div>
                 </div>
             )}
+            <Footer />
         </main>
     );
 }

@@ -46,3 +46,9 @@ N
 src/components/HeaderMobile.js,e\d\ed65b58d4e22bda32909972bd7974d0247e55ea4
 D
 src/pages/Profile.js,e\4\e490e7cc5b8df13328f9d6007192f7e1e2c42797
+C
+src/pages/Footer.js,3\0\30686dfae425481a462fb87703fa7172afc33911
+H
+src/components/Footer.js,b\d\bd22e369de6b4e7c909c8598869bb4c2e3bc1508
+N
+src/components/FooterButton.js,2\8\28a924703339f6ec008f043e642673fda5d1eab9
