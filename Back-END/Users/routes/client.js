@@ -2,6 +2,12 @@ const express = require('express')
 const router = express.Router();
 const controller = require('../controllers/client')
 
+router.get('/', (req, res, next) => {
+    res.status(200)
+    .send("Welcome on clients API")
+    next()
+})
+
 router.post('/create', async (req, res, next) =>{
     const body = req.body
     const type = req.query.type
