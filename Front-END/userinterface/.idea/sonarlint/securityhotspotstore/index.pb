@@ -34,3 +34,11 @@ A
 src/pages/Home.js,f\8\f88e17193d91c101c7e0bd70b2fc4123066b1147
 J
 src/components/Category.js,4\e\4ee836e8d91e91a7e28d41c3f3a7ed2083b45056
+K
+src/components/RestoCard.js,a\2\a2063c738652120bf328a8a9630c5ebab5161522
+O
+src/components/HeaderDesktop.js,0\f\0fe3ab4e092eb94f09a570e8a4227a9fc7bb7eb3
+B
+src/pages/Login.js,c\8\c896236ba4a30f2d4d14daebfc43b8b237ff6821
+C
+src/pages/SignUp.js,7\5\75226b9a46b972c0be91625b8b2ea7b1292028e9

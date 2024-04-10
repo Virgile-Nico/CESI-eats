@@ -54,8 +54,8 @@ export default function SignUp() {
 
     return(
         <main className="h-screen w-full flex flex-col items-center my-2">
-            {isMobile && (<img alt="logo" src={Logo} className="h-1/6 w-1/4"/>)}
-            {!isMobile && (<img alt="logo" src={Logo} className="h-1/4 w-1/6"/>)}
+            {isMobile && (<img alt="logo" src={Logo} className="h-40 w-50"/>)}
+            {!isMobile && (<img alt="logo" src={Logo} className="h-50 w-64"/>)}
             <form className={isMobile ? 'flex flex-col md:w-1/3 mx-4' : 'flex flex-col md:w-1/3 mx-4 space-y-4'}>
                 <h2 className="text-2xl md:text-4xl font-bold text-center m-6 text-gray-900">Inscription</h2>
                 <div className="m-4">
@@ -67,7 +67,7 @@ export default function SignUp() {
                         id="UserFirstname"
                         name={"firstname"}
                         value={form.firstname}
-                        placeholder="Entrer votre adresse prénom"
+                        placeholder="Entrer votre prénom"
                         onChange={handleChange}
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                     />
@@ -81,7 +81,7 @@ export default function SignUp() {
                         id="UserLastname"
                         name={"lastname"}
                         value={form.lastname}
-                        placeholder="Entrer votre adresse nom"
+                        placeholder="Entrer votre nom"
                         onChange={handleChange}
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                     />
@@ -106,7 +106,7 @@ export default function SignUp() {
                     <input
                         type={showPassword.password ? 'text' : 'password'}
                         placeholder="Entrer votre mot de passe"
-                        className="border-none bg-transparent w-full sm:text-sm text-gray-900 focus:outline-none"
+                        className="border-none px-2 bg-transparent w-full sm:text-sm text-gray-900 focus:outline-none"
                         value={form.password}
                         name={"password"}
                         onChange={handleChange}
@@ -129,7 +129,7 @@ export default function SignUp() {
                     <input
                         type={showPassword.confirmPassword ? 'text' : 'password'}
                         placeholder="Confirmer votre mot de passe"
-                        className="border-none bg-transparent w-full sm:text-sm text-gray-900 focus:outline-none"
+                        className="border-none bg-transparent w-full sm:text-sm text-gray-900 px-2 focus:outline-none"
                         value={password}
                         onChange={handlePassword}
                     />

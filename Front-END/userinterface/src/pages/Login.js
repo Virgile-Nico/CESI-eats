@@ -46,7 +46,7 @@ export default function Login() {
 								value={email}
 								onChange={handleChange}
 								placeholder="Entrer votre adresse email"
-								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
+								className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 text-lg shadow-sm focus:outline-none"
 							/>
 							{!isValid && <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
 						</div>
@@ -54,7 +54,7 @@ export default function Login() {
 							<input
 								type={show ? 'text' : 'password'}
 								placeholder="Entrer votre mot de passe"
-								className="border-none bg-transparent w-full text-lg text-gray-900 focus:outline-none"
+								className="border-none bg-transparent w-full text-lg text-gray-900 px-2 focus:outline-none"
 								value={password}
 								onChange={e => setPassword(e.target.value)}
 							/>
@@ -77,7 +77,7 @@ export default function Login() {
 					<button
 						onClick={() => setNotifVisible(true)}
 						className="flex flex-row w-1/2 self-center h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
-						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
+						<p className="m-auto inset-0 md:text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>
 				</div>
 			)}
@@ -85,7 +85,7 @@ export default function Login() {
 				<div className="flex flex-col w-full space-y-10 py-4 place-items-center my-auto">
 					<img alt="logo"
 						 src={Logo}
-						 className="h-9/12 w-1/4"/>
+						 className="h-50 w-64"/>
 					<div className="flex flex-col w-1/4 rounded-md">
 						<input
 							type="email"
@@ -93,7 +93,7 @@ export default function Login() {
 							value={email}
 							onChange={handleChange}
 							placeholder="Entrer votre adresse email"
-							className="w-full h-12 rounded-md border-gray-300 bg-gray-300 px-2 text-lg shadow-md focus:outline-none"
+							className="w-full h-12 rounded-md border-gray-300 bg-gray-300 px-4 text-lg shadow-md focus:outline-none"
 						/>
 						{!isValid && <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
 					</div>
