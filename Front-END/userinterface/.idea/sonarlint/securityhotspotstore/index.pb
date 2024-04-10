@@ -44,3 +44,5 @@ C
 src/pages/SignUp.js,7\5\75226b9a46b972c0be91625b8b2ea7b1292028e9
 N
 src/components/HeaderMobile.js,e\d\ed65b58d4e22bda32909972bd7974d0247e55ea4
+D
+src/pages/Profile.js,e\4\e490e7cc5b8df13328f9d6007192f7e1e2c42797
