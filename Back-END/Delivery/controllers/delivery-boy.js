@@ -2,7 +2,7 @@ const select_query = "SELECT * FROM LIVREURS WHERE (ID = ?)";
 const update_query = "UPDATE LIVREURS SET MAIL = ?, NOM = ?, PRENOM = ?, RIB = ?, VEHICULE_TYPE = ? WHERE (ID = ?)";
 const delete_query = "DELETE FROM LIVREURS WHERE (ID = ?)";
 
-const mariadb = require("../controllers/dbMaria")
+const mariadb = require("./dbMaria")
 
 module.exports = {
     select: async function (id) {
