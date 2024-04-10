@@ -52,3 +52,5 @@ H
 src/components/Footer.js,b\d\bd22e369de6b4e7c909c8598869bb4c2e3bc1508
 N
 src/components/FooterButton.js,2\8\28a924703339f6ec008f043e642673fda5d1eab9
+H
+src/components/Avatar.js,5\6\56e1055f2418b236ac284798df739f5169d74056
