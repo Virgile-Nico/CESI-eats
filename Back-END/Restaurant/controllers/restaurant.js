@@ -250,6 +250,6 @@ module.exports = {
 
     Order_update: async function (Identifier) {
         const ID= Identifier
-        await Order.Orders.findByIdAndUpdate(ID, { Status: "En préparation"})
+        await Order.Orders.findByIdAndUpdate(ID, { Status: "In preparation"})
     },
 }
