@@ -9,15 +9,17 @@ import axios from "axios";
 import CardPayment from "../components/CardPayment";
 import HeaderDesktop from "../components/HeaderDesktop";
 import {useSelector} from "react-redux";
-
-// mapStateToProps function to map state to props
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    articlesCount: state.articlesCount
-});
+import {logout} from "../actions/authActions";
 
 export default function Profile() {
-    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
+    const articlesCount = useSelector(state => state.articlesCount);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+    const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+    useEffect(() => {
+        setIsAuthenticatedLocal(isAuthenticated);
+        setIsArticlesCountLocal(articlesCount);
+    }, [isAuthenticated, articlesCount]);
     const navigate = useNavigate();
     const [addresses, setAddresses] = useState([]);
     const [payments, setPayments] = useState([]);
@@ -86,9 +88,10 @@ export default function Profile() {
 
     return (
         <main className="flex flex-col items-center justify-between h-screen">
-            {!isMobile && (<HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />)}
+            {!isMobile && (<HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />)}
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
             <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
+            <button className="bg-gray-200 rounded-lg p-2 text-gray-500 hover:bg-gray-100" onClick={logout}>Déconnexion</button>
             <div className={isMobile ? "flex flex-col items-start h-full w-full space-y-2" : "flex flex-row justify-between items-start h-full w-full mt-12 p-2"}>
                 <button className="flex flex-row space-x-4 bg-transparent hover:bg-gray-200 w-60 p-4" onClick={() => navigate('/profile/order-history')}>
                     <Icon path={mdiInvoiceList} size={1}/>

@@ -2,10 +2,17 @@ import Bowl from '../assets/img/bowl_logo.png';
 import Logo from '../assets/logo/logo_slogan.png';
 import Icon from '@mdi/react';
 import {mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {login} from "../actions/authActions";
+import {useDispatch, useSelector} from "react-redux";
+
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated,
+})
 
 export default function Login() {
+	const { isAuthenticated } = useSelector(mapStateToProps);
 	// Check if the screen width is less than or equal to 600 pixels
 	const isMobile = window.innerWidth <= 600;
 	const [show, setShow] = useState(false); // State to store the visibility of the password
@@ -13,7 +20,7 @@ export default function Login() {
 	const [notifVisible, setNotifVisible] = useState(false); // State to store the visibility of the notification
 	const [email, setEmail] = useState(''); // State to store the email value
 	const [isValid, setIsValid] = useState(true); // State to store the validity of the email
-
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	// Function to handle changes in the input value
@@ -25,6 +32,15 @@ export default function Login() {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		setIsValid(emailRegex.test(value));
 	};
+
+	useEffect(() => {
+		if (isAuthenticated)
+			navigate('/success-connexion');
+	}, [isAuthenticated, navigate]);
+
+	const submitLogin = () => {
+		dispatch(login(email, password))
+	}
 
 	return (
 		<main className="h-screen w-full flex flex-col items-center">
@@ -121,7 +137,7 @@ export default function Login() {
 					<button type="button" onClick={() => navigate('/sign-up')} className="text-sm text-end mx-4 underline active:no-underline">Je n'ai pas de compte
 					</button>
 					<button
-						onClick={() => setNotifVisible(true)}
+						onClick={submitLogin}
 						className="flex flex-row w-1/6 h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
 						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>

@@ -5,14 +5,8 @@ import { mdiAccount, mdiAccountPlus, mdiCart, mdiCircleSmall, mdiMagnify } from 
 import { connect } from 'react-redux';
 
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    articlesCount: state.articlesCount
-});
-
-function HeaderDesktop() {
+export default function HeaderDesktop({ isAuthenticated, articlesCount }) {
     const navigate = useNavigate();
-    const { isAuthenticated, articlesCount } = mapStateToProps;
 
     return (
         <header className="w-full h-20 flex justify-between items-center px-6">
@@ -40,7 +34,7 @@ function HeaderDesktop() {
                         </button>
                         <button onClick={() => navigate('/profile')}
                                 className="flex flex-row space-x-2 w-50 bg-gray-100 shadow rounded-3xl py-2 px-8 hover:bg-gray-300">
-                            <Icon className="my-auto" path={mdiAccountPlus} size={1}/>
+                            <Icon className="my-auto" path={mdiAccount} size={1}/>
                             <p className="m-auto inset-0 text-lg font-semibold text-center text-gray-800">Mon compte</p>
                         </button>
                     </div>
@@ -83,4 +77,3 @@ function HeaderDesktop() {
     )
 }
 
-export default connect(mapStateToProps)(HeaderDesktop);

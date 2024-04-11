@@ -8,14 +8,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../actions/cartActions";
 import Footer from "../components/Footer";
 
-// mapStateToProps function to map state to props
-const mapStateToProps = state => ({
-	isAuthenticated: state.auth.isAuthenticated,
-	articlesCount: state.articlesCount
-});
-
 export default function RestaurantMenu() {
-	const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
+	const articlesCount = useSelector(state => state.articlesCount);
+	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+	const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+	const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+	useEffect(() => {
+		setIsAuthenticatedLocal(isAuthenticated);
+		setIsArticlesCountLocal(articlesCount);
+	}, [isAuthenticated, articlesCount]);
 	const { restaurantId } = useParams(); // Get the restaurant id from the URL using useParams
 	const [menuItems, setMenuItems] = useState([{name: '', description: '', price: '', image: ''}]);
 	const isMobile = window.innerWidth <= 600;
@@ -32,7 +33,7 @@ export default function RestaurantMenu() {
 
 	useEffect(() => {
 		// Make a request to your API to fetch the restaurant menu items
-		axios.get(`api_url/${restaurantId}/menu`)
+		axios.get(`http://213.32.6.121:3023/login?type=user&?ID=${restaurantId}`)
 			.then(response => {
 				setMenuItems(response.data);
 			})
@@ -43,7 +44,7 @@ export default function RestaurantMenu() {
 
 	return (
 		<div className="container flex flex-col mx-auto py-8">
-			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />}
+			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />}
 			<h1 className="text-3xl font-bold mb-4">Restaurant Menu</h1>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{menuItems.map((item, index) => (

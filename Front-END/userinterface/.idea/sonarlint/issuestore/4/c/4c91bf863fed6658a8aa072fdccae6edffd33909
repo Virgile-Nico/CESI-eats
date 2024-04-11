@@ -1,4 +1,6 @@
 
-~javascript:S1481"5Remove the declaration of the unused 'user' variable.(Έ»μ¥8Ήύτωμ1J$021e4de3-984b-4a82-ad17-a605c0661304
-{javascript:S1854"2Remove this useless assignment to variable "user".(Έ»μ¥8Ίύτωμ1J$9c9afb99-f701-4897-9780-bc5c2bbbeab1
-ljavascript:S6479U"Do not use Array index in keys(Ίϊ±ϋÿÿÿÿ8¶¬τωμ1J$5c8bd3dc-79da-445b-b8c3-33b21f93e5cb
+~javascript:S1481"5Remove the declaration of the unused 'user' variable.(Έ»μ¥8Ήύτωμ1J$a3ded301-f359-4dcf-980f-d0522804beb5
+{javascript:S1854"2Remove this useless assignment to variable "user".(Έ»μ¥8Ίύτωμ1J$7dcfe78e-039a-4bf7-b82e-24f1c9348280
+\javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(υάΆ8©€Ίϊμ1
+Yjavascript:S1854"6Remove this useless assignment to variable "navigate".(υάΆ8©€Ίϊμ1
+ljavascript:S6479T"Do not use Array index in keys(Ίϊ±ϋÿÿÿÿ8¶¬τωμ1J$f91e8b2d-7214-47ce-a7fb-59b596914f33

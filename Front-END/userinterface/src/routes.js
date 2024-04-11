@@ -9,7 +9,6 @@ import Edit from "./pages/Edit";
 import RestaurantMenu from "./pages/RestaurantMenu";
 import OrderHistory from "./pages/OderHistory";
 import Cart from "./pages/Cart";
-import TrackingOrder from "./pages/TrackingOrder";
 
 
 export const routes = [

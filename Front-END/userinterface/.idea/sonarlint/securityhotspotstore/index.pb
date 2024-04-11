@@ -45,3 +45,7 @@ K
 src/reducers/userReducer.js,b\7\b7b31d48b26c64856d65e08dfd710528b8aaab50
 J
 src/pages/TrackingOrder.js,f\7\f76213829bfad844cdec34d092234ceda28d2892
+J
+src/components/Category.js,4\e\4ee836e8d91e91a7e28d41c3f3a7ed2083b45056
+M
+src/pages/SuccessConnexion.js,4\6\46f2316b60c8b883215739dc88cb01fda8962da7

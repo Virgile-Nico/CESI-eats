@@ -5,12 +5,21 @@ import Logo from "../assets/logo/logo.png";
 import HeaderDesktop from "../components/HeaderDesktop";
 import Footer from "../components/Footer";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 function back(){
     window.history.back();
 }
 
 export default function OrderHistory() {
+    const articlesCount = useSelector(state => state.articlesCount);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+    const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+    useEffect(() => {
+        setIsAuthenticatedLocal(isAuthenticated);
+        setIsArticlesCountLocal(articlesCount);
+    }, [isAuthenticated, articlesCount]);
     const isMobile = window.innerWidth <= 600;
     const [orders, setOrders] = useState([{id: '', date: '', total: 0, qtyItems: 0, status: ''}]);
 
@@ -36,7 +45,7 @@ export default function OrderHistory() {
                     </div>
                 </div>
             ) : (
-                <HeaderDesktop articlesCount={0} />
+                <HeaderDesktop articlesCount={isArticlesCountLocal} isAuthenticated={isAuthenticatedLocal} />
             )}
             <div className="flex flex-col space-y-4 items-center">
                 <h2 className="text-4xl font-bold text-center text-gray-900">Historique de commandes</h2>

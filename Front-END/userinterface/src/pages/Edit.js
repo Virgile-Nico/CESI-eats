@@ -1,25 +1,29 @@
 import Icon from "@mdi/react";
 import {mdiArrowLeft, mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Logo from "../assets/logo/logo.png";
 import axios from "axios";
 import HeaderDesktop from "../components/HeaderDesktop";
 import Footer from "../components/Footer";
 import {useSelector} from "react-redux";
 import NotificationFeedback from "../components/NotificationFeedback";
+import {getUser} from "../actions/userAction";
 
 function back(){
     window.history.back();
 }
 
-// mapStateToProps function to map state to props
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    articlesCount: state.articlesCount
-});
+
 
 export default function Edit() {
-    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
+    const articlesCount = useSelector(state => state.articlesCount);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+    const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+    useEffect(() => {
+        setIsAuthenticatedLocal(isAuthenticated);
+        setIsArticlesCountLocal(articlesCount);
+    }, [isAuthenticated, articlesCount]);
     const [showPassword, setShowPassword] = useState({
         password: false,
         confirmPassword: false
@@ -34,6 +38,36 @@ export default function Edit() {
     const isMobile = window.innerWidth <= 600;
     const [notifVisible, setNotifVisible] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
+
+    const handleSubmitFormPayment = async (event) => {
+        event.preventDefault();
+        const userId = getUser().id;
+        try {
+            const response = await axios.post(`http://213.32.6.121:3020/login?type=card&ID=${userId}`, payment);
+            console.log(response.data); // Handle the response as needed
+            setNotifVisible(true);
+            setIsSaved(true); // Set to true if the API call is successful
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setNotifVisible(true);
+            setIsSaved(false); // Set to false if the API call fails
+        }
+    };
+
+    const handleSubmitFormAddress = async (event) => {
+        event.preventDefault();
+        const userId = getUser().id;
+        try {
+            const response = await axios.post(`http://213.32.6.121:3020/login?type=address&ID=${userId}`, address);
+            console.log(response.data); // Handle the response as needed
+            setNotifVisible(true);
+            setIsSaved(true); // Set to true if the API call is successful
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setNotifVisible(true);
+            setIsSaved(false); // Set to false if the API call fails
+        }
+    };
 
     const handleChangeForm = (event) => {
         const { name, value } = event.target;
@@ -108,7 +142,7 @@ export default function Edit() {
                     </div>
                 </div>
                 ) : (
-                    <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />
+                    <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />
                 )
             }
             <div className="flex flex-col items-center h-full w-full space-y-12">
@@ -207,7 +241,7 @@ export default function Edit() {
                     </div>
                 </form>
 
-                <form onSubmit={handleSubmitForm}
+                <form onSubmit={handleSubmitFormAddress}
                       className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'}>
                     <h1 className="text-2xl font-semibold text-center text-gray-200">Ajouter une adresse</h1>
                     <div className="m-4">
@@ -249,7 +283,7 @@ export default function Edit() {
                 </form>
 
 
-                <form onSubmit={handleSubmitForm}
+                <form onSubmit={handleSubmitFormPayment}
                       className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'}>
                     <h1 className="text-2xl font-semibold text-center text-gray-200">Ajouter une carte bancaire</h1>
                     <div className="m-4">

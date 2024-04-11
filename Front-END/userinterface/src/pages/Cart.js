@@ -52,7 +52,6 @@ export default function Cart() {
 
 			if (response.status === 200) {
 				alert("Commande passée avec succès!");
-				navigate('/tracking-order');
 			} else {
 				alert("Une erreur s'est produite lors de la commande. Veuillez réessayer plus tard.");
 			}

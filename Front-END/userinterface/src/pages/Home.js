@@ -38,7 +38,6 @@ const mapStateToProps = state => ({
 });
 
 export default function Home() {
-    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
     const isMobile = window.innerWidth <= 600;
     const catImgEnum = {
         "Cuisine Française": Baguette,
@@ -67,6 +66,29 @@ export default function Home() {
     const [restos, setRestos] = useState([{name: '', img: '', categories: [], id: ''}]);
     const [displayCount, setDisplayCount] = useState(7);
     const [isExpanded, setIsExpanded] = useState(false);
+    const articlesCount = useSelector(state => state.articlesCount);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+    const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+    useEffect(() => {
+        setIsAuthenticatedLocal(isAuthenticated);
+        setIsArticlesCountLocal(articlesCount);
+    }, [isAuthenticated, articlesCount]);
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleCategoryClick = (categoryName) => {
+        setSelectedCategory(categoryName);
+    };
+
+    const filteredRestos = selectedCategory
+        ? restos.filter(resto => resto.categories.includes(selectedCategory))
+        : restos;
+
+    useEffect(() => {
+        setIsAuthenticatedLocal(isAuthenticated);
+        setIsArticlesCountLocal(articlesCount);
+    }, [isAuthenticated, articlesCount]);
 
     const handleShowMore = () => {
         setIsExpanded(true);
@@ -89,7 +111,7 @@ export default function Home() {
     }, [])
 
     useEffect(() => {
-        axios.get('api-call')
+        axios.get('http://213.32.6.121:')
             .then(response => {
                 setRestos(response.data.name)
             })
@@ -109,14 +131,14 @@ export default function Home() {
         <main className="h-screen w-full flex flex-col items-center">
             {!isMobile ? (
                 <div className="h-screen w-full flex flex-col items-center">
-                    <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />
+                    <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />
                     <div className="w-full flex flex-row flex-wrap h-2/5 space-x-2">
                         {categories.map((category, index) => (
-                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)} />
+                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleCategoryClick(category.name)} />
                         ))}
                     </div>
                     <div className="grid  grid-cols-5 gap-3 justify-center items-center h-4/5">
-                        {restos.map((resto, index) => (
+                        {filteredRestos.map((resto, index) => (
                             <RestoCard key={index} onClick={() => console.log(resto.name)} restoName={resto.name} restoImg={resto.img} />
                         ))}
                     </div>
@@ -126,7 +148,7 @@ export default function Home() {
                     <HeaderMobile />
                     <div className="w-full grid grid-cols-4 gap-1.5 h-1/5">
                         {categories.slice(0, displayCount).map((category, index) => (
-                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)} />
+                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleCategoryClick(category.name)} />
                         ))}
                         {categories.length > 7 && !isExpanded && (
                             <button className="bg-transparent flex flex-col items-center        p-2"
@@ -150,7 +172,7 @@ export default function Home() {
                         )}
                     </div>
                     <div className="grid grid-cols-1 gap-3 justify-center items-center h-4/5">
-                        {restos.map((resto, index) => (
+                        {filteredRestos.map((resto, index) => (
                             <RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.id)} restoName={resto.name} restoImg={resto.img} />
                         ))}
                     </div>

@@ -1,29 +1,28 @@
-import axios from 'axios';
-import {setUser} from "./userAction";
-import {useDispatch} from "react-redux";
+import { setUser } from "./userAction";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
-export const login = (username, password) => {
+export const login = (email, password) => {
 	return async dispatch => {
 		try {
-			// Perform your API call for login using Axios
-			const response = await axios.post('your-login-url', {
-				username,
-				password
-			});
+			const requestBody = {
+				email: email,
+				password: password
+			};
 
-			const { accessToken, refreshToken } = response.data;
+			const response = await axios.post('http://213.32.6.121:3020/login?type=user', requestBody);
 
-			// Dispatch the loginSuccess action with the tokens
+			const { accessToken, refreshToken, userID } = response.data;
+
 			dispatch(loginSuccess(accessToken, refreshToken));
+			dispatch(setUser(userID));
 		} catch (error) {
-			// Handle errors here
 			console.error('Login error:', error);
 		}
 	};
 };
 
 export const logout = () => {
-	// Supprimer les tokens du localStorage
 	localStorage.removeItem('accessToken');
 	localStorage.removeItem('refreshToken');
 
@@ -32,19 +31,15 @@ export const logout = () => {
 	};
 };
 
-export const loginSuccess = (accessToken, refreshToken, userID) => {
+export const loginSuccess = (accessToken, refreshToken) => {
 	if (accessToken && refreshToken) {
 		localStorage.setItem('accessToken', accessToken);
 		localStorage.setItem('refreshToken', refreshToken);
 	}
 
-	const dispatch = useDispatch();
-
-	dispatch(setUser(userID));
-
 	return {
 		type: 'LOGIN_SUCCESS',
 		accessToken,
-		refreshToken
+		refreshToken,
 	};
 };
