@@ -215,8 +215,11 @@ module.exports = {
                 Articles : articles_list,
                 Menus : menus_list
             }
+            return obj
         }
-        return obj
+        else{
+            return null
+        }
     },
     Order_history: async function (Identifier) {
         let result = await Order.Orders.find( { ID_restaurant: Identifier })
