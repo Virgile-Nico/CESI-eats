@@ -1,9 +1,9 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
 const app = express()
-const port = 3010
+const port = 3020
+const mongo = require('./controllers/dbMongo')
 //const Logger = require('./controllers/logger')
-
 
 const router = require('./routes/auth');
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use((req, res) => {
   res.send();
 })
 
-connectToMongoDB()
+mongo.connectToMongoDB()
   .then(() => {
 
     app.listen(port, () => {
