@@ -190,9 +190,10 @@ module.exports = {
         return obj
     },
     Order_read: async function (Identifier) {
+        
         let result = await Order.Orders.findById(Identifier)
-
-        const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${result.ID_client}`
+        if(result.Status == 'confirmed' || result.Status == 'paid' || result.Status == 'in prepartion' || result.Status ==  "in mouvement" || result.Status ==  "Done"){
+            const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${result.ID_client}`
             let client_name = await pool.query(SQL_query)
             let articles_list = []
             let menus_list = []
@@ -214,37 +215,39 @@ module.exports = {
                 Articles : articles_list,
                 Menus : menus_list
             }
-
+        }
         return obj
     },
     Order_history: async function (Identifier) {
         let result = await Order.Orders.find( { ID_restaurant: Identifier })
         let obj_to_return = []
         await Promise.all(result.map( async (order) => {
-            const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${order.ID_client}`
-            let client_name = await pool.query(SQL_query)
-            let articles_list = []
-            let menus_list = []
-            
-            await Promise.all(await order.Articles.map(async (article) => {
-                articles_list.push(await this.Articles_order_read(article))
-            }))
-            await Promise.all(await order.Menus.map(async (menu) => {
-                menus_list.push(await this.Menus_order_read(menu))
-            }))
+            if(order.Status == 'confirmed' || order.Status == 'paid' || order.Status == 'in prepartion' || order.Status ==  "in mouvement" || order.Status ==  "Done"){
+                const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${order.ID_client}`
+                let client_name = await pool.query(SQL_query)
+                let articles_list = []
+                let menus_list = []
+                
+                await Promise.all(await order.Articles.map(async (article) => {
+                    articles_list.push(await this.Articles_order_read(article))
+                }))
+                await Promise.all(await order.Menus.map(async (menu) => {
+                    menus_list.push(await this.Menus_order_read(menu))
+                }))
 
-            let obj = {
-                _id : order._id,
-                Date_Creation : order._id.getTimestamp(),
-                ID : order.ID,
-                nom_client : `${client_name[0].NOM} ${client_name[0].PRENOM}`,
-                Total_price : order.Total_price,
-                Status: order.Status,
-                Number_products : order.Number_products,
-                Articles : articles_list,
-                Menus : menus_list
+                let obj = {
+                    _id : order._id,
+                    Date_Creation : order._id.getTimestamp(),
+                    ID : order.ID,
+                    nom_client : `${client_name[0].NOM} ${client_name[0].PRENOM}`,
+                    Total_price : order.Total_price,
+                    Status: order.Status,
+                    Number_products : order.Number_products,
+                    Articles : articles_list,
+                    Menus : menus_list
+                }
+                obj_to_return.push(obj)
             }
-            obj_to_return.push(obj)
         }))
         return obj_to_return
     },
