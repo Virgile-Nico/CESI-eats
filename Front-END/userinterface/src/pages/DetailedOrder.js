@@ -1,45 +1,57 @@
+// DetailedOrder.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ordersData from './CESI_eats.orders.json';
+import ordersData from './CESI_eats.orders.json'; // Assurez-vous que le chemin est correct
+import HeaderDesktop from '../components/HeaderDesktop'; // Assurez-vous que le chemin est correct
+
 const DetailedOrder = () => {
-  const { id } = useParams(); // Cela devrait maintenant être l'ID de la commande, pas l'ID du client
+  const { id } = useParams();
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    // Trouver la commande qui correspond à l'ID
-    const foundOrder = ordersData.find((o) => o.ID === id);
+    const foundOrder = ordersData.find(order => order.ID === id);
     if (foundOrder) {
       setOrder(foundOrder);
     } else {
-      // Affichez une erreur ou redirigez si la commande n'est pas trouvée
       console.error('Commande non trouvée');
     }
   }, [id]);
 
   if (!order) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
+  // Utilisez les classes CSS existantes ou celles de TailwindCSS pour le styling, selon votre setup
   return (
-    <div style={{ maxWidth: '600px', margin: '20px auto', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
-      <h1>Commande n°{order.ID}</h1>
-      <div style={{ marginBottom: '10px' }}>
-        Status : {order.Status}
-      </div>
-      <div style={{ marginBottom: '10px' }}>
-        <h2>Nombre de produits : {order.Number_products}</h2>
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
+    <>
+      <HeaderDesktop />
+      <div className="max-w-2xl mx-auto my-8 p-6 bg-white rounded shadow">
+        <h1 className="text-2xl font-bold text-center mb-4">Commande n°{order.ID}</h1>
+        <p className="text-lg"><strong>Client :</strong> {order.nom_client}</p>
+        <p className="text-md text-gray-700"><strong>Status :</strong> {order.Status}</p>
+        <p className="text-md text-gray-700"><strong>Nombre de produits :</strong> {order.Number_products}</p>
+        
+        <div className="my-4">
           {order.Articles.map((article, index) => (
-            <li key={index} style={{ background: '#f6f6f6', marginBottom: '5px', padding: '10px', borderRadius: '4px' }}>
-              {article.Qte} x {article.ID} {/* Replace ID with product name if available */}
-            </li>
+            <div key={article._id} className="flex justify-between my-2">
+              <span>{article.Qte} x {article.Nom}</span>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        {order.Menus && order.Menus.map((menu, index) => (
+          <div key={menu._id} className="my-4">
+            <span className="font-semibold">{menu.Qte} x {menu.Nom}</span>
+            <ul className="list-disc ml-6">
+              {menu.Articles.map((article) => (
+                <li key={article._id}>{article.Nom}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        {/* Ajoutez plus de détails de la commande ici si nécessaire */}
       </div>
-      <div style={{ marginBottom: '10px' }}>
-        Client fidèle (nombre de commandes)
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -20,20 +20,16 @@ export default function SignUp() {
         const { name, value } = event.target;
     
         if (event.target.type === "select-multiple") {
-            // Pour un select multiple, nous devons traiter un tableau de valeurs
             const valueArray = Array.from(event.target.selectedOptions, (option) => option.value);
             setForm(prevState => ({
                 ...prevState,
                 [name]: valueArray
             }));
         } else {
-            // Pour les autres inputs, nous pouvons simplement mettre à jour la valeur
             setForm(prevState => ({
                 ...prevState,
                 [name]: value
             }));
-    
-            // Les expressions régulières pour l'email et le téléphone sont utilisées uniquement quand les champs correspondants sont changés
             if (name === "email") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 setIsValid(emailRegex.test(value));

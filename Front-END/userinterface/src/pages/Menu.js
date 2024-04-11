@@ -1,6 +1,6 @@
 import React from 'react';
-import menuData from './CESI_eats.menu.json'; // Assurez-vous que le chemin est correct
-import HeaderDesktop from '../components/HeaderDesktop'; // Utilisez le chemin correct pour importer HeaderDesktop
+import menuData from './CESI_eats.menu.json'; 
+import HeaderDesktop from '../components/HeaderDesktop'; 
 
 const Menu = () => {
     return (
