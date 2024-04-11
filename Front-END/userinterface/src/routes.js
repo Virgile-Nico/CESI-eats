@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Edit from "./pages/Edit";
 import RestaurantMenu from "./pages/RestaurantMenu";
+import OrderHistory from "./pages/OderHistory";
 
 
 export const routes = [
@@ -52,6 +53,11 @@ export const routes = [
 				path: "/edit",
 				element: <Edit />,
 			},
+			{
+				name: "OderHistory",
+				path: "/order-history",
+				element: <OrderHistory />,
+			}
 		],
 	},
 	{

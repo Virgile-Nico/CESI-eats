@@ -3,6 +3,8 @@ import {mdiArrowLeft, mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
 import React, {useState} from "react";
 import Logo from "../assets/logo/logo.png";
 import axios from "axios";
+import HeaderDesktop from "../components/HeaderDesktop";
+import Footer from "../components/Footer";
 
 function back(){
     window.history.back();
@@ -86,21 +88,31 @@ export default function Edit() {
     };
 
     return (
-        <main>
-            <button onClick={back}
-                    className="flex flex-row space-x-2 w-50 h-50 bg-gray-200 shadow rounded-full py-2 px-8 hover:bg-gray-100 self-start m-2">
-                <Icon className="my-auto" path={mdiArrowLeft} size={1}/>
-            </button>
-            <div className="flex flex-col items-center h-full w-full space-y-12">
-                <div className="flex items-center mb-2">
+        <main className="flex flex-col">
+            {isMobile ? (
+                <div className="flex flex-row space-x-6 w-full">
+                    <button onClick={back} className="flex flex-row space-x-2 w-50 h-50 bg-gray-200 shadow rounded-full py-2 px-8 hover:bg-gray-100 self-start m-2">
+                        <Icon className="my-auto" path={mdiArrowLeft} size={1}/>
+                    </button>
+                    <div className="flex items-center mb-2">
                     <img alt="logo" src={Logo} className="h-32 w-42 "/>
+                    </div>
                 </div>
-
-                <form onSubmit={handleSubmitForm} className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'} >
-                    <h1 className="text-2xl font-semibold text-center text-gray-200" >Modifier mon profil</h1 >
-                    <div className="m-4" >
+                ) : (
+                    <HeaderDesktop articlesCount={0} />
+                )
+            }
+            <div className="flex flex-col items-center h-full w-full space-y-12">
+                <button onClick={back}
+                        className="flex flex-row space-x-2 w-50 h-50 bg-gray-200 shadow-md rounded-full py-2 px-8 hover:bg-gray-100 hover:shadow-none self-start m-2">
+                    <Icon className="my-auto" path={mdiArrowLeft} size={1}/>
+                </button>
+                <form onSubmit={handleSubmitForm}
+                      className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'}>
+                    <h1 className="text-2xl font-semibold text-center text-gray-200">Modifier mon profil</h1>
+                    <div className="m-4">
                         <label htmlFor="UserEmail"
-                               className="sr-only" > Email </label >
+                               className="sr-only"> Email </label>
 
                         <input
                             type="email"
@@ -112,9 +124,9 @@ export default function Edit() {
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
                         {!isValid &&
-                            <p className="text-red-700 bg-transparent" >Veuillez entrer une adresse email valide.</p >}
-                    </div >
-                    <div className="flex flex-row h-10 m-4 rounded-md bg-gray-300 p-2" >
+                            <p className="text-red-700 bg-transparent">Veuillez entrer une adresse email valide.</p>}
+                    </div>
+                    <div className="flex flex-row h-10 m-4 rounded-md bg-gray-300 p-2">
                         <input
                             type={showPassword.password ? 'text' : 'password'}
                             placeholder="Nouveau mot de passe"
@@ -125,19 +137,19 @@ export default function Edit() {
                         />
                         <button className="bg-transparent"
                                 type="button"
-                                onClick={(e) => handlePasswordToggle('password', e)} >
+                                onClick={(e) => handlePasswordToggle('password', e)}>
                             {showPassword.password ? (
                                 <Icon path={mdiEye}
                                       size={1}
-                                      color="currentColor" />
+                                      color="currentColor"/>
                             ) : (
                                 <Icon path={mdiEyeOff}
                                       size={1}
-                                      color="currentColor" />
+                                      color="currentColor"/>
                             )}
-                        </button >
-                    </div >
-                    <div className="flex flex-row h-10 m-4 rounded-md bg-gray-300 p-2" >
+                        </button>
+                    </div>
+                    <div className="flex flex-row h-10 m-4 rounded-md bg-gray-300 p-2">
                         <input
                             type={showPassword.confirmPassword ? 'text' : 'password'}
                             placeholder="Confirmer votre mot de passe"
@@ -147,23 +159,23 @@ export default function Edit() {
                         />
                         <button className="bg-transparent"
                                 type="button"
-                                onClick={(e) => handlePasswordToggle('confirmPassword', e)} >
+                                onClick={(e) => handlePasswordToggle('confirmPassword', e)}>
                             {showPassword.confirmPassword ? (
                                 <Icon path={mdiEye}
                                       size={1}
-                                      color="currentColor" />
+                                      color="currentColor"/>
                             ) : (
                                 <Icon path={mdiEyeOff}
                                       size={1}
-                                      color="currentColor" />
+                                      color="currentColor"/>
                             )}
-                        </button >
-                    </div >
+                        </button>
+                    </div>
                     {!isSame &&
-                        <p className="text-red-700 bg-transparent" >Les mot de passe sont différents.</p >}
-                    <div className="m-4" >
+                        <p className="text-red-700 bg-transparent">Les mot de passe sont différents.</p>}
+                    <div className="m-4">
                         <label htmlFor="UserPhone"
-                               className="sr-only" > Téléphone </label >
+                               className="sr-only"> Téléphone </label>
 
                         <input
                             type="phone"
@@ -175,20 +187,21 @@ export default function Edit() {
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
                         {!isPhoneValid &&
-                            <p className="text-red-700 bg-transparent" >Veuillez entrer un numéro de téléphone
-                                                                        valide.</p >}
-                    </div >
-                    <div className="flex flex-row space-x-4 mx-4" >
+                            <p className="text-red-700 bg-transparent">Veuillez entrer un numéro de téléphone
+                                valide.</p>}
+                    </div>
+                    <div className="flex flex-row space-x-4 mx-4">
                         <button type="submit"
-                                className="w-60 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300 mx-auto" >
-                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800" >Enregistrer</p >
-                        </button >
-                    </div >
-                </form >
+                                className="w-60 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300 mx-auto">
+                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Enregistrer</p>
+                        </button>
+                    </div>
+                </form>
 
-                <form onSubmit={handleSubmitForm} className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'} >
-                    <h1 className="text-2xl font-semibold text-center text-gray-200" >Ajouter une adresse</h1 >
-                    <div className="m-4" >
+                <form onSubmit={handleSubmitForm}
+                      className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'}>
+                    <h1 className="text-2xl font-semibold text-center text-gray-200">Ajouter une adresse</h1>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"street"}
@@ -197,8 +210,8 @@ export default function Edit() {
                             onChange={handleChangeAddress}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="m-4" >
+                    </div>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"zipCode"}
@@ -207,8 +220,8 @@ export default function Edit() {
                             onChange={handleChangeAddress}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="m-4" >
+                    </div>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"city"}
@@ -217,19 +230,20 @@ export default function Edit() {
                             onChange={handleChangeAddress}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="flex flex-row space-x-4 mx-4" >
+                    </div>
+                    <div className="flex flex-row space-x-4 mx-4">
                         <button type="submit"
-                                className="w-60 mx-auto h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300" >
-                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800" >Enregistrer</p >
-                        </button >
-                    </div >
-                </form >
+                                className="w-60 mx-auto h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300">
+                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Enregistrer</p>
+                        </button>
+                    </div>
+                </form>
 
 
-                <form onSubmit={handleSubmitForm} className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'} >
-                    <h1 className="text-2xl font-semibold text-center text-gray-200" >Ajouter une carte bancaire</h1 >
-                    <div className="m-4" >
+                <form onSubmit={handleSubmitForm}
+                      className={isMobile ? 'flex flex-col md:w-1/3 mx-4 bg-gray-500 rounded-xl p-1.5' : 'flex flex-col md:w-1/3 mx-4 space-y-4 bg-gray-500 rounded-xl p-1.5'}>
+                    <h1 className="text-2xl font-semibold text-center text-gray-200">Ajouter une carte bancaire</h1>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"cardNumber"}
@@ -238,8 +252,8 @@ export default function Edit() {
                             onChange={handleChangePayment}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="m-4" >
+                    </div>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"username"}
@@ -248,8 +262,8 @@ export default function Edit() {
                             onChange={handleChangePayment}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="m-4" >
+                    </div>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"expirationDate"}
@@ -258,8 +272,8 @@ export default function Edit() {
                             onChange={handleChangePayment}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="m-4" >
+                    </div>
+                    <div className="m-4">
                         <input
                             type="text"
                             name={"cvc"}
@@ -268,14 +282,14 @@ export default function Edit() {
                             onChange={handleChangePayment}
                             className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                         />
-                    </div >
-                    <div className="flex flex-row space-x-4 mx-4" >
+                    </div>
+                    <div className="flex flex-row space-x-4 mx-4">
                         <button type="submit"
-                                className="w-60 mx-auto h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300" >
-                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800" >Enregistrer</p >
-                        </button >
-                    </div >
-                </form >
+                                className="w-60 mx-auto h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300">
+                            <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Enregistrer</p>
+                        </button>
+                    </div>
+                </form>
 
                 {notifVisible && (
                     <div
@@ -283,30 +297,35 @@ export default function Edit() {
                         <div className="flex flex-col p-8 bg-gray-100 border-2 border-gray-200 shadow-2xl rounded-2xl">
                             <div className="flex items-center justify-between">
                                 {isSaved ? (
-                                    <div className="flex items-center" >
-                                        <div className="flex flex-col ml-3" >
-                                            <div className="font-bold text-lg md:text-lg text-green-700" >Modification enregistrée</div >
-                                        </div >
-                                    </div >
+                                    <div className="flex items-center">
+                                        <div className="flex flex-col ml-3">
+                                            <div className="font-bold text-lg md:text-lg text-green-700">Modification
+                                                enregistrée
+                                            </div>
+                                        </div>
+                                    </div>
                                 ) : (
-                                    <div className="flex items-center" >
-                                        <div className="flex flex-col ml-3" >
-                                            <div className="font-bold text-lg md:text-lg text-red-700" >L'enregistrement a échoué</div >
-                                        </div >
-                                    </div >
+                                    <div className="flex items-center">
+                                        <div className="flex flex-col ml-3">
+                                            <div className="font-bold text-lg md:text-lg text-red-700">L'enregistrement
+                                                a échoué
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
                                 <button
                                     onClick={() => setNotifVisible(false)}
                                     className="flex-no-shrink bg-transparent px-5 ml-4 py-2 text-sm text-red-700 hover:text-red-400 font-medium tracking-wider rounded-full"
                                 >
                                     <Icon path={mdiCloseBox}
-                                          size={2} />
-                                </button >
-                            </div >
-                        </div >
-                    </div >
+                                          size={2}/>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 )}
-            </div >
-        </main >
+            </div>
+            {!isMobile && (<Footer />)}
+        </main>
     )
 }

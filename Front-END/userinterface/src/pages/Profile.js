@@ -7,6 +7,7 @@ import Address from "../components/Address";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CardPayment from "../components/CardPayment";
+import HeaderDesktop from "../components/HeaderDesktop";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -77,6 +78,7 @@ export default function Profile() {
 
     return (
         <main className="flex flex-col items-center justify-between h-screen">
+            {!isMobile && (<HeaderDesktop articlesCount={0} />)}
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
             <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
             <div className={isMobile ? "flex flex-col items-start h-full w-full space-y-2" : "flex flex-row justify-between items-start h-full w-full mt-12 p-2"}>
