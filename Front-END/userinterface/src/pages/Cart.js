@@ -7,10 +7,12 @@ import Icon from "@mdi/react";
 import {mdiCartMinus} from "@mdi/js";
 import NotificationFeedback from "../components/NotificationFeedback";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const mapStateToProps = state => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	articlesCount: state.articlesCount
+	articlesCount: state.articlesCount,
+	user: state.user
 });
 
 const mapDispatchToProps = {
@@ -20,12 +22,13 @@ const mapDispatchToProps = {
 };
 
 export default function Cart() {
-	const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
+	const { isAuthenticated, articlesCount, user } = useSelector(mapStateToProps);
 	const { emptyCart, removeFromCart } = mapDispatchToProps;
 	const isMobile = window.innerWidth <= 600;
 	const [articles, setArticles] = useState([]);
 	const [isVisible, setIsVisible] = useState(false);
 	const [isNotified, setIsNotified] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setArticles(JSON.parse(localStorage.getItem('cartItems')) || []);
@@ -37,34 +40,34 @@ export default function Cart() {
 	if(isNotified)
 		setTimeout(() => setIsNotified(false), 1500);
 
-	const sendOrderToApi = async (articles) => {
+	const sendOrderToApi = async (orderData, user) => {
 		try {
-			// Envoyez la liste des articles à l'API
-			const response = await axios.post("URL_DE_VOTRE_API", { articles });
+			const response = await axios.post("/create", orderData, {
+				headers: {
+					'Content-Type': 'application/json',
+					'Type': 'Order',
+					'ID': user.ID
+				}
+			});
 
-			// Vérifiez la réponse de l'API
 			if (response.status === 200) {
-				// Si la commande est passée avec succès, affichez un message de succès
 				alert("Commande passée avec succès!");
+				navigate('/tracking-order');
 			} else {
-				// Sinon, affichez un message d'erreur
 				alert("Une erreur s'est produite lors de la commande. Veuillez réessayer plus tard.");
 			}
 		} catch (error) {
-			// En cas d'erreur lors de l'appel à l'API, affichez un message d'erreur
 			console.error("Une erreur s'est produite lors de l'appel à l'API:", error);
 			alert("Une erreur s'est produite lors de la commande. Veuillez réessayer plus tard.");
 		}
 	};
 
+
 	const submitOrder = async () => {
 		try {
 			await sendOrderToApi(articles);
-			// Si la commande est passée avec succès, vous pouvez effectuer d'autres actions ici
 		} catch (error) {
-			// En cas d'erreur lors de l'envoi de la commande, vous pouvez gérer l'erreur ici
 			console.error("Une erreur s'est produite lors de la soumission de la commande:", error);
-			// Vous pouvez également afficher un message d'erreur à l'utilisateur si nécessaire
 			alert("Une erreur s'est produite lors de la soumission de la commande. Veuillez réessayer plus tard.");
 		}
 	};

@@ -1,5 +1,4 @@
 export const setUser = (user) => {
-	// Enregistrer l'utilisateur dans le localStorage
 	localStorage.setItem('user', JSON.stringify(user));
 
 	return {

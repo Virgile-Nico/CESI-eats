@@ -41,3 +41,7 @@ V
 &src/components/NotificationFeedback.js,d\4\d449f06919f96f03c1861bb2c49c5d9f1c7e3b1e
 I
 src/actions/userAction.js,c\7\c7a8e567a4f750cb6916120b3a82c11d06ca8cc7
+K
+src/reducers/userReducer.js,b\7\b7b31d48b26c64856d65e08dfd710528b8aaab50
+J
+src/pages/TrackingOrder.js,f\7\f76213829bfad844cdec34d092234ceda28d2892

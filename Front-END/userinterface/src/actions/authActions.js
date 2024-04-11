@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {setUser} from "./userAction";
+import {useDispatch} from "react-redux";
 
 export const login = (username, password) => {
 	return async dispatch => {
@@ -30,11 +32,15 @@ export const logout = () => {
 	};
 };
 
+export const loginSuccess = (accessToken, refreshToken, userID) => {
+	if (accessToken && refreshToken) {
+		localStorage.setItem('accessToken', accessToken);
+		localStorage.setItem('refreshToken', refreshToken);
+	}
 
-export const loginSuccess = (accessToken, refreshToken) => {
-	// Enregistrer les tokens dans le localStorage ou sessionStorage
-	localStorage.setItem('accessToken', accessToken);
-	localStorage.setItem('refreshToken', refreshToken);
+	const dispatch = useDispatch();
+
+	dispatch(setUser(userID));
 
 	return {
 		type: 'LOGIN_SUCCESS',
