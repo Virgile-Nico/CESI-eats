@@ -70,7 +70,7 @@ export default function Home() {
         setDisplayCount(7);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         axios.get('api-call')
             .then(response => {
                 setCategories(response.data.name)
@@ -88,7 +88,7 @@ export default function Home() {
             .catch(error => {
                 console.error('There was an error!', error);
             });
-    }, []);
+    }, []);*/
 
     const navigate = useNavigate();
 

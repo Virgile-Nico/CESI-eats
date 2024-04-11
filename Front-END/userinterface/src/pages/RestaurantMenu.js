@@ -34,7 +34,7 @@ export default function RestaurantMenu() {
 			.catch(error => {
 				console.error('Error fetching menu items:', error);
 			});
-	}, [restaurantName]); // Execute the effect whenever the restaurant name changes
+	}, [restaurantId]); // Execute the effect whenever the restaurant name changes
 
 	return (
 		<div className="container mx-auto py-8">
