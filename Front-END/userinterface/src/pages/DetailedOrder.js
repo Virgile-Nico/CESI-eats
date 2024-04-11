@@ -9,7 +9,17 @@ const DetailedOrder = () => {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    const foundOrder = ordersData.find(order => order.ID === id);
+    const foundOrder = null;
+    try {
+      axios.get(`http://213.32.6.121:3023/read?type=Order&ID=` + id)
+      .then(res => {
+        foundOrder = res.data;
+      })
+    }
+    catch (error){
+      console.error('error fetching data', error)
+    }
+    
     if (foundOrder) {
       setOrder(foundOrder);
     } else {
