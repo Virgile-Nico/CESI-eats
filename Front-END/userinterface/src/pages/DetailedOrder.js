@@ -1,10 +1,10 @@
-// DetailedOrder.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ordersData from './CESI_eats.orders.json'; // Assurez-vous que le chemin est correct
 import HeaderDesktop from '../components/HeaderDesktop'; // Assurez-vous que le chemin est correct
 
 const DetailedOrder = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [order, setOrder] = useState(null);
 
@@ -21,11 +21,16 @@ const DetailedOrder = () => {
     return <div>Chargement...</div>;
   }
 
-  // Utilisez les classes CSS existantes ou celles de TailwindCSS pour le styling, selon votre setup
   return (
     <>
       <HeaderDesktop />
       <div className="max-w-2xl mx-auto my-8 p-6 bg-white rounded shadow">
+        {/* Bouton de retour */}
+        <div className="flex justify-start mb-4">
+          <button onClick={() => navigate('/home')} className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            ← Retour
+          </button>
+        </div>
         <h1 className="text-2xl font-bold text-center mb-4">Commande n°{order.ID}</h1>
         <p className="text-lg"><strong>Client :</strong> {order.nom_client}</p>
         <p className="text-md text-gray-700"><strong>Status :</strong> {order.Status}</p>
