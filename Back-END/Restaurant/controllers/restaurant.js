@@ -192,7 +192,7 @@ module.exports = {
     Order_read: async function (Identifier) {
         
         let result = await Order.Orders.findById(Identifier)
-        if(result.Status == 'confirmed' || result.Status == 'paid' || result.Status == 'in prepartion' || result.Status ==  "in mouvement" || result.Status ==  "Done"){
+        if(result.Status == 'confirmed' || result.Status == 'paid' || result.Status == 'in preparation' || result.Status ==  "in mouvement" || result.Status ==  "Done"){
             const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${result.ID_client}`
             let client_name = await pool.query(SQL_query)
             let articles_list = []
@@ -222,7 +222,7 @@ module.exports = {
         let result = await Order.Orders.find( { ID_restaurant: Identifier })
         let obj_to_return = []
         await Promise.all(result.map( async (order) => {
-            if(order.Status == 'confirmed' || order.Status == 'paid' || order.Status == 'in prepartion' || order.Status ==  "in mouvement" || order.Status ==  "Done"){
+            if(order.Status == 'confirmed' || order.Status == 'paid' || order.Status == 'in preparation' || order.Status ==  "in mouvement" || order.Status ==  "Done"){
                 const SQL_query = `SELECT NOM, PRENOM from CLIENTS WHERE ID=${order.ID_client}`
                 let client_name = await pool.query(SQL_query)
                 let articles_list = []
