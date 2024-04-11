@@ -56,7 +56,7 @@ export default function Home() {
     }
 
     const [categories, setCategories] = useState([]);
-    const [restos, setRestos] = useState([]);
+    const [restos, setRestos] = useState([{name: '', img: '', categories: [], id: ''}]);
     const [displayCount, setDisplayCount] = useState(7);
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -92,8 +92,8 @@ export default function Home() {
 
     const navigate = useNavigate();
 
-    const navigateToRestaurantMenu = (restaurantName) => {
-        const restaurantMenuUrl = `/restaurant/${encodeURIComponent(restaurantName)}/menu`;
+    const navigateToRestaurantMenu = (restaurantId) => {
+        const restaurantMenuUrl = `/restaurant/${encodeURIComponent(restaurantId)}/menu`;
         navigate(restaurantMenuUrl);
     };
 
@@ -143,7 +143,7 @@ export default function Home() {
                     </div>
                     <div className="grid grid-cols-1 gap-3 justify-center items-center h-4/5">
                         {restos.map((resto, index) => (
-                            <RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.name)} restoName={resto.name} restoImg={resto.img} />
+                            <RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.id)} restoName={resto.name} restoImg={resto.img} />
                         ))}
                     </div>
                 </div>

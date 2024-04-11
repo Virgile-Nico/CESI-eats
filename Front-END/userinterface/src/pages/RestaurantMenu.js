@@ -9,7 +9,7 @@ import {addToCart} from "../actions/cartActions";
 
 
 export default function RestaurantMenu() {
-	const { restaurantName } = useParams(); // Get the restaurant name from the URL using useParams
+	const { restaurantId } = useParams(); // Get the restaurant id from the URL using useParams
 	const [menuItems, setMenuItems] = useState([{name: '', description: '', price: '', image: ''}]);
 	const isMobile = window.innerWidth <= 600;
 	const [articlesCount, setArticlesCount] = useState(0);
@@ -27,7 +27,7 @@ export default function RestaurantMenu() {
 
 	useEffect(() => {
 		// Make a request to your API to fetch the restaurant menu items
-		axios.get(`your_api_url/${restaurantName}/menu`)
+		axios.get(`api_url/${restaurantId}/menu`)
 			.then(response => {
 				setMenuItems(response.data);
 			})
