@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Edit from "./pages/Edit";
 import RestaurantMenu from "./pages/RestaurantMenu";
 import OrderHistory from "./pages/OderHistory";
+import Cart from "./pages/Cart";
 
 
 export const routes = [
@@ -59,6 +60,11 @@ export const routes = [
 				element: <OrderHistory />,
 			}
 		],
+	},
+	{
+		name: "Cart",
+		path: "/cart",
+		element: <Cart />,
 	},
 	{
 		name: "NotFound",

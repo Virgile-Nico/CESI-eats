@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    articlesCount: state.articlesCount
 });
 
-function HeaderDesktop({ articlesCount, isAuthenticated }) {
+function HeaderDesktop() {
     const navigate = useNavigate();
+    const { isAuthenticated, articlesCount } = mapStateToProps;
 
     return (
         <header className="w-full h-20 flex justify-between items-center px-6">

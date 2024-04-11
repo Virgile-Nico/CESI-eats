@@ -8,9 +8,16 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CardPayment from "../components/CardPayment";
 import HeaderDesktop from "../components/HeaderDesktop";
-import OrderHistory from "./OderHistory";
+import {useSelector} from "react-redux";
+
+// mapStateToProps function to map state to props
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    articlesCount: state.articlesCount
+});
 
 export default function Profile() {
+    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
     const navigate = useNavigate();
     const [addresses, setAddresses] = useState([]);
     const [payments, setPayments] = useState([]);
@@ -79,7 +86,7 @@ export default function Profile() {
 
     return (
         <main className="flex flex-col items-center justify-between h-screen">
-            {!isMobile && (<HeaderDesktop articlesCount={0} />)}
+            {!isMobile && (<HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />)}
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
             <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
             <div className={isMobile ? "flex flex-col items-start h-full w-full space-y-2" : "flex flex-row justify-between items-start h-full w-full mt-12 p-2"}>

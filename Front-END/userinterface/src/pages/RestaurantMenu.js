@@ -8,21 +8,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../actions/cartActions";
 import Footer from "../components/Footer";
 
+// mapStateToProps function to map state to props
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated,
+	articlesCount: state.articlesCount
+});
 
 export default function RestaurantMenu() {
+	const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
 	const { restaurantId } = useParams(); // Get the restaurant id from the URL using useParams
 	const [menuItems, setMenuItems] = useState([{name: '', description: '', price: '', image: ''}]);
 	const isMobile = window.innerWidth <= 600;
-	const [articlesCount, setArticlesCount] = useState(0);
 	const cartItems = useSelector(state => state.cartItems);
 	const dispatch = useDispatch();
 	const [isVisible, setIsVisible] = useState(false);
 
 	const addInCart = (itemName, itemPrice) => {
 		dispatch(addToCart({ name: itemName, price: itemPrice }));
-		setArticlesCount(articlesCount + 1);
 		setIsVisible(true);
-		setTimeout(() => {setIsVisible(false)}, 1500)
+		setTimeout(() => { setIsVisible(false) }, 1500);
 	};
 
 
@@ -39,7 +43,7 @@ export default function RestaurantMenu() {
 
 	return (
 		<div className="container flex flex-col mx-auto py-8">
-			{isMobile ? <HeaderMobile /> : <HeaderDesktop articlesCount={articlesCount} />}
+			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />}
 			<h1 className="text-3xl font-bold mb-4">Restaurant Menu</h1>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{menuItems.map((item, index) => (

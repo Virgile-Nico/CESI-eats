@@ -19,3 +19,21 @@ N
 src/components/FooterButton.js,2\8\28a924703339f6ec008f043e642673fda5d1eab9
 B
 src/pages/Login.js,c\8\c896236ba4a30f2d4d14daebfc43b8b237ff6821
+J
+src/actions/cartActions.js,5\2\52934ba5bdeb71378eeb069265d9bd62f71dec3b
+K
+src/reducers/cartReducer.js,0\3\0365c6edd735758c38f4a634d8cd1fe84133e9e3
+<
+src/store.js,e\5\e5a2735375b021a063f28df6dd2434503bb70c9b
+C
+src/pages/Splash.js,a\5\a5730aea6993f46b618a7bb1eaac27797a8e8db6
+O
+src/components/HeaderDesktop.js,0\f\0fe3ab4e092eb94f09a570e8a4227a9fc7bb7eb3
+J
+src/actions/authActions.js,5\2\5250d00efe44b79844428f0b6a5f6f252f4ae0b5
+K
+src/reducers/authReducer.js,7\d\7dd16dd66d6a07e71bdd16e3fc4268e558b475bc
+K
+src/components/RestoCard.js,a\2\a2063c738652120bf328a8a9630c5ebab5161522
+A
+src/pages/Cart.js,4\c\4c91bf863fed6658a8aa072fdccae6edffd33909

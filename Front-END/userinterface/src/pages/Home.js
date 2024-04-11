@@ -29,8 +29,16 @@ import axios from "axios";
 import {mdiMinusBox, mdiPlusBox} from "@mdi/js";
 import {useNavigate} from "react-router-dom";
 import ItemMenu from "../components/ItemMenu";
+import {useSelector} from "react-redux";
+
+// mapStateToProps function to map state to props
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    articlesCount: state.articlesCount
+});
 
 export default function Home() {
+    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
     const isMobile = window.innerWidth <= 600;
     const catImgEnum = {
         "Cuisine Française": Baguette,
@@ -70,7 +78,7 @@ export default function Home() {
         setDisplayCount(7);
     };
 
-    /*useEffect(() => {
+    useEffect(() => {
         axios.get('api-call')
             .then(response => {
                 setCategories(response.data.name)
@@ -88,7 +96,7 @@ export default function Home() {
             .catch(error => {
                 console.error('There was an error!', error);
             });
-    }, []);*/
+    }, []);
 
     const navigate = useNavigate();
 
@@ -101,7 +109,7 @@ export default function Home() {
         <main className="h-screen w-full flex flex-col items-center">
             {!isMobile ? (
                 <div className="h-screen w-full flex flex-col items-center">
-                    <HeaderDesktop articlesCount={0} />
+                    <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />
                     <div className="w-full flex flex-row flex-wrap h-2/5 space-x-2">
                         {categories.map((category, index) => (
                             <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)} />

@@ -5,12 +5,20 @@ import Logo from "../assets/logo/logo.png";
 import axios from "axios";
 import HeaderDesktop from "../components/HeaderDesktop";
 import Footer from "../components/Footer";
+import {useSelector} from "react-redux";
 
 function back(){
     window.history.back();
 }
 
+// mapStateToProps function to map state to props
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    articlesCount: state.articlesCount
+});
+
 export default function Edit() {
+    const { isAuthenticated, articlesCount } = useSelector(mapStateToProps);
     const [showPassword, setShowPassword] = useState({
         password: false,
         confirmPassword: false
@@ -99,7 +107,7 @@ export default function Edit() {
                     </div>
                 </div>
                 ) : (
-                    <HeaderDesktop articlesCount={0} />
+                    <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />
                 )
             }
             <div className="flex flex-col items-center h-full w-full space-y-12">

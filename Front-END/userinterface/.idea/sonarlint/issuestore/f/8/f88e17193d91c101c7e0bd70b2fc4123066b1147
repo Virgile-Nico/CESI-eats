@@ -1,13 +1,6 @@
 
-wjavascript:S1128")Remove this unused import of 'useEffect'.(óİ¥­şÿÿÿÿ8²‡öâì1J$6d8c3284-808c-4b63-87a2-400bcabda231
-sjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8²‡öâì1J$3f597970-6a04-43b0-8530-719fad907426
-Kjavascript:S1128"(Remove this unused import of 'ItemMenu'.(ıëá8…æ›ãì1
-‡javascript:S1481:">Remove the declaration of the unused 'setCategories' variable.(˜šÏï8º‡öâì1J$1b400821-457f-40cb-a2d2-2c83f3bb96c8
-„javascript:S1854:";Remove this useless assignment to variable "setCategories".(˜šÏï8º‡öâì1J$5d519cc6-0e9a-4cfe-bb42-191ed1fb06c6
-ˆjavascript:S1481;":Remove the declaration of the unused 'setRestos' variable.(Œ¥üÈùÿÿÿÿ8º‡öâì1J$7a73b3a3-5dfc-4214-a60c-c4e683a4cc3b
-…javascript:S1854;"7Remove this useless assignment to variable "setRestos".(Œ¥üÈùÿÿÿÿ8º‡öâì1J$b9da3d4c-8925-4a32-a96b-4897043de50b
-ljavascript:S125I"Remove this commented out code.(ì³½‰ıÿÿÿÿ8º‡öâì1J$f0c45728-5fb9-4531-b7f5-6889154ec0ae
-Ajavascript:S6479k"Do not use Array index in keys(ã‘ğö8æ›ãì1
-Ajavascript:S6479p"Do not use Array index in keys(•˜±Â8æ›ãì1
-Ajavascript:S6479y"Do not use Array index in keys(ã‘ğö8æ›ãì1
-Bjavascript:S6479’"Do not use Array index in keys(ã’Éô8æ›ãì1
+qjavascript:S1128"(Remove this unused import of 'ItemMenu'.(ıëá8…æ›ãì1J$3c746672-dc5c-455a-9244-4ca2c4a558eb
+gjavascript:S6479s"Do not use Array index in keys(ã‘ğö8æ›ãì1J$79082ddc-e353-484c-a7ec-7fa34885bfb7
+gjavascript:S6479x"Do not use Array index in keys(•˜±Â8æ›ãì1J$c396ef6d-8e8a-41e4-a339-e9030ca97bbe
+hjavascript:S6479"Do not use Array index in keys(ã‘ğö8æ›ãì1J$cba5d1a2-964d-4c06-91f3-330cc2e2bff6
+hjavascript:S6479š"Do not use Array index in keys(ã’Éô8æ›ãì1J$affc70bb-3bae-4d9a-aa68-aed0acd4e6ac
