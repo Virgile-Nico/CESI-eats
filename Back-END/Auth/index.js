@@ -8,6 +8,9 @@ const mongo = require('./controllers/dbMongo')
 const router = require('./routes/auth');
 app.use(express.json());
 
+var cors = require('cors');
+app.use(cors());
+
 app.use((req, res, next) => {
   //Logger.logaction(req.method, req.url, false, "Request received");
   next();

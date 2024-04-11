@@ -42,39 +42,41 @@ router.post('/register', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
     const type = req.query.type;
+    let response
     switch(type) {
         case 'user':
             console.log('User login')
-            authController.loginUser(req.body);
+            response = authController.loginUser(req.body);
             console.log('Finishing login user')
             break;
         case 'restaurant':
             console.log('Restaurant login')
-            authController.loginRestaurant(req.body);
+            response = authController.loginRestaurant(req.body);
             break;
         case 'delivery':
             console.log('Delivery login')
-            authController.loginDelivery(req.body);
+            response = authController.loginDelivery(req.body);
             break;
         case 'intern':
             console.log('Intern login')
-            authController.loginIntern(req.body);
+            response = authController.loginIntern(req.body);
             break;
         case 'tiers':
             console.log('Tiers login')
-            authController.loginTiers(req.body);
+            response = authController.loginTiers(req.body);
             break;
         default:
             res.status(404).send("Type login unknown");
             return;
     }
     res.status(200)
-    res.json("Login successful");
+    res.json(response);
     next()
 });
 
 router.get('/authenticate', (req, res, next) => {
     const type = req.query.type;
+    let response
     let token = req.headers["authorization"];
         if (!token) {
             console.log("Token is required.");
@@ -86,30 +88,30 @@ router.get('/authenticate', (req, res, next) => {
     switch(type) {
         case 'user':
             console.log('User authenticate')
-            authController.authenticateUser(token);
+            response = authController.authenticateUser(token);
             break;
         case 'restaurant':
             console.log('Restaurant authenticate')
-            authController.authenticateRestaurant(token);
+            response = authController.authenticateRestaurant(token);
             break;
         case 'delivery':
             console.log('Delivery authenticate')
-            authController.authenticateDelivery(token);
+            response = authController.authenticateDelivery(token);
             break;
         case 'intern':
             console.log('Intern authenticate')
-            authController.authenticateIntern(token);
+            response = authController.authenticateIntern(token);
             break;
         case 'tiers':
             console.log('Tiers authenticate')
-            authController.authenticateTiers(token);
+            response = authController.authenticateTiers(token);
             break;
         default:
             res.status(404).send("Type authenticate unknown");
             return;
     }
     res.status(200)
-    res.json("Authentification successful");
+    res.json(response);
     next()
 });
 
