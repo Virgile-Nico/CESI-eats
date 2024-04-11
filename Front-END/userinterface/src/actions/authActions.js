@@ -20,8 +20,25 @@ export const login = (username, password) => {
 	};
 };
 
-export const loginSuccess = (accessToken, refreshToken) => ({
-	type: 'LOGIN_SUCCESS',
-	accessToken,
-	refreshToken
-});
+export const logout = () => {
+	// Supprimer les tokens du localStorage
+	localStorage.removeItem('accessToken');
+	localStorage.removeItem('refreshToken');
+
+	return {
+		type: 'LOGOUT'
+	};
+};
+
+
+export const loginSuccess = (accessToken, refreshToken) => {
+	// Enregistrer les tokens dans le localStorage ou sessionStorage
+	localStorage.setItem('accessToken', accessToken);
+	localStorage.setItem('refreshToken', refreshToken);
+
+	return {
+		type: 'LOGIN_SUCCESS',
+		accessToken,
+		refreshToken
+	};
+};
