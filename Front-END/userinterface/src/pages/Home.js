@@ -27,6 +27,8 @@ import Vegan from "../assets/img/categories/vegan.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {mdiMinusBox, mdiPlusBox} from "@mdi/js";
+import {useNavigate} from "react-router-dom";
+import ItemMenu from "../components/ItemMenu";
 
 export default function Home() {
     const isMobile = window.innerWidth <= 600;
@@ -68,27 +70,32 @@ export default function Home() {
         setDisplayCount(7);
     };
 
-    const App = () => {
-        useEffect(() => {
-            axios.get('api-call')
-                .then(response => {
-                    setCategories(response.data.name)
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
-        }, [])
+    useEffect(() => {
+        axios.get('api-call')
+            .then(response => {
+                setCategories(response.data.name)
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, [])
 
-        useEffect(() => {
-            axios.get('api-call')
-                .then(response => {
-                    setRestos(response.data.name)
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
-        }, []);
-    }
+    useEffect(() => {
+        axios.get('api-call')
+            .then(response => {
+                setRestos(response.data.name)
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
+
+    const navigate = useNavigate();
+
+    const navigateToRestaurantMenu = (restaurantName) => {
+        const restaurantMenuUrl = `/restaurant/${encodeURIComponent(restaurantName)}/menu`;
+        navigate(restaurantMenuUrl);
+    };
 
     return (
         <main className="h-screen w-full flex flex-col items-center">
@@ -136,7 +143,7 @@ export default function Home() {
                     </div>
                     <div className="grid grid-cols-1 gap-3 justify-center items-center h-4/5">
                         {restos.map((resto, index) => (
-                            <RestoCard key={index} onClick={() => console.log(resto.name)} restoName={resto.name} restoImg={resto.img} />
+                            <RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.name)} restoName={resto.name} restoImg={resto.img} />
                         ))}
                     </div>
                 </div>

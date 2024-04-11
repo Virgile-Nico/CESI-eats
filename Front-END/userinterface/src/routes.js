@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Edit from "./pages/Edit";
+import RestaurantMenu from "./pages/RestaurantMenu";
 
 
 export const routes = [
@@ -33,6 +34,13 @@ export const routes = [
 		name: "Home",
 		path: "/home",
 		element: <Home />,
+		routes: [
+			{
+				name: "RestaurantMenu",
+				path: "/restaurant/:restaurantId/menu",
+				element: <RestaurantMenu />,
+			},
+		]
 	},
 	{
 		name: "Profile",
