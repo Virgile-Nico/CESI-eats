@@ -239,6 +239,7 @@ module.exports = {
                 ID : order.ID,
                 nom_client : `${client_name[0].NOM} ${client_name[0].PRENOM}`,
                 Total_price : order.Total_price,
+                Status: Status,
                 Number_products : order.Number_products,
                 Articles : articles_list,
                 Menus : menus_list
