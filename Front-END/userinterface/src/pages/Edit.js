@@ -325,7 +325,7 @@ export default function Edit() {
                     </div>
                 )}
             </div>
-            {!isMobile && (<Footer />)}
+            <Footer />
         </main>
     )
 }

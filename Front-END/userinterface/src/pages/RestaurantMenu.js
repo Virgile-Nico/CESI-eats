@@ -6,6 +6,7 @@ import HeaderMobile from "../components/HeaderMobile";
 import HeaderDesktop from "../components/HeaderDesktop";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../actions/cartActions";
+import Footer from "../components/Footer";
 
 
 export default function RestaurantMenu() {
@@ -37,7 +38,7 @@ export default function RestaurantMenu() {
 	}, [restaurantId]); // Execute the effect whenever the restaurant name changes
 
 	return (
-		<div className="container mx-auto py-8">
+		<div className="container flex flex-col mx-auto py-8">
 			{isMobile ? <HeaderMobile /> : <HeaderDesktop articlesCount={articlesCount} />}
 			<h1 className="text-3xl font-bold mb-4">Restaurant Menu</h1>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -77,6 +78,7 @@ export default function RestaurantMenu() {
 					</button >
 				</div >
 			</div >)}
+			<Footer/>
 		</div >
 	);
 }

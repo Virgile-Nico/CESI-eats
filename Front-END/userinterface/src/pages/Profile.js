@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CardPayment from "../components/CardPayment";
 import HeaderDesktop from "../components/HeaderDesktop";
+import OrderHistory from "./OderHistory";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function Profile() {
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
             <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
             <div className={isMobile ? "flex flex-col items-start h-full w-full space-y-2" : "flex flex-row justify-between items-start h-full w-full mt-12 p-2"}>
-                <button className="flex flex-row space-x-4 bg-transparent hover:bg-gray-200 w-60 p-4" onClick={() => navigate('/orders')}>
+                <button className="flex flex-row space-x-4 bg-transparent hover:bg-gray-200 w-60 p-4" onClick={() => navigate('/profile/order-history')}>
                     <Icon path={mdiInvoiceList} size={1}/>
                     <span className="text-lg font-semibold text-gray-700">Mes commandes</span>
                 </button>

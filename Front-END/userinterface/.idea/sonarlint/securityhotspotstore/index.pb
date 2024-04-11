@@ -15,3 +15,7 @@ D
 src/pages/Profile.js,e\4\e490e7cc5b8df13328f9d6007192f7e1e2c42797
 H
 src/components/Footer.js,b\d\bd22e369de6b4e7c909c8598869bb4c2e3bc1508
+N
+src/components/FooterButton.js,2\8\28a924703339f6ec008f043e642673fda5d1eab9
+B
+src/pages/Login.js,c\8\c896236ba4a30f2d4d14daebfc43b8b237ff6821
