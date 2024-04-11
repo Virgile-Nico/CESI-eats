@@ -7,7 +7,7 @@ export default function App() {
         <Router>
             <Routes>
                 {getRoutes().map((route) => (
-                    <Route exact {...route} key={route.name} />
+                    <Route exact path={route.path} element={route.element} key={route.name} />
                 ))}
                 <Route path="*" element={"NotFound"} />
             </Routes>

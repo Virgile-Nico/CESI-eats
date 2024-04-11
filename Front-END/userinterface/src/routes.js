@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import SuccessConnexion from "./pages/SuccessConnexion";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
+import DetailedOrder from "./pages/DetailedOrder";
 
 
 export const routes = [
@@ -36,6 +37,11 @@ export const routes = [
 		name: "NotFound",
 		path: "*",
 		element: <NotFound />,
+	},
+	{
+		name: "DetailedOrder",
+		path: "/detailed-order/:id", // Note the :id placeholder
+		element: <DetailedOrder />,
 	},
 ];
 
