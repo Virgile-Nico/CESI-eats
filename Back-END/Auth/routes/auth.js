@@ -2,19 +2,18 @@ const express = require('express')
 const router = express.Router();
 const authController = require("../controllers/auth.controller");
 
-const timeLog = (req, res, next) => {
-    console.log('Time: ', Date.now())
+router.get('/', (req, res, next) => {
+    res.status(200)
+    .send("Welcome on Auth API")
     next()
-}
-router.use(timeLog)
+})
 
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
     const type = req.query.type;
     switch(type) {
         case 'user':
             authController.registerUser(req.body);
             console.log('User register')
-            return res.status(201).json({ "msg": "New user created!" });
             break
         case 'restaurant':
             console.log('Restaurant register')
@@ -36,10 +35,12 @@ router.post('/register', (req, res) => {
             res.status(404).send("Type unknown");
             return;
     }
-    res.status(200).send("Register successful");
+    res.status(200)
+    res.json("Register successful");
+    next()
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     const type = req.query.type;
     switch(type) {
         case 'user':
@@ -67,10 +68,12 @@ router.post('/login', (req, res) => {
             res.status(404).send("Type login unknown");
             return;
     }
-    res.status(200).send("Login successful");
+    res.status(200)
+    res.json("Login successful");
+    next()
 });
 
-router.get('/authenticate', (req, res) => {
+router.get('/authenticate', (req, res, next) => {
     const type = req.query.type;
     let token = req.headers["authorization"];
         if (!token) {
@@ -105,7 +108,9 @@ router.get('/authenticate', (req, res) => {
             res.status(404).send("Type authenticate unknown");
             return;
     }
-    res.status(200).send("Authentification successful");
+    res.status(200)
+    res.json("Authentification successful");
+    next()
 });
 
 module.exports = router;

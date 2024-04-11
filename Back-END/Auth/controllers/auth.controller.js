@@ -6,6 +6,7 @@ const Intern = require('../models/Intern');
 const Restaurant = require('../models/Restaurant');
 const Tiers = require('../models/Tiers');
 const pool = require('../controllers/dbMaria');
+const categories = require('../models/categories');
 
 module.exports = {
     registerUser: async (body) => {
@@ -272,6 +273,9 @@ module.exports = {
         const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
         const hashedRIB = bcrypt.hashSync(body.RIB, 10);
         await pool.query('INSERT INTO RESTAURANT (MAIL, PASSWORD, NOM, TEL, CP, VILLE, ADRESSE, SIRET, RIB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.TEL, body.CP, body.VILLE, body.ADRESSE, body.SIRET, hashedRIB]);
+        let ID = await pool.query(`SELECT ID FROM RESTAURANT WHERE MAIL = ${body.MAIL}`)
+        const newest = new categories(ID , body.categories)
+        newest.save();
     } catch (error) {
         console.error("register error: ", error);
     }
