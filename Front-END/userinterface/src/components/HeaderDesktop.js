@@ -8,7 +8,7 @@ export default function HeaderDesktop({articlesCount}) {
     return(
         <header className="w-full h-20 flex justify-center items-center px-6">
             <div className="flex items-center">
-                <img alt="logo" src={Logo} className="h-24 w-18"/>
+                <img src={Logo} alt="Logo" className="h-24 w-18 cursor-pointer" onClick={() => navigate('/home')} />
             </div>
             <div className="flex items-center space-x-4">
                 <button

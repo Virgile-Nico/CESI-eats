@@ -5,7 +5,7 @@ import SuccessConnexion from "./pages/SuccessConnexion";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import DetailedOrder from "./pages/DetailedOrder";
-
+import Menu from "./pages/Menu";
 
 export const routes = [
 	{
@@ -43,6 +43,11 @@ export const routes = [
 		path: "/detailed-order/:id", // Note the :id placeholder
 		element: <DetailedOrder />,
 	},
+	{
+        name: "Menu",
+        path: "/menu",
+        element: <Menu />,
+    },
 ];
 
 export const compileRoutes = (parentRoute, subRoutes) => {
