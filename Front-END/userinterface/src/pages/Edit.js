@@ -43,7 +43,7 @@ export default function Edit() {
         event.preventDefault();
         const userId = getUser().id;
         try {
-            const response = await axios.post(`http://213.32.6.121:3020/login?type=card&ID=${userId}`, payment);
+            const response = await axios.post(`http://213.32.6.121:3025/update?type=card&ID=${userId}`, payment);
             console.log(response.data); // Handle the response as needed
             setNotifVisible(true);
             setIsSaved(true); // Set to true if the API call is successful
@@ -58,7 +58,7 @@ export default function Edit() {
         event.preventDefault();
         const userId = getUser().id;
         try {
-            const response = await axios.post(`http://213.32.6.121:3020/login?type=address&ID=${userId}`, address);
+            const response = await axios.post(`http://213.32.6.121:3025/update?type=address&ID=${userId}`, address);
             console.log(response.data); // Handle the response as needed
             setNotifVisible(true);
             setIsSaved(true); // Set to true if the API call is successful

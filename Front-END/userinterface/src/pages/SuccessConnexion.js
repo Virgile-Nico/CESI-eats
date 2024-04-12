@@ -27,7 +27,7 @@ export default function SuccessConnexion () {
                 <h2 className="text-2xl font-bold text-gray-900">Connexion réussie</h2>
                 <p className="text-gray-600">Vous allez être redirigé vers votre compte d’ici un instant. Si rien ne se
                     passe, cliquez sur le bouton “Continuer”.</p>
-                <button className="flex flex-row space-x-2 w-1/2 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300" onClick={() => navigate('/')}>
+                <button className="flex flex-row space-x-2 w-1/2 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300" onClick={() => navigate('/home')}>
                     <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Continuer</p>
                     <Icon className="my-auto" path={mdiArrowRight} size={1} />
                 </button>

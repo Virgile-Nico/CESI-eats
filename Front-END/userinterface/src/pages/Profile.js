@@ -10,6 +10,7 @@ import CardPayment from "../components/CardPayment";
 import HeaderDesktop from "../components/HeaderDesktop";
 import {useSelector} from "react-redux";
 import {logout} from "../actions/authActions";
+import {getUser} from "../actions/userAction";
 
 export default function Profile() {
     const articlesCount = useSelector(state => state.articlesCount);
@@ -47,7 +48,7 @@ export default function Profile() {
         setDisplayCountPayment(2);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         setAddresses([
             { street: '1 rue de la paix', zipCode: '75000', city: 'Paris' },
             { street: '2 rue de la paix', zipCode: '75000', city: 'Paris' },
@@ -62,35 +63,39 @@ export default function Profile() {
             { cardNumber: '1234 567 9101 1121', username: 'Nathalie Parisse', cvc: '123', date: '12/23' },
             { cardNumber: '1234 567 9101 1121', username: 'Nathalie Parisse', cvc: '123', date: '12/23' },
         ])
-    }, []);
+    }, []);*/
 
-
-    useEffect(() => {
-        axios.get('api-call')
-            .then(response => {
-                setAddresses(response.data.name)
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, [])
+    const userId = isAuthenticated ? getUser().id : null;
 
     useEffect(() => {
-        axios.get('api-call')
-            .then(response => {
-                setPayments(response.data.name)
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, [])
+        if (userId) {
+            axios.get(`http://213.32.6.121:3025/read?type=address&ID=${userId}`)
+                .then(response => {
+                    if (response.data !== undefined) {
+                        setAddresses(response.data);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
 
+            axios.get(`http://213.32.6.121:3025/read?type=card&ID=${userId}`)
+                .then(response => {
+                    if (response.data !== undefined) {
+                        setPayments(response.data);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
+        }
+    }, [userId]);
 
     return (
         <main className="flex flex-col items-center justify-between h-screen">
             {!isMobile && (<HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />)}
             <Avatar firstname={'Nathalie'} lastname={'parisse'} />
-            <button className="bg-gray-200 rounded-lg p-2 text-primary-500 hover:bg-gray-100" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
+            <button className="bg-gray-200 font-semibold rounded-lg p-2 text-primary-500 hover:bg-gray-100 mb-2" onClick={() => navigate('/profile/edit')}>Modifier mon profil</button>
             <button className="bg-gray-200 rounded-lg p-2 text-gray-500 hover:bg-gray-100" onClick={logout}>Déconnexion</button>
             <div className={isMobile ? "flex flex-col items-start h-full w-full space-y-2" : "flex flex-row justify-between items-start h-full w-full mt-12 p-2"}>
                 <button className="flex flex-row space-x-4 bg-transparent hover:bg-gray-200 w-60 p-4" onClick={() => navigate('/profile/order-history')}>
