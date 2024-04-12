@@ -54,16 +54,7 @@ module.exports = {
         });
         return list_to_return
     },
-    Article_menu_read: async function (Identifier) {
-        let article = await Article.Article.findById(Identifier)
-        let obj = {
-            _id: article._id,
-            Nom: article.Nom,
-            Description: article.Description,
-            Prix: article.Prix
-        }
-        return obj
-    },
+    
     Menu_read: async function (Identifier) {
         let response = await Menu.Menu.find({ ID: Identifier })
         const list_to_return = []
@@ -170,7 +161,8 @@ module.exports = {
         let obj = {
             _id: article._id,
             Nom: article.Nom,
-            Description: article.Description
+            Description: article.Description,
+            Prix: article.Prix
         }
         return obj
     },
