@@ -69,15 +69,13 @@ export default function Home() {
         setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
     }, [isAuthenticated, articlesCount]);
 
-    /*const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const handleSortBy = (categoryName) => {
         setSelectedCategory(categoryName);
     };
 
-    const filteredRestos = selectedCategory
-        ? restos.filter(resto => resto.categories.includes(selectedCategory))
-        : restos;
-*/
+    console.log(selectedCategory)
+
     const handleShowMore = () => {
         setIsExpanded(true);
         setDisplayCount(categories.length);
@@ -109,6 +107,67 @@ export default function Home() {
     }, []);*/
 
     useEffect(() => {
+        filterRestaurants(selectedCategory);
+    }, [selectedCategory]);
+
+    const filterRestaurants = (category) => {
+        if (category)
+            setRestos(restos.filter(resto => resto.categories.includes(category)));
+        else
+            setRestos([
+                {
+                    name: "Resto 1",
+                    img: "https://worldinparis.com/wp-content/uploads/2019/10/steak-frites.jpg",
+                    categories: ["Cuisine Française"],
+                    id: "1"
+                },
+                {name: "Resto 2", img: test, categories: ["Cuisine Italienne"], id: "2"},
+                {
+                    name: "Resto 3",
+                    img: "https://realfood.tesco.com/media/images/RFO-1400x919-Pasta-mini-mini-b876d7d9-32d3-4568-8803-1dfe995043d4-0-1400x919.jpg",
+                    categories: ["Plats Végétariens"],
+                    id: "3"
+                },
+                {
+                    name: "Resto 4",
+                    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN6hCBkzF9lIY4nL2cE7qpo6yUphXimajXPgFdxQtETQ&s",
+                    categories: ["Cuisine Asiatique"],
+                    id: "4"
+                },
+                {
+                    name: "Resto 5",
+                    img: "https://www.foodandwine.com/thmb/x5Xd9vyWwaPochuUbAU3typL8RM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-seafood-boil-with-cajun-seasoning-hero-02-e202a099e35a4cd2b00aadb486eed146.jpg",
+                    categories: ["Fruits de Mer et Poissons"],
+                    id: "5"
+                },
+                {
+                    name: "Resto 6",
+                    img: "https://media01.stockfood.com/largepreviews/MjU2NDU2OA==/00082728-American-food-hot-dogs-pizza-hamburger.jpg",
+                    categories: ["Cuisine Américaine"],
+                    id: "6"
+                },
+                {
+                    name: "Resto 7",
+                    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kzogG2H14rbtP1VoRaRMqU7A7B7ag7rbHCptRuKLpg&s",
+                    categories: ["Fast Food"],
+                    id: "7"
+                },
+                {
+                    name: "Resto 8",
+                    img: "https://images.immediate.co.uk/production/volatile/sites/30/2023/01/Ponzu-tofu-poke-bowl-8733c67.jpg?quality=90&resize=440,400",
+                    categories: ["Plat Végan"],
+                    id: "8"
+                },
+                {
+                    name: "Resto 9",
+                    img: "https://cdn.sortiraparis.com/images/80/103598/961048-atelier-fargo-la-patisserie-artisanale-gourmande-au-levain-naturel-saint-honore-eclairs.jpg",
+                    categories: ["Pâtisserie et Desserts"],
+                    id: "9"
+                },
+            ])
+    }
+
+    useEffect(() => {
         setCategories([
             {name: "Cuisine Française"},
             {name: "Cuisine Italienne"},
@@ -124,58 +183,9 @@ export default function Home() {
             {name: "Pâtisseries et Desserts"},
             {name: "Cuisine Méditerranéenne"},
         ]);
-        setRestos([
-            {
-                name: "Resto 1",
-                img: "https://worldinparis.com/wp-content/uploads/2019/10/steak-frites.jpg",
-                categories: ["Cuisine Française"],
-                id: "1"
-            },
-            {name: "Resto 2", img: test, categories: ["Cuisine Italienne"], id: "2"},
-            {
-                name: "Resto 3",
-                img: "https://realfood.tesco.com/media/images/RFO-1400x919-Pasta-mini-mini-b876d7d9-32d3-4568-8803-1dfe995043d4-0-1400x919.jpg",
-                categories: ["Plats Végétariens"],
-                id: "3"
-            },
-            {
-                name: "Resto 4",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN6hCBkzF9lIY4nL2cE7qpo6yUphXimajXPgFdxQtETQ&s",
-                categories: ["Cuisine Asiatique"],
-                id: "4"
-            },
-            {
-                name: "Resto 5",
-                img: "https://www.foodandwine.com/thmb/x5Xd9vyWwaPochuUbAU3typL8RM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-seafood-boil-with-cajun-seasoning-hero-02-e202a099e35a4cd2b00aadb486eed146.jpg",
-                categories: ["Fruits de Mer et Poissons"],
-                id: "5"
-            },
-            {
-                name: "Resto 6",
-                img: "https://media01.stockfood.com/largepreviews/MjU2NDU2OA==/00082728-American-food-hot-dogs-pizza-hamburger.jpg",
-                categories: ["Cuisine Américaine"],
-                id: "6"
-            },
-            {
-                name: "Resto 7",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kzogG2H14rbtP1VoRaRMqU7A7B7ag7rbHCptRuKLpg&s",
-                categories: ["Fast Food"],
-                id: "7"
-            },
-            {
-                name: "Resto 8",
-                img: "https://images.immediate.co.uk/production/volatile/sites/30/2023/01/Ponzu-tofu-poke-bowl-8733c67.jpg?quality=90&resize=440,400",
-                categories: ["Plat Végan"],
-                id: "8"
-            },
-            {
-                name: "Resto 9",
-                img: "https://cdn.sortiraparis.com/images/80/103598/961048-atelier-fargo-la-patisserie-artisanale-gourmande-au-levain-naturel-saint-honore-eclairs.jpg",
-                categories: ["Pâtisserie et Desserts"],
-                id: "9"
-            },
-        ]);
-    }, []);
+    }, [selectedCategory]);
+
+
 
 
     const navigate = useNavigate();
@@ -202,8 +212,8 @@ export default function Home() {
                         ))
                     ) : (
                         categories.slice(0, displayCount).map((category, index) => (
-                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)}/>
-                            /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleSortBy(category.name)} />*/
+                            /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)}/>*/
+                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={()=>handleSortBy(category.name)} />
                         ))
                     )}
                     {categories.length > 7 && !isExpanded && isMobile && (

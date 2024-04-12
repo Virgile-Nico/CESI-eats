@@ -1,10 +1,8 @@
 
-zjavascript:S1128"2Remove this unused import of 'resetArticlesCount'.(ŽÊˆ%8Æ¯Ší1J$a6675c11-35b8-4c25-a966-d94636a85be2
-Žjavascript:S1481"ERemove the declaration of the unused 'isAuthenticatedLocal' variable.(ÝÎ¾Â8Æ¯Ší1J$c76dfa20-7897-4837-b774-1df15bf86a93
-‹javascript:S1854"BRemove this useless assignment to variable "isAuthenticatedLocal".(ÝÎ¾Â8Æ¯Ší1J$565f760c-56fe-4a04-8a64-ceb808b125a1
-Žjavascript:S1481"ERemove the declaration of the unused 'isArticlesCountLocal' variable.(ÜÍ¸¿8Æ¯Ší1J$ff3cc9ea-23d5-49b6-99c5-4e11f6170d54
-‹javascript:S1854"BRemove this useless assignment to variable "isArticlesCountLocal".(ÜÍ¸¿8Æ¯Ší1J$16159cf8-6779-404a-98ec-c626bdc5ba67
-‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(ŽõÜ¢8Æ¯Ší1J$96d6e903-4f25-4dbb-ae65-35038dc873b1
-javascript:S1854"6Remove this useless assignment to variable "navigate".(ŽõÜ¢8Æ¯Ší1J$d7a2a0e1-cf57-4a5d-b34b-a98d00959e02
-ljavascript:S6766O"#HTML entity, `>` , must be escaped.(úÀåþ8£Æ¯Ší1J$b4600244-505c-4634-8d8b-d1f125716adb
-ljavascript:S6479T"Do not use Array index in keys(Ú‚Ñ›ÿÿÿÿÿ8£Æ¯Ší1J$74444adc-b291-4813-a9e1-f47a870187f3
+zjavascript:S1128"2Remove this unused import of 'resetArticlesCount'.(ŽÊˆ%8Æ¯Ší1J$06468fc9-baec-43fb-97c7-d3a81f2af506
+Žjavascript:S1481"ERemove the declaration of the unused 'isAuthenticatedLocal' variable.(ÝÎ¾Â8Æ¯Ší1J$a9743a60-7e30-4d28-880b-128032ef22c6
+‹javascript:S1854"BRemove this useless assignment to variable "isAuthenticatedLocal".(ÝÎ¾Â8Æ¯Ší1J$9bc7313d-0090-4c4c-8107-9c414caff46e
+‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(ŽõÜ¢8Æ¯Ší1J$20ab0c40-048f-4182-9c7c-6897c911e8a4
+javascript:S1854"6Remove this useless assignment to variable "navigate".(ŽõÜ¢8Æ¯Ší1J$0a4760c8-23ab-4705-a139-66f672c44051
+ljavascript:S6766O"#HTML entity, `>` , must be escaped.(úÀåþ8£Æ¯Ší1J$9a7804bc-357f-4516-9a6e-d1195b8a5ebb
+ljavascript:S6479T"Do not use Array index in keys(Ú‚Ñ›ÿÿÿÿÿ8£Æ¯Ší1J$bbe1d1bd-26fb-4f18-9244-ec772f2c8146

@@ -72,7 +72,7 @@ export default function Cart() {
 
 	return(
 		<main className="flex flex-col h-full w-full">
-			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />}
+			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isArticlesCountLocal} articlesCount={isArticlesCountLocal} />}
 			<div className="flex flex-col items-center justify-center">
 				<h1 className="text-3xl font-bold mt-8">Panier</h1>
 					{articles.length > 0 ? (
