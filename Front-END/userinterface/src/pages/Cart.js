@@ -4,26 +4,20 @@ import HeaderMobile from "../components/HeaderMobile";
 import HeaderDesktop from "../components/HeaderDesktop";
 import {useEffect, useState} from "react";
 import Icon from "@mdi/react";
-import {mdiCartMinus} from "@mdi/js";
+import {mdiCartMinus, mdiCartOff} from "@mdi/js";
 import NotificationFeedback from "../components/NotificationFeedback";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.auth.isAuthenticated,
-	articlesCount: state.articlesCount,
-	user: state.user
-});
-
-const mapDispatchToProps = {
-	resetArticlesCount,
-	emptyCart,
-	removeFromCart
-};
-
 export default function Cart() {
-	const { isAuthenticated, articlesCount, user } = useSelector(mapStateToProps);
-	const { emptyCart, removeFromCart } = mapDispatchToProps;
+	const articlesCount = useSelector(state => state.articlesCount);
+	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+	const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
+	const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
+	useEffect(() => {
+		setIsAuthenticatedLocal(isAuthenticated);
+		setIsArticlesCountLocal(articlesCount);
+	}, [isAuthenticated, articlesCount]);
 	const isMobile = window.innerWidth <= 600;
 	const [articles, setArticles] = useState([]);
 	const [isVisible, setIsVisible] = useState(false);
@@ -72,10 +66,10 @@ export default function Cart() {
 	};
 
 	return(
-		<main className="flex flex-col">
+		<main className="flex flex-col h-full w-full">
 			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticated} articlesCount={articlesCount} />}
 			<div className="flex flex-col items-center justify-center">
-				<h1 className="text-2xl font-bold mt-8">Panier</h1>
+				<h1 className="text-3xl font-bold mt-8">Panier</h1>
 				<div className="flex flex-col items-center justify-center mt-4">
 					{articles > 0 ? (
 						<div className="flex flex-col items-center justify-center">
@@ -96,12 +90,13 @@ export default function Cart() {
 							))}
 						</div>
 					) : (
-						<div className="flex flex-col items-center justify-center">
+						<div className="flex flex-col items-center justify-center text-xl">
+							<Icon path={mdiCartOff} size={1} />
 							Votre panier est vide
 						</div>
 					)}
 				</div>
-				<div className="flex flex-row items-center justify-between" >
+				<div className="flex flex-row items-center space-x-4" >
 					<button onClick={() => {
 						emptyCart();
 						setIsNotified(true);

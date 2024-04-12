@@ -1,10 +1,8 @@
 
-sjavascript:S1128"%Remove this unused import of 'axios'.(ÒÁæÅúÿÿÿÿ8õ³³í1J$496ec467-d8fe-4259-83f8-4c18a25331cc
-†javascript:S1481"=Remove the declaration of the unused 'restaurantId' variable.(ŞÂêæ8õ³³í1J$d5747942-caa4-490a-9a0c-24aa5fe2bfc7
-ƒjavascript:S1854":Remove this useless assignment to variable "restaurantId".(ŞÂêæ8ö³³í1J$ea07556e-8f13-4975-ab5b-14ca95bf5279
-ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8ö³³í1J$81666780-c498-409a-af63-42760ec75752
-€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8ö³³í1J$714afc12-3b03-4aa3-8a08-04598cb347f4
-ljavascript:S1251"Remove this commented out code.(ì³½‰ıÿÿÿÿ8ö³³í1J$5f7f28f9-d3b9-4981-8d13-ec069aed264f
-ljavascript:S6479G"Do not use Array index in keys(Ê¹¹óşÿÿÿÿ8€±ºí1J$57a52e54-0c8d-4517-a3b0-ad90c3849166
-ƒjavascript:S6747W":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8Ğí1J$4aa345b4-edbe-4e45-95db-3fca212ba4f2
-ƒjavascript:S6747c":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8Ğí1J$3f050d42-90ea-40b0-8b5b-98b4cb8d32f0
+sjavascript:S1128"%Remove this unused import of 'axios'.(ÒÁæÅúÿÿÿÿ8ú»ˆ‰í1J$5982ab17-53fe-4b7b-93f5-87866ed1dc7e
+†javascript:S1481"=Remove the declaration of the unused 'restaurantId' variable.(ŞÂêæ8û»ˆ‰í1J$021fdf85-6501-41d3-8938-e2c3a4eadc2b
+ƒjavascript:S1854":Remove this useless assignment to variable "restaurantId".(ŞÂêæ8û»ˆ‰í1J$12e09ad3-19c2-493c-b44b-31639b1df972
+ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8û»ˆ‰í1J$b1d4f62e-c785-4d53-910c-0c38a94173fa
+€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8û»ˆ‰í1J$9eb0026b-8778-4682-8966-bddd710f7072
+ljavascript:S1252"Remove this commented out code.(ì³½‰ıÿÿÿÿ8û»ˆ‰í1J$1db51aef-ecc1-4efd-9467-bffa6f87b65a
+ljavascript:S6479H"Do not use Array index in keys(Ê¹¹óşÿÿÿÿ8û»ˆ‰í1J$c4029cca-47e8-47cd-a506-8ffdfca55df3

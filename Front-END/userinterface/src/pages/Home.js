@@ -125,16 +125,56 @@ export default function Home() {
             {name: "Cuisine Méditerranéenne"},
         ]);
         setRestos([
-            {name: "Resto 1", img: test, categories: ["Cuisine Française"], id: "1"},
+            {
+                name: "Resto 1",
+                img: "https://worldinparis.com/wp-content/uploads/2019/10/steak-frites.jpg",
+                categories: ["Cuisine Française"],
+                id: "1"
+            },
             {name: "Resto 2", img: test, categories: ["Cuisine Italienne"], id: "2"},
-            {name: "Resto 3", img: test, categories: ["Plats Végétariens"], id: "3"},
-            {name: "Resto 4", img: test, categories: ["Cuisine Asiatique"], id: "4"},
-            {name: "Resto 5", img: test, categories: ["Fruits de Mer et Poissons"], id: "5"},
-            {name: "Resto 6", img: test, categories: ["Cuisine Américaine"], id: "6"},
-            {name: "Resto 7", img: test, categories: ["Fast Food"], id: "7"},
-            {name: "Resto 8", img: test, categories: ["Plat Végan"], id: "8"},
-            {name: "Resto 9", img: test, categories: ["Spécialités Locales"], id: "9"},
-    ]);
+            {
+                name: "Resto 3",
+                img: "https://realfood.tesco.com/media/images/RFO-1400x919-Pasta-mini-mini-b876d7d9-32d3-4568-8803-1dfe995043d4-0-1400x919.jpg",
+                categories: ["Plats Végétariens"],
+                id: "3"
+            },
+            {
+                name: "Resto 4",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN6hCBkzF9lIY4nL2cE7qpo6yUphXimajXPgFdxQtETQ&s",
+                categories: ["Cuisine Asiatique"],
+                id: "4"
+            },
+            {
+                name: "Resto 5",
+                img: "https://www.foodandwine.com/thmb/x5Xd9vyWwaPochuUbAU3typL8RM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-seafood-boil-with-cajun-seasoning-hero-02-e202a099e35a4cd2b00aadb486eed146.jpg",
+                categories: ["Fruits de Mer et Poissons"],
+                id: "5"
+            },
+            {
+                name: "Resto 6",
+                img: "https://media01.stockfood.com/largepreviews/MjU2NDU2OA==/00082728-American-food-hot-dogs-pizza-hamburger.jpg",
+                categories: ["Cuisine Américaine"],
+                id: "6"
+            },
+            {
+                name: "Resto 7",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kzogG2H14rbtP1VoRaRMqU7A7B7ag7rbHCptRuKLpg&s",
+                categories: ["Fast Food"],
+                id: "7"
+            },
+            {
+                name: "Resto 8",
+                img: "https://images.immediate.co.uk/production/volatile/sites/30/2023/01/Ponzu-tofu-poke-bowl-8733c67.jpg?quality=90&resize=440,400",
+                categories: ["Plat Végan"],
+                id: "8"
+            },
+            {
+                name: "Resto 9",
+                img: "https://cdn.sortiraparis.com/images/80/103598/961048-atelier-fargo-la-patisserie-artisanale-gourmande-au-levain-naturel-saint-honore-eclairs.jpg",
+                categories: ["Pâtisserie et Desserts"],
+                id: "9"
+            },
+        ]);
     }, []);
 
 
@@ -147,60 +187,51 @@ export default function Home() {
 
     return (
         <main className="h-screen w-full flex flex-col items-center">
-            {!isMobile ? (
-                <div className="h-screen w-full flex flex-col items-center">
-                    <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />
-                    <div className="w-full flex flex-row flex-wrap h-2/5 space-x-2">
-                        {categories.map((category, index) => (
-                            /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleSortBy(category.name)} /> */
-                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={()=>console.log(category.name)} />
-                        ))}
-                    </div>
-                    <div className="grid  grid-cols-5 gap-3 justify-center items-center h-4/5">
-                        {/*{filteredRestos.map((resto, index) => (*/}
-                        {restos.map((resto, index) => (
-                            <RestoCard key={index} onClick={() => console.log(resto.name)} restoName={resto.name} restoImg={resto.img} />
-                        ))}
-                    </div>
-                </div>
-            ) : (
-                <div className="h-screen w-full flex flex-col items-center">
-                    <HeaderMobile />
-                    <div className="w-full grid grid-cols-4 gap-1.5 h-1/5">
-                        {categories.slice(0, displayCount).map((category, index) => (
+            <div className="h-screen w-full flex flex-col items-center">
+                {!isMobile ? (
+                    <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal}/>
+                ) : (
+                    <HeaderMobile/>
+                )}
+                <div
+                    className={!isMobile ? "w-full flex flex-row flex-wrap h-2/5 space-x-2" : "w-full grid grid-cols-4 gap-1 h-1/5"}>
+                    {!isMobile ? (
+                        categories.map((category, index) => (
+                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)}/>
                             /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleSortBy(category.name)} />*/
-                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={()=>console.log(category.name)} />
-                        ))}
-                        {categories.length > 7 && !isExpanded && (
-                            <button className="bg-transparent flex flex-col items-center        p-2"
-                                    onClick={handleShowMore}>
-                                <div
-                                    className="place-content-center justify-center p-4 rounded-xl ">
-                                    <Icon path={mdiPlusBox} size={1}/>
-                                </div>
-                                <h5 className="text-center text-xs md:text-sm font-semibold">Afficher plus</h5>
-                            </button>
-                        )}
-                        {isExpanded && (
-                            <button className="bg-transparent flex flex-col items-center        p-2"
-                                    onClick={handleShowLess}>
-                                <div
-                                    className="place-content-center justify-center p-4 rounded-xl ">
-                                    <Icon path={mdiMinusBox} size={1}/>
-                                </div>
-                                <h5 className="text-center text-xs md:text-sm font-semibold">Afficher moins</h5>
-                            </button>
-                        )}
-                    </div>
-                    <div className="grid grid-cols-1 gap-3 justify-center items-center h-4/5">
-                       {/* {filteredRestos.map((resto, index) => (*/}
-                        {restos.map((resto, index) => (
-                            <RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.id)} restoName={resto.name} restoImg={resto.img} />
-                        ))}
-                    </div>
+                        ))
+                    ) : (
+                        categories.slice(0, displayCount).map((category, index) => (
+                            <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)}/>
+                            /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleSortBy(category.name)} />*/
+                        ))
+                    )}
+                    {categories.length > 7 && !isExpanded && (
+                        <button className="bg-transparent flex flex-col items-center p-2" onClick={handleShowMore}>
+                            <div className="place-content-center justify-center p-4 rounded-xl">
+                                <Icon path={mdiPlusBox} size={1}/>
+                            </div>
+                            <h5 className="text-center text-xs md:text-sm font-semibold">Afficher plus</h5>
+                        </button>
+                    )}
+                    {isExpanded && (
+                        <button className="bg-transparent flex flex-col items-center p-2" onClick={handleShowLess}>
+                            <div className="place-content-center justify-center p-4 rounded-xl">
+                                <Icon path={mdiMinusBox} size={1}/>
+                            </div>
+                            <h5 className="text-center text-xs md:text-sm font-semibold">Afficher moins</h5>
+                        </button>
+                    )}
                 </div>
-            )}
-            <Footer />
-        </main>
+                <div
+                    className={!isMobile ? "grid grid-cols-5 gap-3 justify-center items-center h-4/5" : "grid grid-cols-1 gap-3 justify-center items-center h-4/5"}>
+                    {restos.map((resto, index) => (
+                        <RestoCard key={index} onClick={() => navigate("/restaurant-menu")} restoName={resto.name} restoImg={resto.img}/>
+                        /*<RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.id)} restoName={resto.name} restoImg={resto.img}/>*/
+                    ))}
+                </div>
+            </div>
+        <Footer/>
+    </main>
     );
 }

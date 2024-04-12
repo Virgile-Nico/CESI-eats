@@ -12,9 +12,9 @@ export default function HeaderDesktop({ isAuthenticated, articlesCount }) {
         <header className="w-full h-20 flex justify-between items-center px-6">
             {isAuthenticated ? (
                 <>
-                    <div className="flex items-center">
+                    <button className="flex items-center bg-transparent" onClick={()=>navigate('/home')}>
                         <img alt="logo" src={Logo} className="h-24 w-18"/>
-                    </div>
+                    </button>
                     <div className="flex flex-row h-10 w-1/3 mx-4 rounded-full bg-gray-300 p-2">
                         <input
                             type="text"
@@ -41,9 +41,9 @@ export default function HeaderDesktop({ isAuthenticated, articlesCount }) {
                 </>
             ) : (
                 <>
-                    <div className="flex items-center">
+                    <button className="flex items-center bg-transparent" onClick={()=>navigate('/home')}>
                         <img alt="logo" src={Logo} className="h-24 w-18"/>
-                    </div>
+                    </button>
                     <div className="flex flex-row h-10 w-1/3 mx-4 rounded-full bg-gray-300 p-2">
                         <input
                             type="text"

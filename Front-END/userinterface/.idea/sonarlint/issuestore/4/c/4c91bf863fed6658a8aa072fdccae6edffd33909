@@ -1,6 +1,9 @@
 
-~javascript:S1481"5Remove the declaration of the unused 'user' variable.(¸»ì¥8¹ıôùì1J$08642f86-9112-4826-8c1c-1296c112ddee
-{javascript:S1854"2Remove this useless assignment to variable "user".(¸»ì¥8ºıôùì1J$c699acee-7865-4926-bd34-e3ca58bd85b2
-‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(õÜ¢8©€ºúì1J$38556fd6-9193-4090-9026-3cf96327fb1a
-javascript:S1854"6Remove this useless assignment to variable "navigate".(õÜ¢8©€ºúì1J$e0efa7e4-ae83-462b-ab91-da6b08ccc066
-ljavascript:S6479T"Do not use Array index in keys(ºú±ûÿÿÿÿ8¶¬ôùì1J$48a28e52-988e-4f62-af53-a2e8d25642c7
+zjavascript:S1128"2Remove this unused import of 'resetArticlesCount'.(Êˆ%8¨éˆí1J$138bf03a-43c4-4d0f-b535-a0230bf79b4b
+hjavascript:S1481"ERemove the declaration of the unused 'isAuthenticatedLocal' variable.(İÎ¾Â8Èäéˆí1
+ejavascript:S1854"BRemove this useless assignment to variable "isAuthenticatedLocal".(İÎ¾Â8Èäéˆí1
+hjavascript:S1481"ERemove the declaration of the unused 'isArticlesCountLocal' variable.(ÜÍ¸¿8Îäéˆí1
+ejavascript:S1854"BRemove this useless assignment to variable "isArticlesCountLocal".(ÜÍ¸¿8Îäéˆí1
+‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(õÜ¢8©€ºúì1J$361169e1-d66e-4380-bcfc-f76dde48191a
+javascript:S1854"6Remove this useless assignment to variable "navigate".(õÜ¢8©€ºúì1J$e56d835d-d37f-4a5b-99fc-ecb79c2da719
+ljavascript:S6479N"Do not use Array index in keys(ºú±ûÿÿÿÿ8¶¬ôùì1J$6d65df2b-9e44-48ce-90ab-766c85889798
