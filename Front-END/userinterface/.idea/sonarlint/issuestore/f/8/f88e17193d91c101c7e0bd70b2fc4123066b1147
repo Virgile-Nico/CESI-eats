@@ -1,8 +1,8 @@
 
-qjavascript:S1128"(Remove this unused import of 'ItemMenu'.(ıëá8ĞË¼ûì1J$720aab0d-e348-4432-a37e-c9a7463d8dfe
-mjavascript:S6479‰"Do not use Array index in keys(êÕğ¸üÿÿÿÿ8±–²üì1J$59fecdfa-f722-4ed2-a954-e46fc36d759e
-·javascript:S3699‰"hRemove this use of the output from "handleCategoryClick"; "handleCategoryClick" doesn't return anything.(êÕğ¸üÿÿÿÿ8±–²üì1J$11ee7695-2097-454f-a8fc-4ba2ba75cbf8
-hjavascript:S6479"Do not use Array index in keys(•˜±Â8±–²üì1J$91d75e0f-eafc-4bd6-b400-5a28c1d02040
-mjavascript:S6479—"Do not use Array index in keys(êÕğ¸üÿÿÿÿ8±–²üì1J$9aa0e681-e862-4f91-b5f4-6202c99a5196
-·javascript:S3699—"hRemove this use of the output from "handleCategoryClick"; "handleCategoryClick" doesn't return anything.(êÕğ¸üÿÿÿÿ8±–²üì1J$34c858e6-adf6-4a35-a187-517b3e250755
-hjavascript:S6479°"Do not use Array index in keys(ã’Éô8±–²üì1J$470996f1-1982-4580-8d88-60c4f282beb5
+Mjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8ÿ‡¯í1
+Fjavascript:S125H"Remove this commented out code.(˜¤Ÿÿÿÿÿÿ8ÿ‡¯í1
+Fjavascript:S125["Remove this commented out code.(ì³½‰ıÿÿÿÿ8€ˆ¯í1
+Bjavascript:S6479œ"Do not use Array index in keys(ã‘ğö8€ˆ¯í1
+Bjavascript:S6479¢"Do not use Array index in keys(•˜±Â8€ˆ¯í1
+Bjavascript:S6479¬"Do not use Array index in keys(ã‘ğö8€ˆ¯í1
+Bjavascript:S6479Æ"Do not use Array index in keys(ã’Éô8€ˆ¯í1

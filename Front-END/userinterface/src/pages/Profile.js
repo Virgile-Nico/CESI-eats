@@ -48,7 +48,7 @@ export default function Profile() {
         setDisplayCountPayment(2);
     };
 
-    /*useEffect(() => {
+    useEffect(() => {
         setAddresses([
             { street: '1 rue de la paix', zipCode: '75000', city: 'Paris' },
             { street: '2 rue de la paix', zipCode: '75000', city: 'Paris' },
@@ -63,11 +63,13 @@ export default function Profile() {
             { cardNumber: '1234 567 9101 1121', username: 'Nathalie Parisse', cvc: '123', date: '12/23' },
             { cardNumber: '1234 567 9101 1121', username: 'Nathalie Parisse', cvc: '123', date: '12/23' },
         ])
-    }, []);*/
+    }, []);
 
-    const userId = isAuthenticated ? getUser().id : null;
+    const userId = isAuthenticated ? getUser().ID : null;
 
-    useEffect(() => {
+    console.log(userId);
+
+    /*useEffect(() => {
         if (userId) {
             axios.get(`http://213.32.6.121:3025/read?type=address&ID=${userId}`)
                 .then(response => {
@@ -89,7 +91,7 @@ export default function Profile() {
                     console.error('There was an error!', error);
                 });
         }
-    }, [userId]);
+    }, [userId]);*/
 
     return (
         <main className="flex flex-col items-center justify-between h-screen">

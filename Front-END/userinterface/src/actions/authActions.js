@@ -6,16 +6,24 @@ export const login = (email, password) => {
 	return async dispatch => {
 		try {
 			const requestBody = {
-				email: email,
-				password: password
+				MAIL: email,
+				PASSWORD: password
 			};
 
-			const response = await axios.post('http://213.32.6.121:3020/login?type=user', requestBody);
+			console.log(JSON.stringify(requestBody));
 
-			const { accessToken, refreshToken, userID } = response.data;
+			const response = await axios.post('http://213.32.6.121:3020/login?type=user', JSON.stringify(requestBody), {
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			console.log(response.data);
+			const { accessToken, refreshToken, userID } = response;
+			//const user = { mail: userID.mail, ID: userID.ID };
 
 			dispatch(loginSuccess(accessToken, refreshToken));
-			dispatch(setUser(userID));
+			//dispatch(setUser(user));
 		} catch (error) {
 			console.error('Login error:', error);
 		}

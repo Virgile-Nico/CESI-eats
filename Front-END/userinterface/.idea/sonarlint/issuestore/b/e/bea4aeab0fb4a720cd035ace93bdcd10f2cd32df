@@ -1,6 +1,10 @@
 
-ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8şûİöì1J$31fff692-8a0e-4180-be96-b0b2ca4c95c0
-€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8ÿûİöì1J$1b409ca1-ecfe-4981-bac8-711bd9ddf7d0
-ljavascript:S64794"Do not use Array index in keys(Ê¹¹óşÿÿÿÿ8€üİöì1J$90331c1b-ec41-44d5-9c02-92d6c80dca5f
-ƒjavascript:S6747D":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8üİöì1J$765c6d9b-f9cb-4fe9-bd53-7966f695d9a1
-ƒjavascript:S6747P":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8üİöì1J$e1841046-69cc-4c75-a82b-02878601a6fb
+sjavascript:S1128"%Remove this unused import of 'axios'.(ÒÁæÅúÿÿÿÿ8õ³³í1J$496ec467-d8fe-4259-83f8-4c18a25331cc
+†javascript:S1481"=Remove the declaration of the unused 'restaurantId' variable.(ŞÂêæ8õ³³í1J$d5747942-caa4-490a-9a0c-24aa5fe2bfc7
+ƒjavascript:S1854":Remove this useless assignment to variable "restaurantId".(ŞÂêæ8ö³³í1J$ea07556e-8f13-4975-ab5b-14ca95bf5279
+ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8ö³³í1J$81666780-c498-409a-af63-42760ec75752
+€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8ö³³í1J$714afc12-3b03-4aa3-8a08-04598cb347f4
+ljavascript:S1251"Remove this commented out code.(ì³½‰ıÿÿÿÿ8ö³³í1J$5f7f28f9-d3b9-4981-8d13-ec069aed264f
+ljavascript:S6479G"Do not use Array index in keys(Ê¹¹óşÿÿÿÿ8€±ºí1J$57a52e54-0c8d-4517-a3b0-ad90c3849166
+ƒjavascript:S6747W":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8Ğí1J$4aa345b4-edbe-4e45-95db-3fca212ba4f2
+ƒjavascript:S6747c":Unknown property 'fill-rule' found, use 'fillRule' instead(•Å»Ì8Ğí1J$3f050d42-90ea-40b0-8b5b-98b4cb8d32f0

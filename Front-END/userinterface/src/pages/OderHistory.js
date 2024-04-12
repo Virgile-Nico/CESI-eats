@@ -6,6 +6,7 @@ import HeaderDesktop from "../components/HeaderDesktop";
 import Footer from "../components/Footer";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import {getUser} from "../actions/userAction";
 
 function back(){
     window.history.back();
@@ -23,14 +24,24 @@ export default function OrderHistory() {
     const isMobile = window.innerWidth <= 600;
     const [orders, setOrders] = useState([{id: '', date: '', total: 0, qtyItems: 0, status: ''}]);
 
-    useEffect(() => {
-        axios.get('api-call')
+    const userId = isAuthenticated ? getUser().ID : null;
+
+    /*useEffect(() => {
+        axios.get(`http://213.32.6.121:3025/read?type=history&ID=${userId}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 setOrders(response.data.name)
             })
             .catch(error => {
                 console.error('There was an error!', error);
             });
+    }, []);*/
+
+    useEffect(() => {
+        setOrders([{id: '1', date: '01/01/2021', total: 50, qtyItems: 3, status: 'En cours'}, {id: '2', date: '01/02/2021', total: 30, qtyItems: 2, status: 'En cours'}, {id: '3', date: '01/03/2021', total: 20, qtyItems: 1, status: 'En cours'}]);
     }, []);
 
     return (

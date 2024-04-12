@@ -3,6 +3,7 @@ import {useState} from "react";
 import Icon from "@mdi/react";
 import {mdiEye, mdiEyeOff} from "@mdi/js";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp() {
     const [showPassword, setShowPassword] = useState({
@@ -13,7 +14,7 @@ export default function SignUp() {
     const [isValid, setIsValid] = useState(true);
     const [isSame, setIsSame] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
-    const [form, setForm] = useState({firstname: '', lastname: '', email: '', password: '', phone: '', sponsorCode: ''});
+    const [form, setForm] = useState({FIRSTNAME: '', LASTNAME : '', MAIL: '', PASSWORD: '', PHONE: '', sponsorCode: ''});
     const isMobile = window.innerWidth <= 600;
 
     const handleChange = (event) => {
@@ -35,7 +36,7 @@ export default function SignUp() {
         const { value } = event.target;
         setPassword(value);
 
-        setIsSame(value === form.password);
+        setIsSame(value === form.PASSWORD);
     };
 
     const handlePasswordToggle = (field, event) => {
@@ -52,6 +53,21 @@ export default function SignUp() {
         navigate('/login');
     }
 
+    const submitSignUp = async () => {
+        try {
+            const response = await axios.post('http://213.32.6.121:3020/register?type=user', JSON.stringify(form), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('Nouvel utilisateur enregistré:', response.data);
+            // Rediriger ou afficher un message de succès après l'inscription réussie
+        } catch (error) {
+            console.error('Erreur d\'inscription:', error);
+            // Gérer l'erreur d'inscription, afficher un message d'erreur, etc.
+        }
+    }
+
     return(
         <main className="h-screen w-full flex flex-col items-center my-2">
             {isMobile && (<img alt="logo" src={Logo} className="h-40 w-50"/>)}
@@ -59,28 +75,28 @@ export default function SignUp() {
             <form className={isMobile ? 'flex flex-col md:w-1/3 mx-4' : 'flex flex-col md:w-1/3 mx-4 space-y-4'}>
                 <h2 className="text-2xl md:text-4xl font-bold text-center m-6 text-gray-900">Inscription</h2>
                 <div className="m-4">
-                    <label htmlFor="UserFirstname"
+                    <label htmlFor="UserFIRSTNAME"
                            className="sr-only"> Prénom </label>
 
                     <input
                         type="text"
-                        id="UserFirstname"
-                        name={"firstname"}
-                        value={form.firstname}
+                        id="UserFIRSTNAME"
+                        name={"FIRSTNAME"}
+                        value={form.FIRSTNAME}
                         placeholder="Entrer votre prénom"
                         onChange={handleChange}
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
                     />
                 </div>
                 <div className="m-4">
-                    <label htmlFor="UserLastname"
+                    <label htmlFor="UserLASTNAME"
                            className="sr-only"> Nom </label>
 
                     <input
                         type="text"
-                        id="UserLastname"
-                        name={"lastname"}
-                        value={form.lastname}
+                        id="UserLASTNAME"
+                        name={"LASTNAME"}
+                        value={form.LASTNAME}
                         placeholder="Entrer votre nom"
                         onChange={handleChange}
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
@@ -91,10 +107,10 @@ export default function SignUp() {
                            className="sr-only"> Email </label>
 
                     <input
-                        type="email"
-                        id="UserEmail"
-                        name={"email"}
-                        value={form.email}
+                        type="MAIL"
+                        id="UserMAIL"
+                        name={"MAIL"}
+                        value={form.MAIL}
                         onChange={handleChange}
                         placeholder="Entrer votre adresse email"
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
@@ -107,8 +123,8 @@ export default function SignUp() {
                         type={showPassword.password ? 'text' : 'password'}
                         placeholder="Entrer votre mot de passe"
                         className="border-none px-2 bg-transparent w-full sm:text-sm text-gray-900 focus:outline-none"
-                        value={form.password}
-                        name={"password"}
+                        value={form.PASSWORD}
+                        name={"PASSWORD"}
                         onChange={handleChange}
                     />
                     <button className="bg-transparent"
@@ -156,8 +172,8 @@ export default function SignUp() {
                     <input
                         type="phone"
                         id="UserPhone"
-                        name={"phone"}
-                        value={form.phone}
+                        name={"PHONE"}
+                        value={form.PHONE}
                         onChange={handleChange}
                         placeholder="Entrer votre numéro de téléphone"
                         className="w-full h-10 rounded-md border-gray-200 bg-gray-300 px-4 shadow-sm sm:text-sm focus:outline-none"
@@ -184,7 +200,7 @@ export default function SignUp() {
                             className="w-1/2 h-10 bg-gray-300 shadow-md rounded-3xl py-2 px-8 hover:bg-gray-500">
                         <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Annuler</p>
                     </button>
-                    <button type="submit" onClick={(e) => e.preventDefault()}
+                    <button type="submit" onClick={submitSignUp}
                             className="w-1/2 h-10 bg-primary-500 shadow-md rounded-3xl py-2 px-8 hover:bg-primary-300">
                         <p className="m-auto inset-0 text-xl font-semibold text-center text-gray-800">Confirmer</p>
                     </button>

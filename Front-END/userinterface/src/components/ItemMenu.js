@@ -6,7 +6,7 @@ export default function ItemMenu({itemName, itemDescription, itemImg, itemPrice,
 
 	return(
 		<div className={isMobile ? "flex flex-row w-5/6 items-center justify-between bg-transparent border-2 border-gray-200 rounded-xl p-1.5" : "flex flex-row w-1/3 items-center justify-between bg-transparent border-2 border-gray-200 rounded-xl p-1.5"}>
-			<div className="flex flex-col space-y-4">
+			<div className="flex flex-col space-y-4 mx-2">
 				<h3 className="text-2xl font-bold text-start text-gray-700">{itemName}</h3>
 				<p className="text-justify text-sm text-gray-500">{itemDescription}</p>
 				<div className="flex flex-row space-x-4 items-center">

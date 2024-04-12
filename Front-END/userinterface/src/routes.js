@@ -36,13 +36,19 @@ export const routes = [
 		name: "Home",
 		path: "/home",
 		element: <Home />,
-		routes: [
+		/*routes: [
 			{
 				name: "RestaurantMenu",
 				path: "/restaurant/:restaurantId/menu",
 				element: <RestaurantMenu />,
 			},
-		]
+		]*/
+	},
+	{
+		name: "RestaurantMenu",
+		/*path: "/restaurant/:restaurantId/menu",*/
+		path: "/restaurant-menu",
+		element: <RestaurantMenu />,
 	},
 	{
 		name: "Profile",

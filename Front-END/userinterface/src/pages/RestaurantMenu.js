@@ -30,10 +30,29 @@ export default function RestaurantMenu() {
 		setTimeout(() => { setIsVisible(false) }, 1500);
 	};
 
-
 	useEffect(() => {
+		setMenuItems([
+			{name: 'Pizza Margherita', description: 'Tomate, mozzarella, basilic', price: '8.50', image: 'https://img.cuisineaz.com/660x660/2013/12/20/i18445-margherite.jpeg'},
+			{name: 'Pizza Reine', description: 'Tomate, mozzarella, jambon, champignons, olives', price: '9.50', image: 'https://colmar.coeur-paysan.com/wp-content/uploads/2022/05/CP-Colmar-Pizza-reine.png'},
+			{name: 'Pizza 4 fromages', description: 'Tomate, mozzarella, gorgonzola, emmental, chèvre', price: '10.50', image: 'https://assets.afcdn.com/recipe/20200506/110673_w1024h768c1cx3120cy2080cxt0cyt0cxb6240cyb4160.webp'},
+			{name: 'Pizza Végétarienne', description: 'Tomate, mozzarella, poivrons, oignons, champignons, olives', price: '11.50', image: 'https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/E3262F2D-E223-4172-BA55-46A609BD8240/Derivates/15442077-24d9-4fbc-b0ff-abb9244e28e4.jpg'},
+			{name: 'Pizza Calzone', description: 'Tomate, mozzarella, jambon, champignons, olives, oeuf', price: '12.50', image: 'https://img.passeportsante.net/1200x675/2022-10-07/shutterstock-413678740.webp'},
+			{name: 'Pizza 4 saisons', description: 'Tomate, mozzarella, jambon, champignons, artichauts, olives', price: '13.50', image: 'https://lh3.googleusercontent.com/proxy/AKN40nia7vafwVJqzLhzWnwALQ0IC9SLnvyJyrj3iAKIsjlKD0PtyTMX6_RdSQhwPJL6L0nvraeCSake-TGLo4aUi3EZNanpC2VI3S8durKRCTIdhWI'},
+			{name: 'Pizza Hawaïenne', description: 'Tomate, mozzarella, jambon, ananas, olives', price: '14.50', image: 'https://assets.afcdn.com/recipe/20170328/63885_w1024h576c1cx1500cy1000.webp'},
+			{name: 'Pizza Orientale', description: 'Tomate, mozzarella, merguez, poivrons, oignons, olives', price: '15.50', image: 'https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2018.2F09.2F25.2F5ad52111-03c7-44c1-89d4-34d5cc3bcf6a.2Ejpeg/750x562/quality/80/crop-from/center/cr/wqkgUm91bGllci1UdXJpb3QvIFN1Y3LDqSBTYWzDqSAvIEN1aXNpbmUgQWN0dWVsbGU%3D/pizza-orientale.jpeg'},
+			{name: 'Pizza Royale', description: 'Tomate, mozzarella, foie gras, magret de canard, champignons, olives', price: '16.50', image: 'https://img.cuisineaz.com/660x660/2016/06/30/i87982-pizza-royale.jpg'},
+			{name:'Pizza Pepperoni', description:'Tomate, mozzarella, pepperoni, olives', price:'17.50', image:'https://dxpulwm6xta2f.cloudfront.net/eyJidWNrZXQiOiJhZGMtZGV2LWltYWdlcy1yZWNpcGVzIiwia2V5IjoicGl6emFfcGVwcGVyb25pLmpwZyIsImVkaXRzIjp7ImpwZWciOnsicXVhbGl0eSI6ODB9LCJwbmciOnsicXVhbGl0eSI6ODB9LCJ3ZWJwIjp7InF1YWxpdHkiOjgwfX19'},
+		])
+	}, []);
+
+
+	/*useEffect(() => {
 		// Make a request to your API to fetch the restaurant menu items
-		axios.get(`http://213.32.6.121:3023/login?type=user&?ID=${restaurantId}`)
+		axios.get(`http://213.32.6.121:3023/login?type=user&?ID=${restaurantId}`, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
 			.then(response => {
 				setMenuItems(response.data);
 			})
@@ -41,12 +60,12 @@ export default function RestaurantMenu() {
 				console.error('Error fetching menu items:', error);
 			});
 	}, [restaurantId]); // Execute the effect whenever the restaurant name changes
-
+*/
 	return (
-		<div className="container flex flex-col mx-auto py-8">
+		<main className="h-screen w-full flex flex-col space-y-4 items-center">
 			{isMobile ? <HeaderMobile /> : <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal} />}
-			<h1 className="text-3xl font-bold mb-4">Restaurant Menu</h1>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			<h1 className="text-3xl text-center font-bold mb-4">Menu</h1>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 m-4 w-full items-center place-items-center">
 				{menuItems.map((item, index) => (
 					<ItemMenu
 						key={index}
@@ -84,6 +103,6 @@ export default function RestaurantMenu() {
 				</div >
 			</div >)}
 			<Footer/>
-		</div >
+		</main >
 	);
 }

@@ -49,3 +49,5 @@ J
 src/components/Category.js,4\e\4ee836e8d91e91a7e28d41c3f3a7ed2083b45056
 M
 src/pages/SuccessConnexion.js,4\6\46f2316b60c8b883215739dc88cb01fda8962da7
+C
+src/pages/SignUp.js,7\5\75226b9a46b972c0be91625b8b2ea7b1292028e9
