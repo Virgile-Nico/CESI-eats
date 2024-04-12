@@ -1,0 +1,152 @@
+[
+  {
+      "_id": "66163946f9409d361cd7e0d9",
+      "Date_Creation": "2024-04-10T07:01:26.000Z",
+      "ID": "Wqauq",
+      "nom_client": "Dupont Jean",
+      "Total_price": 990.5,
+      "Status": "in preparation",
+      "Number_products": 109,
+      "Articles": [
+          {
+              "_id": "661634a9407cf1771eb0eb7e",
+              "Nom": "Le stage IR",
+              "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage qui vous permet de vous retrouver dans la merde seulement deux mois avant le début du stage",
+              "Prix": 9999.01,
+              "Qte": 10
+          },
+          {
+              "_id": "661634d4407cf1771eb0eb82",
+              "Nom": "Le CESI",
+              "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL",
+              "Prix": 9999.02,
+              "Qte": 3
+          }
+      ],
+      "Menus": [
+          {
+              "_id": "661635bb407cf1771eb0eb8a",
+              "Nom": "La base",
+              "Description": "Si tu l'as pas découvert en A1, alors c'est en A3, et on dit TOUS 'Bienvenue à CESI'",
+              "Prix": 90000,
+              "Articles": [
+                  {
+                      "_id": "661634f2407cf1771eb0eb84",
+                      "Nom": "Les CCTL",
+                      "Description": "AAAAHHHHHH Tu vas aller aux rttrapages, et tu vas etre encore plus dans la merde parce que ils seront plus durs"
+                  },
+                  {
+                      "_id": "66163502407cf1771eb0eb86",
+                      "Nom": "Les rattrapages",
+                      "Description": "Tu vas etre encore plus dans la merde parce que ils seront plus durs"
+                  },
+                  {
+                      "_id": "661634d4407cf1771eb0eb82",
+                      "Nom": "Le CESI",
+                      "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL"
+                  }
+              ],
+              "Qte": 3
+          },
+          {
+              "_id": "66163561407cf1771eb0eb88",
+              "Nom": "La quatrième année",
+              "Description": "Tu vas etre dans la merde et l'aide que tu recevra ne sera pas toujours à la hauteur de tes attentes",
+              "Prix": 90000,
+              "Articles": [
+                  {
+                      "_id": "661634d4407cf1771eb0eb82",
+                      "Nom": "Le CESI",
+                      "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL"
+                  },
+                  {
+                      "_id": "661634a9407cf1771eb0eb7e",
+                      "Nom": "Le stage IR",
+                      "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage qui vous permet de vous retrouver dans la merde seulement deux mois avant le début du stage"
+                  },
+                  {
+                      "_id": "661634bb407cf1771eb0eb80",
+                      "Nom": "Le stage MI",
+                      "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage"
+                  }
+              ],
+              "Qte": 3
+          }
+      ]
+  },
+  {
+      "_id": "66167f55dd76893ff39827a8",
+      "Date_Creation": "2024-04-10T12:00:21.000Z",
+      "ID": "Mdous",
+      "nom_client": "Dupont Jean",
+      "Total_price": 990.5,
+      "Status": "Done",
+      "Number_products": 109,
+      "Articles": [
+          {
+              "_id": "661634a9407cf1771eb0eb7e",
+              "Nom": "Le stage IR",
+              "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage qui vous permet de vous retrouver dans la merde seulement deux mois avant le début du stage",
+              "Prix": 9999.01,
+              "Qte": 10
+          },
+          {
+              "_id": "661634d4407cf1771eb0eb82",
+              "Nom": "Le CESI",
+              "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL",
+              "Prix": 9999.02,
+              "Qte": 3
+          }
+      ],
+      "Menus": [
+          {
+              "_id": "661635bb407cf1771eb0eb8a",
+              "Nom": "La base",
+              "Description": "Si tu l'as pas découvert en A1, alors c'est en A3, et on dit TOUS 'Bienvenue à CESI'",
+              "Prix": 90000,
+              "Articles": [
+                  {
+                      "_id": "661634d4407cf1771eb0eb82",
+                      "Nom": "Le CESI",
+                      "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL"
+                  },
+                  {
+                      "_id": "661634f2407cf1771eb0eb84",
+                      "Nom": "Les CCTL",
+                      "Description": "AAAAHHHHHH Tu vas aller aux rttrapages, et tu vas etre encore plus dans la merde parce que ils seront plus durs"
+                  },
+                  {
+                      "_id": "66163502407cf1771eb0eb86",
+                      "Nom": "Les rattrapages",
+                      "Description": "Tu vas etre encore plus dans la merde parce que ils seront plus durs"
+                  }
+              ],
+              "Qte": 3
+          },
+          {
+              "_id": "66163561407cf1771eb0eb88",
+              "Nom": "La quatrième année",
+              "Description": "Tu vas etre dans la merde et l'aide que tu recevra ne sera pas toujours à la hauteur de tes attentes",
+              "Prix": 90000,
+              "Articles": [
+                  {
+                      "_id": "661634d4407cf1771eb0eb82",
+                      "Nom": "Le CESI",
+                      "Description": "AAAAHHHHHH Ton entreprise elle PAYE pour que tu joues à LOL"
+                  },
+                  {
+                      "_id": "661634bb407cf1771eb0eb80",
+                      "Nom": "Le stage MI",
+                      "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage"
+                  },
+                  {
+                      "_id": "661634a9407cf1771eb0eb7e",
+                      "Nom": "Le stage IR",
+                      "Description": "Il parait qu'i coute cher, mais que c'est un superbe stage qui vous permet de vous retrouver dans la merde seulement deux mois avant le début du stage"
+                  }
+              ],
+              "Qte": 3
+          }
+      ]
+  }
+]

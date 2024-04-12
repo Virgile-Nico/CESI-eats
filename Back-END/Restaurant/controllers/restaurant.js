@@ -54,17 +54,30 @@ module.exports = {
         });
         return list_to_return
     },
-    Article_menu_read: async function (Identifier) {
-        let article = await Article.Article.findById(Identifier)
-        let obj = {
-            _id: article._id,
-            Nom: article.Nom,
-            Description: article.Description
-        }
-        return obj
-    },
+    
     Menu_read: async function (Identifier) {
         let response = await Menu.Menu.find({ ID: Identifier })
+        const list_to_return = []
+        await Promise.all(response.map(async (element) => {
+            let articles_list = []
+            
+            await Promise.all(element.Articles.map(async (article) => {
+                articles_list.push(await this.Article_menu_read(article))
+            }));
+
+            let obj = {
+                _id: element.id,
+                Nom: element.Nom,
+                Description: element.Description,
+                Prix: element.Prix,
+                Articles: articles_list
+            }
+            list_to_return.push(obj)
+        }))
+        return list_to_return
+    },
+    single_Menu_read: async function (Identifier) {
+        let response = await Menu.Menu.find({ _id: Identifier })
         const list_to_return = []
         await Promise.all(response.map(async (element) => {
             let articles_list = []
@@ -169,7 +182,8 @@ module.exports = {
         let obj = {
             _id: article._id,
             Nom: article.Nom,
-            Description: article.Description
+            Description: article.Description,
+            Prix: article.Prix
         }
         return obj
     },
