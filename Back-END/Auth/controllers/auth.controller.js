@@ -8,6 +8,19 @@ const Tiers = require('../models/Tiers');
 const pool = require('../controllers/dbMaria');
 const categories = require('../models/categories');
 
+const generateCodeParrain = function () {
+    const length = 8;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    
+    let code = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+    }
+    
+    return code;
+};
+
 module.exports = {
     registerUser: async (body) => {
         try {
@@ -18,7 +31,7 @@ module.exports = {
                 return res.status(400).json({ "error": "email already exists." });
             }
             const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
-            await pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TEL, body.CODE_PARRAIN, body.CODE_PARAINAGE]);
+            await pool.query('INSERT INTO CLIENTS (MAIL, PASSWORD, NOM, PRENOM, TEL, CODE_PARRAIN, CODE_PARAINAGE) VALUES (?, ?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.FIRSTNAME, body.LASTNAME, body.PHONE, body.sponsorCode, generateCodeParrain()]);
         } catch (error) {
             console.error("register error: ", error);
         }
@@ -94,9 +107,9 @@ module.exports = {
     },
 
     //below are the functions for the other types of models
-  //they are similar to the user functions
-  //the only difference is the model used
-  //and the fields used in the model
+    //they are similar to the user functions
+    //the only difference is the model used
+    //and the fields used in the model
   
     registerDelivery: async (body) => {
     try {
@@ -108,7 +121,7 @@ module.exports = {
         }
         const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
         const hashedRIB = bcrypt.hashSync(body.RIB, 10);
-        await pool.query('INSERT INTO LIVREURS (MAIL, PASSWORD, NOM, PRENOM, RIB, VEHICULE_TYPE) VALUES (?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TEL, hashedRIB, body.VEHICULE_TYPE]);
+        await pool.query('INSERT INTO LIVREURS (MAIL, PASSWORD, NOM, PRENOM, RIB, VEHICULE_TYPE) VALUES (?, ?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.FIRSTNAME, body.LASTNAME, body.PHONE, hashedRIB, body.VEHICULE_TYPE]);
     } catch (error) {
         console.error("register error: ", error);
     }
@@ -189,7 +202,7 @@ module.exports = {
             return res.status(400).json({ "error": "email already exists." });
         }
         const hashedPassword = bcrypt.hashSync(body.PASSWORD, 10);
-        await pool.query('INSERT INTO INTERN (MAIL, PASSWORD, NOM, PRENOM, TYPE) VALUES (?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.NOM, body.PRENOM, body.TYPE]);
+        await pool.query('INSERT INTO INTERN (MAIL, PASSWORD, NOM, PRENOM, TYPE) VALUES (?, ?, ?, ?, ?)', [body.MAIL, hashedPassword, body.FIRSTNAME, body.LASTNAME, body.TYPE]);
     } catch (error) {
         console.error("register error: ", error);
     }
