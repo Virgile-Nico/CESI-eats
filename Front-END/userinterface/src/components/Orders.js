@@ -30,7 +30,7 @@ const Order = ({ order }) => {
 
   return (
     <div className={`order-card my-4 p-4 rounded shadow-lg ${statusColor}`}>
-      <h3 className="text-lg font-bold">Commande n°{order._id}</h3>
+      <h3 className="text-lg font-bold">Commande n°{order.ID}</h3>
       <p>Client : {order.nom_client}</p>
       <p>Nombre de produits : {order.Number_products}</p>
       <p>Total : {order.Total_price.toFixed(2)}€</p>

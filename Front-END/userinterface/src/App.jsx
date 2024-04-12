@@ -28,6 +28,7 @@ export default function App() {
               <Route element={<Article/>} path="/article" exact/>
               <Route element={<AddMenuItemForm/>} path="/menu/add" exact/>
               <Route element={<AddArticleForm/>} path="/article/add" exact/>
+              <Route element={<AddMenuItemForm/>} path="/menu/update/:id" exact/>
               <Route element={<AddArticleForm/>} path="/article/update/:id" exact/>
           </Route>
           <Route element={<SignUp/>} path="/sign-up"/>

@@ -9,7 +9,7 @@ function AddArticleForm({ onSubmit }) {
 
     const [nom, setNom] = useState('');
     const [description, setDescription] = useState('');
-    const [prix, setPrix] = useState('');
+    const [prix, setPrix] = useState(0);
 
     
     const saveArticle = () => {
@@ -18,7 +18,27 @@ function AddArticleForm({ onSubmit }) {
             Description: description,
             Prix: prix
         }).then(response => {
-            navigate("/menu");
+            navigate("/article");
+        })
+        .catch(error => {
+                console.error("Erreur lors de la création de l'article : ", error);
+            });
+    }
+    const updateArticle = (Identifier) => {
+        axios.post(`http://213.32.6.121:3023/update?type=Article&ID=${Identifier}`, {
+            Nom: nom,
+            Description: description,
+            Prix: prix
+        }).then(response => {
+            navigate("/article");
+        })
+        .catch(error => {
+                console.error("Erreur lors de la création de l'article : ", error);
+            });
+    }
+    const deleteArticle = (Identifier) => {
+        axios.post(`http://213.32.6.121:3023/delete?type=Article&ID=${Identifier}`).then(response => {
+            navigate("/article");
         })
         .catch(error => {
                 console.error("Erreur lors de la création de l'article : ", error);
@@ -27,10 +47,11 @@ function AddArticleForm({ onSubmit }) {
     
     useEffect(() => {
         if(id) {
-            axios.get('http://213.32.6.121:3023/read?type=Article&ID='+id)
+            axios.get('http://213.32.6.121:3023/read?type=single_Article&ID='+id)
             .then(response => {
                 setNom(response.data.Nom);
                 setDescription(response.data.Description);
+                console.log(response.data)
                 setPrix(response.data.Prix);
             })
             .catch(error => {
@@ -74,7 +95,12 @@ function AddArticleForm({ onSubmit }) {
                     <button
                         className="bg-primary-500 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded mt-4"
                         onClick={() =>{
-                            saveArticle();
+                            if(id){
+                                updateArticle(id) 
+                            }
+                            else{
+                                saveArticle()
+                            }
                         }}
                     >
                         { id ? <span>Sauvegarder les modifications</span> : <span>Ajouter le nouvel article</span> }
@@ -82,11 +108,21 @@ function AddArticleForm({ onSubmit }) {
                     <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
                         onClick={() =>{
-                            navigate('/menu');
+                            navigate('/article');
                         }}
                     >
                         Annuler
                     </button>
+                    {id ?
+                    <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                        onClick={() =>{
+                            deleteArticle(id) 
+                        }}
+                    >
+                        <span>Supprimer l'article</span>
+                    </button>
+                    : <div></div>}
                 </div>
             </div>
         </>

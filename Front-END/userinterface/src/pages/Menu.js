@@ -28,7 +28,7 @@ const Menu = () => {
             </button>
                 <h1 style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Menu du Restaurant</h1>
                 {items ? items.map((menu) => (
-                    <div key={menu._id} className="menu-item" style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}>
+                    <div onClick={() => navigate('/menu/update/'+menu._id)} key={menu._id} className="menu-item" style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}>
                         <h2 style={{ fontSize: '20px', fontWeight: 'bold' }}>{menu.Nom}</h2>
                         <p style={{ marginBottom: '10px' }}>{menu.Description}</p>
                         <p style={{ fontWeight: 'bold' }}>Prix : {menu.Prix.toFixed(2)}€</p>

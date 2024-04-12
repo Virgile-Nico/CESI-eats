@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HeaderDesktop from '../components/HeaderDesktop';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Article from './Article';
 
 function AddMenuItemForm({ onAddItem }) {
+    const { id } = useParams();
     const navigate = useNavigate();
     const [items, setItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState('');
@@ -21,6 +23,16 @@ function AddMenuItemForm({ onAddItem }) {
             .catch(error => {
                 console.error('Erreur lors de la récupération des articles:', error);
             });
+        if(id){
+            axios.get('http://213.32.6.121:3023/read?type=single_Menu&ID='+id)
+            .then(response => {
+                console.log(response.data[0])
+                setNom(response.data[0].Nom);
+                setDescription(response.data[0].Description);
+                setPrix(response.data[0].Prix);
+                setSelectedItems(response.data[0].Articles);
+            })
+        }
     }, []);
 
     const addItem = () => {
@@ -54,7 +66,27 @@ function AddMenuItemForm({ onAddItem }) {
         // Mettre à jour la liste des articles sélectionnés
         setSelectedItems(updatedSelectedItems);
     }
-    
+    const updateMenu = (Identifier) => {
+        axios.post(`http://213.32.6.121:3023/update?type=Menu&ID=${Identifier}`, {
+            Nom: nom,
+            Description: description,
+            Prix: prix,
+            Article: selectedItems
+        }).then(response => {
+            navigate("/menu");
+        })
+        .catch(error => {
+                console.error("Erreur lors de la création de l'article : ", error);
+            });
+    }
+    const deleteMenu = (Identifier) => {
+        axios.post(`http://213.32.6.121:3023/delete?type=Menu&ID=${Identifier}`).then(response => {
+            navigate("/menu");
+        })
+        .catch(error => {
+                console.error("Erreur lors de la création de l'article : ", error);
+            });
+    }
 
     return (
         <div>
@@ -124,10 +156,15 @@ function AddMenuItemForm({ onAddItem }) {
                     <button
                         className="bg-primary-500 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded mt-4"
                         onClick={() =>{
-                            saveMenu();
+                            if(id){
+                                updateMenu(id) 
+                            }
+                            else{
+                                saveMenu();
+                            }
                         }}
                     >
-                        Ajouter le nouveau menu
+                        { id ? <span>Sauvegarder les modifications</span> : <span>Ajouter le nouveau menu</span> }
                     </button>
                     <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
@@ -137,6 +174,16 @@ function AddMenuItemForm({ onAddItem }) {
                     >
                         Annuler
                     </button>
+                    {id ?
+                    <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                        onClick={() =>{
+                            deleteMenu(id) 
+                        }}
+                    >
+                        <span>Supprimer le menu</span>
+                    </button>
+                    : <div></div>}
                 </div>
             </div>
         </div>
