@@ -59,7 +59,8 @@ module.exports = {
         let obj = {
             _id: article._id,
             Nom: article.Nom,
-            Description: article.Description
+            Description: article.Description,
+            Prix: article.Prix
         }
         return obj
     },
