@@ -1,9 +1,9 @@
 
-sjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8Íºí‰í1J$c5d7d4a8-40cb-494e-95fa-656b5d84a7be
-ljavascript:S125H"Remove this commented out code.(˜¤Ÿÿÿÿÿÿ8Íºí‰í1J$f32b2af9-c135-4c45-afa4-88831f9afa52
-ljavascript:S125["Remove this commented out code.(ì³½‰ıÿÿÿÿ8Íºí‰í1J$94366470-4fdc-4bfb-82b6-bc2b6c112380
-“javascript:S1481·"IRemove the declaration of the unused 'navigateToRestaurantMenu' variable.(«Ê¬8Íºí‰í1J$74bedc31-eaa9-41fb-b7a8-5fd534c7f6b6
-javascript:S1854·"FRemove this useless assignment to variable "navigateToRestaurantMenu".(«Ê¬8Óºí‰í1J$c5eeb1ae-1934-47eb-8dce-224ecdead809
-hjavascript:S6479È"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$f32a0902-ab04-4a0e-985d-abf677df63ba
-hjavascript:S6479Í"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$5d0b67a2-8c8b-4d13-8bcb-64b29f48ab50
-mjavascript:S6479å"Do not use Array index in keys(üÛìşÿÿÿÿ8Ôºí‰í1J$5b9edd95-5f8e-46c4-ab29-cf867cd00568
+sjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8Íºí‰í1J$d719cac0-b440-40bc-87dd-155545f7c19a
+ljavascript:S125H"Remove this commented out code.(˜¤Ÿÿÿÿÿÿ8Íºí‰í1J$112019c1-bd5d-424d-a81d-50c05083e45e
+ljavascript:S125["Remove this commented out code.(ì³½‰ıÿÿÿÿ8Íºí‰í1J$a76b4df1-2c77-473f-acb1-df5dfbaad832
+“javascript:S1481·"IRemove the declaration of the unused 'navigateToRestaurantMenu' variable.(«Ê¬8Íºí‰í1J$f06b28f3-0cfb-4755-8a42-e4b43f5dc28d
+javascript:S1854·"FRemove this useless assignment to variable "navigateToRestaurantMenu".(«Ê¬8Óºí‰í1J$5ccedee3-f5a4-4266-b128-484745c47c51
+hjavascript:S6479È"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$3540358c-6961-4029-914f-f3213bda9a35
+hjavascript:S6479Í"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$2abcb145-2ef4-4211-b84a-d997a0875d59
+mjavascript:S6479å"Do not use Array index in keys(üÛìşÿÿÿÿ8Ôºí‰í1J$ccdb227b-59f5-4205-ae86-73c10d2b2c0a

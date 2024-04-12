@@ -186,15 +186,15 @@ export default function Home() {
     };
 
     return (
-        <main className="h-screen w-full flex flex-col items-center">
-            <div className="h-screen w-full flex flex-col items-center">
+        <main className="h-full w-full flex flex-col items-center">
+            <div className="w-full flex flex-col items-center">
                 {!isMobile ? (
                     <HeaderDesktop isAuthenticated={isAuthenticatedLocal} articlesCount={isArticlesCountLocal}/>
                 ) : (
                     <HeaderMobile/>
                 )}
                 <div
-                    className={!isMobile ? "w-full flex flex-row flex-wrap h-2/5 space-x-2" : "w-full grid grid-cols-4 gap-1 h-1/5"}>
+                    className={!isMobile ? "w-full flex flex-row flex-wrap h-2/5 space-x-2" : "w-full grid grid-cols-4 gap-1"}>
                     {!isMobile ? (
                         categories.map((category, index) => (
                             <Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={() => console.log(category.name)}/>
@@ -224,7 +224,7 @@ export default function Home() {
                     )}
                 </div>
                 <div
-                    className={!isMobile ? "grid grid-cols-5 gap-3 justify-center items-center h-4/5" : "grid grid-cols-1 gap-3 justify-center items-center h-4/5"}>
+                    className={!isMobile ? "grid grid-cols-5 gap-3 justify-center items-center" : "grid grid-cols-1 gap-1.5 justify-center items-center"}>
                     {restos.map((resto, index) => (
                         <RestoCard key={index} onClick={() => navigate("/restaurant-menu")} restoName={resto.name} restoImg={resto.img}/>
                         /*<RestoCard key={index} onClick={() => navigateToRestaurantMenu(resto.id)} restoName={resto.name} restoImg={resto.img}/>*/
