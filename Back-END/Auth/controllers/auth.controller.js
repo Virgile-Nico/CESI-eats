@@ -50,10 +50,10 @@ module.exports = {
             if (user) {
                 if (bcrypt.compareSync(body.PASSWORD, user.PASSWORD)) {
                     const accessToken = jwt.sign(
-                        JSON.stringify({ ID: user.ID, MAIL: user.MAIL }),
+                        { ID: user.ID, MAIL: user.MAIL },
                         process.env.ACCESS_JWT_KEY, 
-                        { expiresIn: '1h' },
-                    );
+                        { expiresIn: '1h' } 
+                    );                    
                     return {
                         status: 200,
                         message: "Authentication successful!",
