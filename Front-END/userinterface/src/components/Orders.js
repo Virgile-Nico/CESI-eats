@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const Order = ({ order }) => {
   const navigate = useNavigate();
 
-
-
   // Utilisez une fonction pour obtenir le texte du statut et la couleur en fonction du statut de la commande
   const getStatusTextAndColor = (status) => {
     let text, color;
@@ -32,12 +30,12 @@ const Order = ({ order }) => {
 
   return (
     <div className={`order-card my-4 p-4 rounded shadow-lg ${statusColor}`}>
-      <h3 className="text-lg font-bold">Commande n°{order.ID}</h3>
+      <h3 className="text-lg font-bold">Commande n°{order._id}</h3>
       <p>Client : {order.nom_client}</p>
       <p>Nombre de produits : {order.Number_products}</p>
       <p>Total : {order.Total_price.toFixed(2)}€</p>
       <p className="text-lg">{statusLabel}</p>
-      <button onClick={() => navigate(`/detailed-order/${order.ID}`)} className="text-blue-600 hover:text-blue-800">Détails →</button>
+      <button onClick={() => navigate(`/detailed-order/${order._id}`)} className="text-blue-600 hover:text-blue-800">Détails →</button>
     </div>
   );
 };

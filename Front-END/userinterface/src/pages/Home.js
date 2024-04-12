@@ -1,21 +1,30 @@
-// Home.js
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import HeaderDesktop from '../components/HeaderDesktop';
 import OrdersList from '../components/Orders';
-import ordersData from './CESI_eats.orders.json';
 
 const Home = () => {
   const [inProgressOrders, setInProgressOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);
 
   useEffect(() => {
-    const filteredInProgressOrders = ordersData.filter(order =>
-      order.Status && (order.Status.toLowerCase() === 'paid' || order.Status.toLowerCase() === 'in preparation'));
-    const filteredCompletedOrders = ordersData.filter(order =>
-      order.Status && (order.Status.toLowerCase() === 'done' || order.Status.toLowerCase() === 'in movement'));
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://213.32.6.121:3023/read?type=History&ID=2');
+        const orders = response.data;
+        const filteredInProgressOrders = orders.filter(order =>
+          order.Status && (order.Status.toLowerCase() === 'paid' || order.Status.toLowerCase() === 'in preparation'));
+        const filteredCompletedOrders = orders.filter(order =>
+          order.Status && (order.Status.toLowerCase() === 'done' || order.Status.toLowerCase() === 'in movement'));
+  
+        setInProgressOrders(filteredInProgressOrders);
+        setCompletedOrders(filteredCompletedOrders);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données des commandes', error);
+      }
+    };
 
-    setInProgressOrders(filteredInProgressOrders);
-    setCompletedOrders(filteredCompletedOrders);
+    fetchData();
   }, []);
 
   return (

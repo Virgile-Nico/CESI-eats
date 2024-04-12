@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ordersData from './CESI_eats.orders.json'; // Assurez-vous que le chemin est correct
+import axios from 'axios';  // Assurez-vous que axios est installé et importé
 import HeaderDesktop from '../components/HeaderDesktop'; // Assurez-vous que le chemin est correct
 
 const DetailedOrder = () => {
@@ -8,23 +8,19 @@ const DetailedOrder = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
 
+  console.log('ID de la commande:', id);
   useEffect(() => {
-    const foundOrder = null;
-    try {
-      axios.get(`http://213.32.6.121:3023/read?type=Order&ID=` + id)
+    axios.get(`http://213.32.6.121:3021/delivery?id=${id}`) // Utilisation des templates strings pour inclure l'ID
       .then(res => {
-        foundOrder = res.data;
+        if (res.data) {
+          setOrder(res.data); // Met à jour le state directement avec la réponse
+        } else {
+          console.error('Commande non trouvée');
+        }
       })
-    }
-    catch (error){
-      console.error('error fetching data', error)
-    }
-    
-    if (foundOrder) {
-      setOrder(foundOrder);
-    } else {
-      console.error('Commande non trouvée');
-    }
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données', error);
+      });
   }, [id]);
 
   if (!order) {
@@ -41,25 +37,25 @@ const DetailedOrder = () => {
             ← Retour
           </button>
         </div>
-        <h1 className="text-2xl font-bold text-center mb-4">Commande n°{order.ID}</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">Commande n°{order.id}</h1>
         <p className="text-lg"><strong>Client :</strong> {order.nom_client}</p>
         <p className="text-md text-gray-700"><strong>Status :</strong> {order.Status}</p>
         <p className="text-md text-gray-700"><strong>Nombre de produits :</strong> {order.Number_products}</p>
         
         <div className="my-4">
-          {order.Articles.map((article, index) => (
-            <div key={article._id} className="flex justify-between my-2">
+          {order.Articles && order.Articles.map((article, index) => (
+            <div key={article.id} className="flex justify-between my-2">
               <span>{article.Qte} x {article.Nom}</span>
             </div>
           ))}
         </div>
 
         {order.Menus && order.Menus.map((menu, index) => (
-          <div key={menu._id} className="my-4">
+          <div key={menu.id} className="my-4">
             <span className="font-semibold">{menu.Qte} x {menu.Nom}</span>
             <ul className="list-disc ml-6">
-              {menu.Articles.map((article) => (
-                <li key={article._id}>{article.Nom}</li>
+              {menu.Articles && menu.Articles.map((article) => (
+                <li key={article.id}>{article.Nom}</li>
               ))}
             </ul>
           </div>
