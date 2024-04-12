@@ -56,7 +56,7 @@ module.exports = {
     },
     
     Menu_read: async function (Identifier) {
-        let response = await Menu.Menu.find({ ID: Identifier })
+        let response = await Menu.Menu.find({ _id: Identifier })
         const list_to_return = []
         await Promise.all(response.map(async (element) => {
             let articles_list = []
