@@ -41,7 +41,6 @@ module.exports = {
                         process.env.ACCESS_JWT_KEY, 
                         { expiresIn: '1h' },
                     );
-                    console.log(accessToken)
                     return {
                         status: 200,
                         message: "Authentication successful!",

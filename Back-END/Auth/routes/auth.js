@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const authController = require("../controllers/auth.controller");
+const logger = require('../controllers/logger');
 
 router.get('/', (req, res, next) => {
     res.status(200)
@@ -35,43 +36,41 @@ router.post('/register', (req, res, next) => {
             res.status(404).send("Type unknown");
             return;
     }
+    logger.logaction(req.method, req.url, response.status==200, response.message)
     res.status(200)
     res.json("Register successful");
     next()
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     const type = req.query.type;
     let response
     switch(type) {
         case 'user':
-            console.log('User login')
-            response = authController.loginUser(req.body);
-            console.log('Finishing login user')
+            response = await authController.loginUser(req.body);
             break;
         case 'restaurant':
-            console.log('Restaurant login')
-            response = authController.loginRestaurant(req.body);
+            response = await authController.loginRestaurant(req.body);
             break;
         case 'delivery':
-            console.log('Delivery login')
-            response = authController.loginDelivery(req.body);
+            response = await authController.loginDelivery(req.body);
             break;
         case 'intern':
-            console.log('Intern login')
-            response = authController.loginIntern(req.body);
+            response = await authController.loginIntern(req.body);
             break;
         case 'tiers':
-            console.log('Tiers login')
-            response = authController.loginTiers(req.body);
+            response = await authController.loginTiers(req.body);
             break;
         default:
-            res.status(404).send("Type login unknown");
+            response.status = 404;
+            response.message = "Type login unknown"
+            res.status(404);
+            next();
             return;
     }
-    res.status(200)
+    logger.logaction(req.method, req.url, response.status==200, response.message)
     res.json(response);
-    next()
+    next();
 });
 
 router.get('/authenticate', (req, res, next) => {
