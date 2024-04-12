@@ -63,6 +63,9 @@ router.get('/read', async (req, res, next) => {
 
             console.log("[Restaurant-sevice] Restaurant menu retrieved successfully")
             break;
+        case 'sigle_Menu':
+            response = await controller.single_Menu_read(ID)
+            break;
         case 'Order':
             response = await controller.Order_read(ID)
             break;
