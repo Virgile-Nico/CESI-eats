@@ -5,6 +5,10 @@ const { connectToMongoDB } = require('./controllers/dbMongo');
 
 async function main() {
     await kafkaController.createConsumer('restaurant');
+    await kafkaController.createConsumer('client');
+    await kafkaController.createConsumer('livreur');
+    await kafkaController.createConsumer('intern');
+    await kafkaController.createConsumer('tiers');
 
     const wss = new WebSocketServer({ port: 3026 });
 
@@ -18,8 +22,6 @@ async function main() {
         ws.once('message', function categoryMessage(category) {
             websocketController.handleConnection(ws, category);
         });
-
-        ws.send('something');
     });
 }
 
