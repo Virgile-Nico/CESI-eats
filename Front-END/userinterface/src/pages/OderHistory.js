@@ -19,7 +19,7 @@ export default function OrderHistory() {
     const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
     useEffect(() => {
         setIsAuthenticatedLocal(isAuthenticated);
-        setIsArticlesCountLocal(articlesCount);
+        setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
     }, [isAuthenticated, articlesCount]);
     const isMobile = window.innerWidth <= 600;
     const [orders, setOrders] = useState([{id: '', date: '', total: 0, qtyItems: 0, status: ''}]);

@@ -1,9 +1,10 @@
 
-zjavascript:S1128"2Remove this unused import of 'resetArticlesCount'.(ŽÊˆ%8¨éˆí1J$138bf03a-43c4-4d0f-b535-a0230bf79b4b
-hjavascript:S1481"ERemove the declaration of the unused 'isAuthenticatedLocal' variable.(ÝÎ¾Â8Èäéˆí1
-ejavascript:S1854"BRemove this useless assignment to variable "isAuthenticatedLocal".(ÝÎ¾Â8Èäéˆí1
-hjavascript:S1481"ERemove the declaration of the unused 'isArticlesCountLocal' variable.(ÜÍ¸¿8Îäéˆí1
-ejavascript:S1854"BRemove this useless assignment to variable "isArticlesCountLocal".(ÜÍ¸¿8Îäéˆí1
-‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(ŽõÜ¢8©€ºúì1J$361169e1-d66e-4380-bcfc-f76dde48191a
-javascript:S1854"6Remove this useless assignment to variable "navigate".(ŽõÜ¢8©€ºúì1J$e56d835d-d37f-4a5b-99fc-ecb79c2da719
-ljavascript:S6479N"Do not use Array index in keys(ºúž±ûÿÿÿÿ8¶¬ôùì1J$6d65df2b-9e44-48ce-90ab-766c85889798
+zjavascript:S1128"2Remove this unused import of 'resetArticlesCount'.(ŽÊˆ%8Æ¯Ší1J$a6675c11-35b8-4c25-a966-d94636a85be2
+Žjavascript:S1481"ERemove the declaration of the unused 'isAuthenticatedLocal' variable.(ÝÎ¾Â8Æ¯Ší1J$c76dfa20-7897-4837-b774-1df15bf86a93
+‹javascript:S1854"BRemove this useless assignment to variable "isAuthenticatedLocal".(ÝÎ¾Â8Æ¯Ší1J$565f760c-56fe-4a04-8a64-ceb808b125a1
+Žjavascript:S1481"ERemove the declaration of the unused 'isArticlesCountLocal' variable.(ÜÍ¸¿8Æ¯Ší1J$ff3cc9ea-23d5-49b6-99c5-4e11f6170d54
+‹javascript:S1854"BRemove this useless assignment to variable "isArticlesCountLocal".(ÜÍ¸¿8Æ¯Ší1J$16159cf8-6779-404a-98ec-c626bdc5ba67
+‚javascript:S1481"9Remove the declaration of the unused 'navigate' variable.(ŽõÜ¢8Æ¯Ší1J$96d6e903-4f25-4dbb-ae65-35038dc873b1
+javascript:S1854"6Remove this useless assignment to variable "navigate".(ŽõÜ¢8Æ¯Ší1J$d7a2a0e1-cf57-4a5d-b34b-a98d00959e02
+ljavascript:S6766O"#HTML entity, `>` , must be escaped.(úÀåþ8£Æ¯Ší1J$b4600244-505c-4634-8d8b-d1f125716adb
+ljavascript:S6479T"Do not use Array index in keys(Ú‚Ñ›ÿÿÿÿÿ8£Æ¯Ší1J$74444adc-b291-4813-a9e1-f47a870187f3

@@ -19,7 +19,7 @@ export default function Profile() {
     const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
     useEffect(() => {
         setIsAuthenticatedLocal(isAuthenticated);
-        setIsArticlesCountLocal(articlesCount);
+        setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
     }, [isAuthenticated, articlesCount]);
     const navigate = useNavigate();
     const [addresses, setAddresses] = useState([]);
@@ -65,9 +65,9 @@ export default function Profile() {
         ])
     }, []);
 
-    const userId = isAuthenticated ? getUser().ID : null;
+    /*const userId = isAuthenticated ? getUser().ID : null;
 
-    console.log(userId);
+    console.log(userId);*/
 
     /*useEffect(() => {
         if (userId) {

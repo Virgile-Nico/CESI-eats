@@ -65,8 +65,8 @@ export default function Home() {
     const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(isAuthenticated);
     const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
     useEffect(() => {
-        setIsAuthenticatedLocal(isAuthenticated);
-        setIsArticlesCountLocal(articlesCount);
+        setIsAuthenticatedLocal(isAuthenticated)
+        setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
     }, [isAuthenticated, articlesCount]);
 
     /*const [selectedCategory, setSelectedCategory] = useState(null);
@@ -206,7 +206,7 @@ export default function Home() {
                             /*<Category key={index} src={catImgEnum[category.name]} catName={category.name} onClick={handleSortBy(category.name)} />*/
                         ))
                     )}
-                    {categories.length > 7 && !isExpanded && (
+                    {categories.length > 7 && !isExpanded && isMobile && (
                         <button className="bg-transparent flex flex-col items-center p-2" onClick={handleShowMore}>
                             <div className="place-content-center justify-center p-4 rounded-xl">
                                 <Icon path={mdiPlusBox} size={1}/>
@@ -214,7 +214,7 @@ export default function Home() {
                             <h5 className="text-center text-xs md:text-sm font-semibold">Afficher plus</h5>
                         </button>
                     )}
-                    {isExpanded && (
+                    {isExpanded && isMobile && (
                         <button className="bg-transparent flex flex-col items-center p-2" onClick={handleShowLess}>
                             <div className="place-content-center justify-center p-4 rounded-xl">
                                 <Icon path={mdiMinusBox} size={1}/>

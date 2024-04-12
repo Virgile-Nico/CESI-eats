@@ -33,6 +33,7 @@ export const login = (email, password) => {
 export const logout = () => {
 	localStorage.removeItem('accessToken');
 	localStorage.removeItem('refreshToken');
+	localStorage.removeItem('isAuthenticated');
 
 	return {
 		type: 'LOGOUT'
@@ -43,6 +44,7 @@ export const loginSuccess = (accessToken, refreshToken) => {
 	if (accessToken && refreshToken) {
 		localStorage.setItem('accessToken', accessToken);
 		localStorage.setItem('refreshToken', refreshToken);
+		localStorage.setItem('isAuthenticated', 'true');
 	}
 
 	return {

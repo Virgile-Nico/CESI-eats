@@ -1,11 +1,11 @@
 const initialState = {
-	isAuthenticated: false,
-	accessToken: null,
-	refreshToken: null
+	isAuthenticated: !!localStorage.getItem('accessToken'),
+	accessToken: localStorage.getItem('accessToken'),
+	refreshToken: localStorage.getItem('refreshToken')
 };
 
 const authReducer = (state = initialState, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case 'LOGIN_SUCCESS':
 			return {
 				...state,
@@ -14,7 +14,14 @@ const authReducer = (state = initialState, action) => {
 				refreshToken: action.refreshToken
 			};
 		case 'LOGOUT':
-			return initialState;
+			localStorage.removeItem('accessToken');
+			localStorage.removeItem('refreshToken');
+			return {
+				...state,
+				isAuthenticated: false,
+				accessToken: null,
+				refreshToken: null
+			};
 		default:
 			return state;
 	}

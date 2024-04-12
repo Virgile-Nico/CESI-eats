@@ -1,9 +1,9 @@
 
-sjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8Íºí‰í1J$d719cac0-b440-40bc-87dd-155545f7c19a
-ljavascript:S125H"Remove this commented out code.(˜¤Ÿÿÿÿÿÿ8Íºí‰í1J$112019c1-bd5d-424d-a81d-50c05083e45e
-ljavascript:S125["Remove this commented out code.(ì³½‰ıÿÿÿÿ8Íºí‰í1J$a76b4df1-2c77-473f-acb1-df5dfbaad832
-“javascript:S1481·"IRemove the declaration of the unused 'navigateToRestaurantMenu' variable.(«Ê¬8Íºí‰í1J$f06b28f3-0cfb-4755-8a42-e4b43f5dc28d
-javascript:S1854·"FRemove this useless assignment to variable "navigateToRestaurantMenu".(«Ê¬8Óºí‰í1J$5ccedee3-f5a4-4266-b128-484745c47c51
-hjavascript:S6479È"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$3540358c-6961-4029-914f-f3213bda9a35
-hjavascript:S6479Í"Do not use Array index in keys(ã‘ğö8Óºí‰í1J$2abcb145-2ef4-4211-b84a-d997a0875d59
-mjavascript:S6479å"Do not use Array index in keys(üÛìşÿÿÿÿ8Ôºí‰í1J$ccdb227b-59f5-4205-ae86-73c10d2b2c0a
+Mjavascript:S1128"%Remove this unused import of 'axios'.(íöóÛşÿÿÿÿ8”òŠ‹í1
+Fjavascript:S125H"Remove this commented out code.(˜¤Ÿÿÿÿÿÿ8•òŠ‹í1
+Fjavascript:S125["Remove this commented out code.(ì³½‰ıÿÿÿÿ8•òŠ‹í1
+mjavascript:S1481·"IRemove the declaration of the unused 'navigateToRestaurantMenu' variable.(«Ê¬8•òŠ‹í1
+jjavascript:S1854·"FRemove this useless assignment to variable "navigateToRestaurantMenu".(«Ê¬8•òŠ‹í1
+Bjavascript:S6479È"Do not use Array index in keys(ã‘ğö8•òŠ‹í1
+Bjavascript:S6479Í"Do not use Array index in keys(ã‘ğö8•òŠ‹í1
+Gjavascript:S6479å"Do not use Array index in keys(üÛìşÿÿÿÿ8•òŠ‹í1

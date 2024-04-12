@@ -22,7 +22,7 @@ export default function Edit() {
     const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
     useEffect(() => {
         setIsAuthenticatedLocal(isAuthenticated);
-        setIsArticlesCountLocal(articlesCount);
+        setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
     }, [isAuthenticated, articlesCount]);
     const [showPassword, setShowPassword] = useState({
         password: false,

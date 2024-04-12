@@ -1,8 +1,8 @@
 
-sjavascript:S1128"%Remove this unused import of 'axios'.(ÒÁæÅúÿÿÿÿ8ú»ˆ‰í1J$5982ab17-53fe-4b7b-93f5-87866ed1dc7e
-†javascript:S1481"=Remove the declaration of the unused 'restaurantId' variable.(ÞÂêæ8û»ˆ‰í1J$021fdf85-6501-41d3-8938-e2c3a4eadc2b
-ƒjavascript:S1854":Remove this useless assignment to variable "restaurantId".(ÞÂêæ8û»ˆ‰í1J$12e09ad3-19c2-493c-b44b-31639b1df972
-ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8û»ˆ‰í1J$b1d4f62e-c785-4d53-910c-0c38a94173fa
-€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8û»ˆ‰í1J$9eb0026b-8778-4682-8966-bddd710f7072
-ljavascript:S1252"Remove this commented out code.(ì³½‰ýÿÿÿÿ8û»ˆ‰í1J$1db51aef-ecc1-4efd-9467-bffa6f87b65a
-ljavascript:S6479H"Do not use Array index in keys(Ê¹¹óþÿÿÿÿ8û»ˆ‰í1J$c4029cca-47e8-47cd-a506-8ffdfca55df3
+sjavascript:S1128"%Remove this unused import of 'axios'.(ÒÁæÅúÿÿÿÿ8ú»ˆ‰í1J$c01571b1-5f7d-43e9-8675-783442d25285
+†javascript:S1481"=Remove the declaration of the unused 'restaurantId' variable.(ÞÂêæ8û»ˆ‰í1J$60e9c4b6-31e6-4389-9a4d-d04a1e70241e
+ƒjavascript:S1854":Remove this useless assignment to variable "restaurantId".(ÞÂêæ8û»ˆ‰í1J$a3ec8357-0b60-4c5e-ad58-9bd323f81e6a
+ƒjavascript:S1481":Remove the declaration of the unused 'cartItems' variable.(¥¼áß8û»ˆ‰í1J$78609da3-3f8b-485f-8880-fb3f4e203ae9
+€javascript:S1854"7Remove this useless assignment to variable "cartItems".(¥¼áß8û»ˆ‰í1J$f18c030f-078b-4829-a011-5dd94a4fb0d8
+ljavascript:S1252"Remove this commented out code.(ì³½‰ýÿÿÿÿ8û»ˆ‰í1J$fb8450d8-7ff4-426c-a979-ca1dc1227018
+ljavascript:S6479H"Do not use Array index in keys(Ê¹¹óþÿÿÿÿ8û»ˆ‰í1J$abb8ebd0-6720-498b-b225-8b8f993088d8

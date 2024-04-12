@@ -15,7 +15,7 @@ export default function RestaurantMenu() {
 	const [isArticlesCountLocal, setIsArticlesCountLocal] = useState(articlesCount);
 	useEffect(() => {
 		setIsAuthenticatedLocal(isAuthenticated);
-		setIsArticlesCountLocal(articlesCount);
+		setIsArticlesCountLocal(parseInt(localStorage.getItem('articlesCount')) || 0,);
 	}, [isAuthenticated, articlesCount]);
 	const { restaurantId } = useParams(); // Get the restaurant id from the URL using useParams
 	const [menuItems, setMenuItems] = useState([{name: '', description: '', price: '', image: ''}]);

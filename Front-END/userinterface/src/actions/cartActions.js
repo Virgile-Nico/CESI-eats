@@ -30,6 +30,11 @@ export const resetArticlesCount = () => ({
 	type: 'RESET_ARTICLES_COUNT'
 });
 
-export const emptyCart = () => ({
-	type: 'EMPTY_CART'
-});
+export const emptyCart = () => {
+	localStorage.removeItem('cartItems'); // Supprimer tous les éléments du panier
+	localStorage.setItem('articlesCount', '0'); // Réinitialiser le compteur d'articles à zéro
+
+	return {
+		type: 'EMPTY_CART'
+	};
+};
