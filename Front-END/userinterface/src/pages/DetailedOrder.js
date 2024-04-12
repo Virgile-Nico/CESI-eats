@@ -4,13 +4,12 @@ import axios from 'axios';  // Assurez-vous que axios est installé et importé
 import HeaderDesktop from '../components/HeaderDesktop'; // Assurez-vous que le chemin est correct
 
 const DetailedOrder = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [order, setOrder] = useState(null);
 
-  console.log('ID de la commande:', id);
   useEffect(() => {
-    axios.get(`http://213.32.6.121:3021/delivery?id=${id}`) // Utilisation des templates strings pour inclure l'ID
+    axios.get(`http://213.32.6.121:3023/read?type=Order&ID=${id}`) // Utilisation des templates strings pour inclure l'ID
       .then(res => {
         if (res.data) {
           setOrder(res.data); // Met à jour le state directement avec la réponse
@@ -37,30 +36,31 @@ const DetailedOrder = () => {
             ← Retour
           </button>
         </div>
-        <h1 className="text-2xl font-bold text-center mb-4">Commande n°{order.id}</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">Commande <span className='p-1 bg-gray-200 rounded'>{order.ID}</span></h1>
         <p className="text-lg"><strong>Client :</strong> {order.nom_client}</p>
-        <p className="text-md text-gray-700"><strong>Status :</strong> {order.Status}</p>
         <p className="text-md text-gray-700"><strong>Nombre de produits :</strong> {order.Number_products}</p>
         
         <div className="my-4">
+          <h1>Articles</h1>
           {order.Articles && order.Articles.map((article, index) => (
-            <div key={article.id} className="flex justify-between my-2">
-              <span>{article.Qte} x {article.Nom}</span>
+            <div key={article._id} className="flex flex-col p-2 bg-primary-200 rounded">
+              <span className='font-semibold'>{article.Qte} x {article.Nom}</span>
+              <span className='text-gray-500'>{article.Description}</span>
             </div>
           ))}
         </div>
 
-        {order.Menus && order.Menus.map((menu, index) => (
-          <div key={menu.id} className="my-4">
-            <span className="font-semibold">{menu.Qte} x {menu.Nom}</span>
-            <ul className="list-disc ml-6">
-              {menu.Articles && menu.Articles.map((article) => (
-                <li key={article.id}>{article.Nom}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div>
+          <h1>Menus</h1>
+          {order.Menus && order.Menus.map((menu, index) => (
+            <div key={menu._id} className="flex flex-col p-2 bg-primary-200 rounded">
+              <span className="font-semibold">{menu.Qte} x {menu.Nom}</span>
+              <span className='text-gray-500'>{menu.Description}</span>
+            </div>
+          ))}
+        </div>
         {/* Ajoutez plus de détails de la commande ici si nécessaire */}
+        <p className="text-md text-gray-700 pt-5"><strong>Prix :</strong> {order.Total_price} €</p>
       </div>
     </>
   );

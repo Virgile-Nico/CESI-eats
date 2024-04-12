@@ -8,10 +8,7 @@ export default function Splash() {
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			if(isMobile)
-				navigate('/login');
-			else
-				navigate('/home');
+			navigate('/login');
 		}, 1500);
 
 		return () => clearTimeout(timer);

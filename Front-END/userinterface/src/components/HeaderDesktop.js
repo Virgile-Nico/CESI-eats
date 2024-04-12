@@ -17,6 +17,12 @@ export default function HeaderDesktop({articlesCount}) {
                     <Icon className="my-auto" path={mdiFood} size={1}/>
                     <p className="m-auto inset-0 text-lg font-semibold text-center">Menu</p>
                 </button>
+                <button
+                    className="flex flex-row space-x-2 w-50 bg-neutral-900 shadow rounded-3xl py-2 px-8 text-gray-100 hover:bg-neutral-700"
+                    onClick={() => navigate('/article')}>
+                    <Icon className="my-auto" path={mdiFood} size={1}/>
+                    <p className="m-auto inset-0 text-lg font-semibold text-center">Articles</p>
+                </button>
             .</div>
         </header>
     )
