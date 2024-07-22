@@ -5,8 +5,7 @@ import { Route, Navigate, Outlet } from 'react-router-dom';
 import { isLoggedIn } from '../actions/authActions';
 
 const SecureRoute = ({ component: Component, ...rest }) => {
-//   const isAuthenticated = isLoggedIn();
-  const isAuthenticated = true;
+  const isAuthenticated = isLoggedIn();
 
   return (
     isAuthenticated ? <Outlet/> : <Navigate to="/login"/>

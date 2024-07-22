@@ -1,7 +1,8 @@
 import axios from "axios";
+let Token
+let ID
 
-export const login = (email, password) => {
-	return async dispatch => {
+export const login = async (email, password) => {
 		try {
 			const requestBody = {
 				MAIL: email,
@@ -17,15 +18,16 @@ export const login = (email, password) => {
 			});
 
 			console.log(response.data);
-			const { accessToken, userID } = response;
+			const { accessToken, userID } = response.data;
+			Token = accessToken
+			ID = userID
 			//const user = { mail: userID.mail, ID: userID.ID };
 
-			dispatch(loginSuccess(accessToken));
+			loginSuccess(accessToken);
 			//dispatch(setUser(user));
 		} catch (error) {
 			console.error('Login error:', error);
 		}
-	};
 };
 
 export const logout = () => {

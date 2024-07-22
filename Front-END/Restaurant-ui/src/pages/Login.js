@@ -4,6 +4,7 @@ import Icon from '@mdi/react';
 import {mdiCloseBox, mdiEye, mdiEyeOff} from "@mdi/js";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { login } from '../actions/authActions';
 
 export default function Login() {
 	// Check if the screen width is less than or equal to 600 pixels
@@ -75,7 +76,10 @@ export default function Login() {
 						</button>
 					</div>
 					<button
-						onClick={() => setNotifVisible(true)}
+						onClick={async () => {
+							await login(email, password); 
+							navigate('/home')
+						}}
 						className="flex flex-row w-1/2 self-center h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
 						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>
@@ -121,7 +125,10 @@ export default function Login() {
 					<button type="button" onClick={() => navigate('/sign-up')} className="text-sm text-end mx-4 underline active:no-underline">Je n'ai pas de compte Restaurateur
 					</button>
 					<button
-						onClick={() => setNotifVisible(true)}
+						onClick={async () => {
+							await login(email, password); 
+							navigate('/home')
+						}}
 						className="flex flex-row w-1/6 h-10 bg-primary-500 shadow rounded-3xl py-2 px-8 active:bg-primary-300">
 						<p className="m-auto inset-0 text-xl font-bold text-center text-gray-800">Se connecter</p>
 					</button>
